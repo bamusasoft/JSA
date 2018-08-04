@@ -1,0 +1,12 @@
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\WinIrsService\bin\Release\WinIrsService.dll.config
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\WinIrsService\bin\Release\WinIrsService.dll
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\WinIrsService\bin\Release\WinIrsService.pdb
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\WinIrsService\bin\Release\DomainModel.dll
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\WinIrsService\bin\Release\EntityFramework.dll
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\WinIrsService\bin\Release\DomainModel.pdb
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\WinIrsService\bin\Release\EntityFramework.xml
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\WinIrsService\obj\Release\WinIrsService.csprojResolveAssemblyReference.cache
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\WinIrsService\obj\Release\Jsa.WinIrsService.Properties.Resources.resources
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\WinIrsService\obj\Release\WinIrsService.csproj.GenerateResource.Cache
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\WinIrsService\obj\Release\WinIrsService.dll
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\WinIrsService\obj\Release\WinIrsService.pdb

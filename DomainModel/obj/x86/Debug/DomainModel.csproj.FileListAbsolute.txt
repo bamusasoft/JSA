@@ -1,0 +1,20 @@
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\DomainModel\bin\x86\Debug\DomainModel.dll.config
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\DomainModel\bin\x86\Debug\DomainModel.dll
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\DomainModel\bin\x86\Debug\DomainModel.pdb
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\DomainModel\bin\x86\Debug\EntityFramework.dll
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\DomainModel\bin\x86\Debug\EntityFramework.SqlServer.dll
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\DomainModel\bin\x86\Debug\EntityFramework.xml
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\DomainModel\bin\x86\Debug\EntityFramework.SqlServer.xml
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\DomainModel\obj\x86\Debug\DomainModel.dll
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\DomainModel\obj\x86\Debug\DomainModel.pdb
+C:\repose\Jeddah Automation Project\JSA\DomainModel\bin\x86\Debug\DomainModel.dll.config
+C:\repose\Jeddah Automation Project\JSA\DomainModel\bin\x86\Debug\DomainModel.dll
+C:\repose\Jeddah Automation Project\JSA\DomainModel\bin\x86\Debug\DomainModel.pdb
+C:\repose\Jeddah Automation Project\JSA\DomainModel\bin\x86\Debug\EntityFramework.dll
+C:\repose\Jeddah Automation Project\JSA\DomainModel\bin\x86\Debug\EntityFramework.SqlServer.dll
+C:\repose\Jeddah Automation Project\JSA\DomainModel\bin\x86\Debug\EntityFramework.xml
+C:\repose\Jeddah Automation Project\JSA\DomainModel\bin\x86\Debug\EntityFramework.SqlServer.xml
+C:\repose\Jeddah Automation Project\JSA\DomainModel\obj\x86\Debug\DomainModel.csproj.CoreCompileInputs.cache
+C:\repose\Jeddah Automation Project\JSA\DomainModel\obj\x86\Debug\DomainModel.csproj.CopyComplete
+C:\repose\Jeddah Automation Project\JSA\DomainModel\obj\x86\Debug\DomainModel.dll
+C:\repose\Jeddah Automation Project\JSA\DomainModel\obj\x86\Debug\DomainModel.pdb

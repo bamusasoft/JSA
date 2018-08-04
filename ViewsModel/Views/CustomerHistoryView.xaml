@@ -1,0 +1,118 @@
+﻿<Window x:Class="Jsa.ViewsModel.Views.CustomerHistoryView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Jsa.ViewsModel.Views"
+        Style="{StaticResource WindowCommonStyle}"
+        mc:Ignorable="d"
+        Title="{StaticResource ViewsNames_HistoryView}" Height="600" Width="700" FlowDirection="RightToLeft">
+    <Window.Resources>
+        <Style x:Key="GroupHeaderStyle" TargetType="{x:Type GroupItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GroupItem">
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name}" FontSize="14"/>
+                            <ItemsPresenter />
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <DockPanel>
+        <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar>
+                <Button Command="{Binding PrintCommand}" IsEnabled="{Binding PrintEnabled}" Margin="0,0,5,0">
+                    <StackPanel Orientation="Horizontal" Margin="0">
+                        <Image Style="{StaticResource TollbarPrintStyle}"/>
+                        <TextBlock Margin="5,0,0,0" Text="{StaticResource Menu_Print}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </ToolBar>
+        </ToolBarTray>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="0.5*"/>
+            </Grid.ColumnDefinitions>
+            <GroupBox Header="{StaticResource HistoryView_CustomerInfoCaption}" Grid.Column="0" Margin="5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Margin="0,0,0,10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{StaticResource General_CustomerIdLabel}"
+                                   Margin="10"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding CustomerHistory.CustomerId}" IsReadOnly="True" Margin="10,10,100,10"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="{StaticResource General_CustomerNameLabel}" Margin="10"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding CustomerHistory.CustomerName}" IsReadOnly="True" Margin="10"/>
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="{StaticResource HistoryView_CustomerClassLabel}" Margin="10"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding CustomerHistory.CustomerClass}" IsReadOnly="True" Margin="10,10,100,10"/>
+
+                    </Grid>
+                    <Rectangle Fill="Silver" Margin="0,0,0,10" Grid.Row="1" Stroke="Silver" VerticalAlignment="Top" Height="2"/>
+                    <Grid Grid.Row="2" Margin="0,0,0,10">
+                        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding CustomerHistory.CustomerProperties}" 
+                                  IsReadOnly="True" CanUserAddRows="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="{StaticResource General_PropertyNoLabel}" 
+                                                    Binding="{Binding Description}" Width="0.6*"/>
+                                <DataGridTextColumn Header="{StaticResource General_LocationLabel}" 
+                                                    Binding="{Binding Location}" Width="0.4*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+
+                </Grid>
+
+            </GroupBox>
+
+            <GroupBox Header="{StaticResource HistoryView_PaymentInfoCaption}" Grid.Column="1" Margin="5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="{StaticResource HistoryView_PaymentCaption}"/>
+                    <DataGrid Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" 
+                              ItemsSource="{Binding CustomerHistory.BindingCustomerPayments}"
+                              CanUserAddRows="False">
+                        <DataGrid.GroupStyle>
+                            <GroupStyle ContainerStyle="{StaticResource GroupHeaderStyle}">
+                                <GroupStyle.Panel>
+                                    <ItemsPanelTemplate>
+                                        <DataGridRowsPresenter/>
+                                    </ItemsPanelTemplate>
+                                </GroupStyle.Panel>
+                            </GroupStyle>
+                        </DataGrid.GroupStyle>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="{StaticResource General_PayDateLabel}" 
+                                                Binding="{Binding PayDate}" Width="0.5*"/>
+                            <DataGridTextColumn Header="{StaticResource General_AmountLabel}" 
+                                                Binding="{Binding Amount, StringFormat=N0}" Width="0.5*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </GroupBox>
+
+        </Grid>
+    </DockPanel>
+</Window>

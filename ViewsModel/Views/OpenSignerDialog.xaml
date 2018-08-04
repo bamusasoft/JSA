@@ -1,0 +1,51 @@
+﻿<Window x:Class="Jsa.ViewsModel.Views.OpenSignerDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="إدراج متعهد" Style="{StaticResource WindowCommonStyle}" Height="300" Width="450" WindowStartupLocation="CenterScreen"
+        Loaded="DialogLoaded" WindowStyle="ToolWindow">
+    <Window.Resources>
+        <Style x:Key="ListItemStyle" TargetType="ListViewItem">
+            <EventSetter Event="MouseDoubleClick" Handler="ListViewDoubleClick"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0" x:Name="txtSignerName" TabIndex="0"/>
+            <Button Grid.Column="1" Content="بحث" Click="SearchButtonClick" IsDefault="True" TabIndex="1"/>
+       </Grid>
+        <Grid Grid.Row="1" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <ListView Grid.Row="0" Name="lstSigners" ItemsSource="{Binding Signers}" SelectionChanged="SelectedSignerChanged"
+                      ItemContainerStyle="{StaticResource ListItemStyle}">
+                <ListView.View>
+                    <GridView AllowsColumnReorder="True">
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=SignerId}" 
+                                        Header="رقم الهوية" Width="Auto"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" 
+                                        Header="الإسم" Width="250" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Mobile}"
+                                        Header="رقم الجوال" Width="Auto"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" FlowDirection="LeftToRight" Background="#FFD2E8F1">
+            <Button Content="الغاء" Width="70" Height="30"
+                    Click="CancelButtonClick" IsCancel="True" TabIndex="4"/>
+            <Button Content="موافق"  Width="70" Height="30"  Margin="10,0,0,0"
+                    Click="OkButtonClick" TabIndex="3"/>
+        </StackPanel>
+            
+    </Grid>
+</Window>

@@ -1,0 +1,82 @@
+﻿<Window x:Class="Jsa.ViewsModel.Views.AddScheduleDetailsDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:behaviors="clr-namespace:Jsa.ViewsModel.UIBehaviors"
+		Title="دفعات التعهد" Style="{StaticResource WindowCommonStyle}" 
+        WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
+	<Window.Resources>
+        <ContextMenu x:Key="gridRowContextMenu">
+            <MenuItem Header="حذف"
+                      DataContext="{Binding  RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext}"
+                      Command="{Binding Path=DeleteCommand}" />
+        </ContextMenu>
+    </Window.Resources>
+    <Grid x:Name="layoutGrid" >
+    	<Grid.RowDefinitions>
+    		<RowDefinition Height="Auto"/>
+    		<RowDefinition Height="51*"/>
+    		<RowDefinition Height="Auto"/>
+    	</Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+        	<TextBlock Margin="5" TextWrapping="Wrap" Text="المستأجر" HorizontalAlignment="Center"/>
+        	<TextBlock Margin="5" TextWrapping="Wrap" Text="رقم العين" Grid.Column="1" HorizontalAlignment="Center"/>
+        	<TextBlock Margin="5" TextWrapping="Wrap" Text="اجمالي الرصيد" Grid.Column="2" HorizontalAlignment="Center"/>
+        	<TextBox Margin="5" Grid.Row="1" TextWrapping="Wrap" IsEnabled="False" Text="{Binding CustomerName}"/>
+        	<TextBox Margin="10,5,0,5" Grid.Row="1" TextWrapping="Wrap" Grid.Column="1" IsEnabled="False" Text="{Binding PropertyDescription}"/>
+        	<TextBox Margin="5" Grid.Row="1" TextWrapping="Wrap" Grid.Column="2"  Background="#FFF32828" FontSize="26.667" IsReadOnly="True"
+				Text="{Binding CurrentBalance}"/>
+
+		</Grid>
+		 <DataGrid Grid.Row="1" x:Name="dgDetails" KeyboardNavigation.TabIndex="4" AutoGenerateColumns="False"
+                                  SelectionUnit="CellOrRowHeader" SelectionMode="Single" RowHeaderWidth="25"
+                                  ItemsSource="{Binding Path=Details, ValidatesOnDataErrors=True}"
+                                  IsSynchronizedWithCurrentItem="True" CanUserSortColumns="True" SelectionChanged="OnDetailsGridSelectionChanged"
+                                  behaviors:DataGridBehavior.DisplayRowNumber="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="مبلغ الدفعة" Width="0.20*"
+                                                    Binding="{Binding AmountDue, UpdateSourceTrigger=PropertyChanged}" />
+                                <DataGridTemplateColumn Header="تاريخ الإستحقاق" Width="0.20*"
+                                                        CellEditingTemplate="{StaticResource EditMaskedCellTemplate}"
+                                                        CellTemplate="{StaticResource ShowMaskedCellTemplate}" />
+                                <DataGridCheckBoxColumn Header="دفعة تخفيض؟"
+                                                        Binding="{Binding DiscountAmount}" Width="Auto" />
+                                <DataGridTextColumn Header="ملاحظات" Width="0.20*"
+                                                    Binding="{Binding Remarks}" />
+
+                            </DataGrid.Columns>
+                            <DataGrid.RowStyle>
+                                <Style TargetType="DataGridRow" BasedOn="{StaticResource {x:Type DataGridRow}}">
+                                    <!--<Style.Triggers>
+                                    <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                        <Setter Property="HeaderStyle" Value="{StaticResource FocusedRowHeader}"/>
+                                    </Trigger>
+                                </Style.Triggers>-->
+                                    <Setter Property="ContextMenu" Value="{StaticResource gridRowContextMenu}" />
+                                </Style>
+                            </DataGrid.RowStyle>
+
+                            <!--Attach the context menu to the row header only, so the user will be able to delete the row only when it's fully selected.-->
+                            <DataGrid.RowHeaderStyle>
+                                <Style TargetType="DataGridRowHeader"
+                                       BasedOn="{StaticResource {x:Type DataGridRowHeader}}">
+                                    <Setter Property="ContextMenu" Value="{StaticResource gridRowContextMenu}" />
+                                </Style>
+                            </DataGrid.RowHeaderStyle>
+                        </DataGrid>
+		<StackPanel Margin="0" Grid.Row="2" Orientation="Horizontal" FlowDirection="LeftToRight" Background="#FFC5D6E2">
+			<Button Content="Cancel" HorizontalAlignment="Right" Width="75" Height="35" Margin="10"
+                    Command="{Binding CancelCommand}"/>
+			<Button Content="Ok" Width="75" HorizontalAlignment="Right" Height="35" IsCancel="True" Margin="10"
+                    Command="{Binding OkCommand}"/>
+		</StackPanel>
+    </Grid>
+</Window>

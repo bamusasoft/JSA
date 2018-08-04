@@ -1,0 +1,147 @@
+﻿<Window x:Class="Jsa.ViewsModel.Views.CasesReportView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:extToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+		xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" 
+        Title="تقرير متابعة القضايا" Style="{StaticResource WindowCommonStyle}">
+    <Window.Resources>
+    	
+        
+
+    </Window.Resources>
+	
+	<DockPanel Margin="0">
+
+		<Ribbon DockPanel.Dock="Top">
+			<RibbonTab Header="عام">
+				<RibbonGroup Header="تحرير">
+					<RibbonButton LargeImageSource="..\Resources/Images/AddNew.png" Command="{Binding ClearCommand}" ToolTip="جديد (Escape)" />
+					<RibbonButton Command="{Binding SaveCommand}" ToolTip="حفظ (Ctrl + S)" Style="{StaticResource SaveButtonStyle}"/>
+					<RibbonButton Command="{Binding DeleteCommand}" ToolTip="حذف (Ctrl + D)" Style="{StaticResource DeleteButtonStyle}"/>
+				</RibbonGroup>
+				<RibbonGroup Header="بحث">
+					<StackPanel Orientation="Horizontal">
+						<RibbonTextBox Text="{Binding SearchField, UpdateSourceTrigger=PropertyChanged}" BorderThickness="1" Margin="0,15,0,0"/>
+						<RibbonButton Command="{Binding SearchCommand}" Style="{StaticResource SearchButtonStyle}" Height="Auto" 
+							Margin="0,10,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+					</StackPanel>
+				</RibbonGroup>
+			</RibbonTab>
+		</Ribbon>
+		<Grid>
+			<DataGrid x:Name="dataGrid" ItemsSource="{Binding LegalCases}" CanUserAddRows="False" AutoGenerateColumns="False" 
+				AreRowDetailsFrozen="True" IsReadOnly="True" SelectionMode="Single" GridLinesVisibility="Vertical">
+				<DataGrid.Columns>
+					<DataGridTextColumn Header="رقم المعاملة" Binding="{Binding CaseNo}" Width="Auto"/>
+					<DataGridTextColumn Header="المدعى عليه" Binding="{Binding Defendant}" Width="*"/>
+					<DataGridTextColumn Header="تاريخ الجلسة القادمة" Binding="{Binding NextAppointmentDate, Converter={StaticResource AddMaskConverter}}"
+						Width="Auto"/>
+                    
+				</DataGrid.Columns>
+				<DataGrid.RowDetailsTemplate>
+					<DataTemplate>
+						<DataGrid x:Name="detailGrid" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding CaseFollowings}" IsReadOnly="True"
+							Padding="10,0,0,10" >
+							<DataGrid.Columns>
+								<DataGridTextColumn Header="تاريخ المتابعة" Binding="{Binding FollowingDate, Converter={StaticResource AddMaskConverter}}" Width="Auto"/>
+								<DataGridTextColumn Header="الجهة" Binding="{Binding FollowingDestination}" Width="Auto"/>
+								<DataGridTextColumn Header="الإفادة" Binding="{Binding FollowingDescription}" Width="350">
+									<DataGridTextColumn.ElementStyle>
+										<Style>
+											<Setter Property="TextBlock.TextWrapping" Value="WrapWithOverflow"/>
+											<Setter Property="TextBlock.TextAlignment" Value="Justify"/>
+											<Setter Property="TextBlock.Padding" Value="5"/>
+										</Style>
+									</DataGridTextColumn.ElementStyle>
+								</DataGridTextColumn>
+								<DataGridTextColumn Header="موعد المتابعة القادمة" Binding="{Binding NextFollowingDate, Converter={StaticResource AddMaskConverter}}" Width="Auto"/>
+								<DataGridTextColumn Header="جهة المتابعة القادمة" Binding="{Binding NextFollowingDestination}" Width="Auto"/>
+							</DataGrid.Columns>
+                            <DataGrid.Template>
+                                <ControlTemplate>
+                                    <ControlTemplate.Triggers>
+
+                                                <Trigger Property="Visibility" Value="Visible">
+                                                    <Trigger.EnterActions>
+                                                        <BeginStoryboard x:Name="loadBeginStoryboard">
+                                                            <Storyboard>
+
+                                                                <!--<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="detailGrid">
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0.1"/>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.5"/>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0.1"/>
+                                            </DoubleAnimationUsingKeyFrames>-->
+                                                        <DoubleAnimation Storyboard.TargetProperty="(DataGrid.Height)"  From="0" To="{Binding ElementName=detailGrid, Path=ActualHeight}"  Storyboard.TargetName="detailGrid" Duration="0:0:2">
+                                                                    <DoubleAnimation.EasingFunction>
+                                                                        <ElasticEase Oscillations="1" EasingMode="EaseOut"/>
+                                                                    </DoubleAnimation.EasingFunction>
+                                                                </DoubleAnimation>
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </Trigger.EnterActions>
+                                                </Trigger>
+
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                                
+                            </DataGrid.Template>
+                            <!--<DataGrid.Triggers>
+                                <EventTrigger RoutedEvent="DataGrid.MouseEnter" SourceName="detailGrid">
+                                    <BeginStoryboard x:Name="loadBeginStoryboard">
+                                        <Storyboard >
+                                            
+                                            --><!--<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="detailGrid">
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0.1"/>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.5"/>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0.1"/>
+                                            </DoubleAnimationUsingKeyFrames>--><!--
+                                            <DoubleAnimation Storyboard.TargetProperty="(DataGrid.Height)" From="0" To="{Binding ElementName=detailGrid, Path=ActualHeight}" Storyboard.TargetName="detailGrid" Duration="0:0:2">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <ElasticEase Oscillations="1" EasingMode="EaseOut"/>
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                    
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="DataGrid.MouseLeave" SourceName="detailGrid">
+                                    <BeginStoryboard x:Name="unloadBeginStoryboard">
+                                        <Storyboard >
+
+                                            --><!--<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="detailGrid">
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0.1"/>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.5"/>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0.1"/>
+                                            </DoubleAnimationUsingKeyFrames>--><!--
+                                            <DoubleAnimation Storyboard.TargetProperty="(DataGrid.Height)" From="{Binding ElementName=detailGrid, Path=ActualHeight}" To="0" Storyboard.TargetName="detailGrid" Duration="0:0:2">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <ElasticEase Oscillations="1" EasingMode="EaseIn"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+
+                                </EventTrigger>
+                            </DataGrid.Triggers>-->
+						</DataGrid>
+					</DataTemplate>
+				</DataGrid.RowDetailsTemplate>
+				<i:Interaction.Triggers>
+					<i:EventTrigger EventName="LostKeyboardFocus">
+						<ei:ChangePropertyAction x:Name="WhenDataGridLostKeyboard" PropertyName="RowDetailsVisibilityMode"/>
+					</i:EventTrigger>
+					<i:EventTrigger EventName="GotKeyboardFocus">
+						<ei:ChangePropertyAction x:Name="WhenDataGridGotKeyboard" PropertyName="RowDetailsVisibilityMode">
+							<ei:ChangePropertyAction.Value>
+								<DataGridRowDetailsVisibilityMode>VisibleWhenSelected</DataGridRowDetailsVisibilityMode>
+							</ei:ChangePropertyAction.Value>
+						</ei:ChangePropertyAction>
+					</i:EventTrigger>
+				</i:Interaction.Triggers>
+			</DataGrid>
+		</Grid>
+
+	</DockPanel>
+</Window>

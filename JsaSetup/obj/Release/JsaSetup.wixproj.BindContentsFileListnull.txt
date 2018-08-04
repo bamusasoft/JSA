@@ -1,0 +1,10 @@
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\DomainModel\bin\Release\DomainModel.dll
+..\ViewsModel\bin\Debug\EntityFramework.dll
+..\ViewsModel\bin\Debug\EntityFramework.SqlServer.dll
+..\ViewsModel\bin\Debug\log4net.dll
+..\ViewsModel\bin\Debug\TwainDotNet.dll
+..\ViewsModel\bin\Debug\TwainDotNet.Wpf.dll
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\ViewsModel\bin\Release\ViewsModel.exe
+..\ViewsModel\bin\Debug\ViewsModel.exe.config
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\WinIrsService\bin\Release\WinIrsService.dll
+..\ViewsModel\bin\Debug\Xceed.Wpf.Toolkit.dll

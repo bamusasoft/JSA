@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActivityView_DescriptionMissing" xml:space="preserve">
+    <value>ادخل وصف النشاط</value>
+  </data>
+  <data name="BackgroundPrintJobsExist" xml:space="preserve">
+    <value>توجد مهام طباعة في الخلفية
+فضلاً إنتظر قليلاً حتى يتم الإنتهاء من طباعتها</value>
+  </data>
+  <data name="BulkIresContractsView_BulkSaveFinished" xml:space="preserve">
+    <value>إنتهت عملية تسجيل العقود في برنامج العقار بنجاح</value>
+  </data>
+  <data name="BulkIresContractsView_SaveToIresWarning" xml:space="preserve">
+    <value>أنت على وشك حفظ عقود سنة كاملة في برنامج العقار.
+تأكد من إغلاق جميع العقود المفتوحة قبل مواصلة العملية.
+في حال مواصلة العملية لن تستطيع التراجع، هل تريد مواصلة العملية؟</value>
+  </data>
+  <data name="ClaimView_ClaimTemplMissing" xml:space="preserve">
+    <value>حدد مسار نموذج المطالبة في الخيارات أولاً</value>
+  </data>
+  <data name="ClassesView_CannotOpenBeforSave" xml:space="preserve">
+    <value>احفظ البيانات اولاً</value>
+  </data>
+  <data name="ContractView_ContPhoFolderMissingMsg" xml:space="preserve">
+    <value>قم بتحديد مسار حفظ صور العقود في قائمة الخيارات أولاً</value>
+  </data>
+  <data name="ContractView_ContractNotExist" xml:space="preserve">
+    <value>رقم العقد غير موجود</value>
+  </data>
+  <data name="ContractView_DepositMissing" xml:space="preserve">
+    <value>لم تحدد مبلغ التأمين 
+هل تريد الإستمرار؟</value>
+  </data>
+  <data name="ContractView_InvalidForPrint1" xml:space="preserve">
+    <value>أدخل يوم تسجيل العقد</value>
+  </data>
+  <data name="ContractView_InvalidForPrint2" xml:space="preserve">
+    <value>تأكد من مبلغ التأمين</value>
+  </data>
+  <data name="ContractView_InvalidForPrint3" xml:space="preserve">
+    <value>أدخل الحي الواقع فيه العقار</value>
+  </data>
+  <data name="ContractView_InvalidForPrint4" xml:space="preserve">
+    <value>أدخل التاريخ الهجري لتسجيل العقد</value>
+  </data>
+  <data name="ContractView_InvalidForPrint5" xml:space="preserve">
+    <value>ادخل التاريخ الميلادي لتسجيل العقد</value>
+  </data>
+  <data name="ContractView_InvalidForPrint6" xml:space="preserve">
+    <value>أدخل المدينة الواقع فيها العقار</value>
+  </data>
+  <data name="ContractView_NotSaved" xml:space="preserve">
+    <value>إحفظ البيانات أولاً</value>
+  </data>
+  <data name="CustomerView_CustomerNotExist" xml:space="preserve">
+    <value>لا يوجد مستأجر بهذا الرقم</value>
+  </data>
+  <data name="CustomerView_InvalidFax" xml:space="preserve">
+    <value>رقم الفاكس يجب ان يكون 9 ارقام مع مفتاح المنطقة</value>
+  </data>
+  <data name="CustomerView_InvalidId" xml:space="preserve">
+    <value>رقم الهوية يجب أن يكون 10 أرقام</value>
+  </data>
+  <data name="CustomerView_InvalidMobile" xml:space="preserve">
+    <value>رقم الجوال يجب ان يكون 10 أرقام</value>
+  </data>
+  <data name="CustomerView_InvalidNationality" xml:space="preserve">
+    <value>يجب إدخال الجنسية</value>
+  </data>
+  <data name="CustomerView_InvalidPhone" xml:space="preserve">
+    <value>رقم الهاتف يجب ان يكون 9 ارقام مع مفتاح المنطقة</value>
+  </data>
+  <data name="DeletePrompetMsg" xml:space="preserve">
+    <value>هل تريد حذف السجل؟</value>
+  </data>
+  <data name="ExceMsg_ClaimLetterMissing" xml:space="preserve">
+    <value>يجب إدخال نص الرسالة الموجهة في المطالبة في الخيارات أولاً</value>
+  </data>
+  <data name="MonthlyContractView_EndDateMissing" xml:space="preserve">
+    <value>أدخل تاريخ نهاية العقد</value>
+  </data>
+  <data name="ObjectNotFoundExcMsg" xml:space="preserve">
+    <value>لا توجد نتائج للبحث</value>
+  </data>
+  <data name="SavePrompetMsg" xml:space="preserve">
+    <value>هل تريد الخروج دون حفظ؟</value>
+  </data>
+  <data name="ScheduleView_ContractMissing" xml:space="preserve">
+    <value>يجب تحديد العقد</value>
+  </data>
+  <data name="ScheduleView_CustomerAlreadyScheduled" xml:space="preserve">
+    <value>هذه المستأجر سبق ان تعهد</value>
+  </data>
+  <data name="ScheduleView_DetailDateMissing" xml:space="preserve">
+    <value>تاريخ دفعات التعهد يجب ان يكون خلال السنة الحالية</value>
+  </data>
+  <data name="ScheduleView_DetailsMissing" xml:space="preserve">
+    <value>يجب إدخال دفعة تعهد واحدة على الأقل</value>
+  </data>
+  <data name="ScheduleView_InvalidAmoutDueTotal" xml:space="preserve">
+    <value>مجموع دفعات التعهد يجب أن يكون مساوياً لإحمالي قيمة العقد</value>
+  </data>
+  <data name="ScheduleView_ScheduleNotExist" xml:space="preserve">
+    <value>لا يوجد تعهد بهذا الرقم</value>
+  </data>
+  <data name="ScheduleView_SignerMissing" xml:space="preserve">
+    <value>يجب تحديد المتعهد</value>
+  </data>
+  <data name="SignerView_SignerExist" xml:space="preserve">
+    <value>المتعهد تم تسجيله من قبل</value>
+  </data>
+  <data name="SignerView_SignerIdDateMissing" xml:space="preserve">
+    <value>يجب ادخال تاريخ الهوية</value>
+  </data>
+  <data name="SignerView_SignerIdMissing" xml:space="preserve">
+    <value>يجب إدخال رقم الهوية</value>
+  </data>
+  <data name="SignerView_SignerMobileMissing" xml:space="preserve">
+    <value>يجب إدخال رقم الجوال من 10 أرقام</value>
+  </data>
+  <data name="SignerView_SignerNameMissing" xml:space="preserve">
+    <value>يجب إدخال اسم المتعهد</value>
+  </data>
+  <data name="SignerView_SignerNotExist" xml:space="preserve">
+    <value>لايوجد متعهد بهذا الرقم</value>
+  </data>
+  <data name="SyncView_InvalidYear" xml:space="preserve">
+    <value>أدخل السنة بشكل صحيح
+السنة يجب أن تكون أكبر من 1433</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="UnsignedContract" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\UnsignedContract.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+</root>

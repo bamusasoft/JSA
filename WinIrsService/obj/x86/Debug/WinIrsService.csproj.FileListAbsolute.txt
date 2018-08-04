@@ -1,0 +1,27 @@
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\WinIrsService\bin\x86\Debug\WinIrsService.dll.config
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\WinIrsService\bin\x86\Debug\WinIrsService.dll
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\WinIrsService\bin\x86\Debug\WinIrsService.pdb
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\WinIrsService\bin\x86\Debug\DomainModel.dll
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\WinIrsService\bin\x86\Debug\EntityFramework.dll
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\WinIrsService\bin\x86\Debug\DomainModel.pdb
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\WinIrsService\bin\x86\Debug\EntityFramework.xml
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\WinIrsService\obj\x86\Debug\WinIrsService.csprojResolveAssemblyReference.cache
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\WinIrsService\obj\x86\Debug\Jsa.WinIrsService.Properties.Resources.resources
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\WinIrsService\obj\x86\Debug\WinIrsService.csproj.GenerateResource.Cache
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\WinIrsService\obj\x86\Debug\WinIrsService.dll
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\WinIrsService\obj\x86\Debug\WinIrsService.pdb
+C:\repose\Jeddah Automation Project\JSA\WinIrsService\bin\x86\Debug\WinIrsService.dll.config
+C:\repose\Jeddah Automation Project\JSA\WinIrsService\bin\x86\Debug\WinIrsService.dll
+C:\repose\Jeddah Automation Project\JSA\WinIrsService\bin\x86\Debug\WinIrsService.pdb
+C:\repose\Jeddah Automation Project\JSA\WinIrsService\bin\x86\Debug\DomainModel.dll
+C:\repose\Jeddah Automation Project\JSA\WinIrsService\bin\x86\Debug\EntityFramework.dll
+C:\repose\Jeddah Automation Project\JSA\WinIrsService\bin\x86\Debug\DomainModel.pdb
+C:\repose\Jeddah Automation Project\JSA\WinIrsService\bin\x86\Debug\DomainModel.dll.config
+C:\repose\Jeddah Automation Project\JSA\WinIrsService\bin\x86\Debug\EntityFramework.xml
+C:\repose\Jeddah Automation Project\JSA\WinIrsService\obj\x86\Debug\WinIrsService.csprojAssemblyReference.cache
+C:\repose\Jeddah Automation Project\JSA\WinIrsService\obj\x86\Debug\Jsa.WinIrsService.Properties.Resources.resources
+C:\repose\Jeddah Automation Project\JSA\WinIrsService\obj\x86\Debug\WinIrsService.csproj.GenerateResource.cache
+C:\repose\Jeddah Automation Project\JSA\WinIrsService\obj\x86\Debug\WinIrsService.csproj.CoreCompileInputs.cache
+C:\repose\Jeddah Automation Project\JSA\WinIrsService\obj\x86\Debug\WinIrsService.csproj.CopyComplete
+C:\repose\Jeddah Automation Project\JSA\WinIrsService\obj\x86\Debug\WinIrsService.dll
+C:\repose\Jeddah Automation Project\JSA\WinIrsService\obj\x86\Debug\WinIrsService.pdb

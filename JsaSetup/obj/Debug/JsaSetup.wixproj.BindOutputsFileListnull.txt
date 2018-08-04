@@ -1,0 +1,3 @@
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\JsaSetup\bin\Debug\cab1.cab
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\JsaSetup\bin\Debug\JsaSetup.msi
+C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\JsaSetup\bin\Debug\JsaSetup.wixpdb

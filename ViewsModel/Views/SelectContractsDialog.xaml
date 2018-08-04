@@ -1,0 +1,24 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="Jsa.ViewsModel.Views.SelectContractsDialog"
+        Title="اختيار العقود" Style="{StaticResource WindowCommonStyle}" WindowStyle="ToolWindow" ShowInTaskbar="False" Width="500" Height="400"
+        WindowStartupLocation="CenterScreen">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+        <xctk:CheckListBox Margin="10" DisplayMemberPath="Property.Description" ValueMemberPath="Level" ItemsSource="{Binding CustomerContracts}"
+						   SelectedItem="{Binding SelectedContract}" SelectedItemsOverride="{Binding SelectedContracts}"/>
+                           
+		<StackPanel Margin="0" Grid.Row="1" Orientation="Horizontal" FlowDirection="LeftToRight" Background="#FFC5D6E2">
+			<Button Content="Cancel" HorizontalAlignment="Right" Width="75" Height="35" Margin="10"
+                    Command="{Binding CancelCommand}" IsCancel="True"/>
+			<Button Content="Ok" Width="75" HorizontalAlignment="Right" Height="35" IsCancel="True" Margin="10"
+                    Command="{Binding OkCommand}" IsDefault="True"/>
+		</StackPanel>
+        
+	</Grid>
+</Window>

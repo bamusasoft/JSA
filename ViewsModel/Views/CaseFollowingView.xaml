@@ -1,0 +1,113 @@
+﻿<Window x:Class="Jsa.ViewsModel.Views.CaseFollowingView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:extToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+		xmlns:system="clr-namespace:System;assembly=mscorlib"
+		Title="سجل الصادر" Style="{StaticResource WindowCommonStyle}">
+	<Window.InputBindings>
+		<KeyBinding Key="Escape" Command="{Binding AddNewCommand}"/>
+		<KeyBinding Key="S" Modifiers="Control" Command="{Binding SaveCommand}"/>
+		<KeyBinding Key="D" Modifiers="Control" Command="{Binding DeleteCommand}"/>
+	</Window.InputBindings>
+	<DockPanel Margin="0">
+
+	<Ribbon DockPanel.Dock="Top">
+			<RibbonTab Header="عام">
+				<RibbonGroup Header="تحرير">
+                    <RibbonButton LargeImageSource="..\Resources/Images/AddNew.png" Command="{Binding ClearCommand}" ToolTip="جديد"/>
+					<RibbonButton Command="{Binding SaveCommand}" ToolTip="حفظ (Ctrl + S)" Style="{StaticResource SaveButtonStyle}"/>
+                    <RibbonButton Command="{Binding PrintCommand}" ToolTip="حذف (Ctrl + D)" Style="{StaticResource PrintButtonStyle}"/>
+					<RibbonButton Command="{Binding DeleteCommand}" ToolTip="حذف (Ctrl + D)" Style="{StaticResource DeleteButtonStyle}"/>
+				</RibbonGroup>
+			</RibbonTab>
+			</Ribbon>
+        <Grid KeyDown="OnGridContentKeyDown">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="0.60*"/>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="0.40*"/>
+		</Grid.ColumnDefinitions>
+		<Grid Grid.Column="0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+			<Grid Grid.Row="0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+				<TextBlock Margin="3" TextWrapping="Wrap" Text="رقم القضية" VerticalAlignment="Center"/>
+				<TextBlock Margin="3" TextWrapping="Wrap" Text="المدعى عليه" VerticalAlignment="Center" Grid.Row="1"/>
+				<TextBox x:Name="txtCaseNo" Grid.Column="1" Margin="5,5,150,5" TextWrapping="Wrap" VerticalAlignment="Center" RenderTransformOrigin="0.518,3.266" TabIndex="0"
+                         PreviewKeyDown="OnCaseNoKeyDown" Validation.ErrorTemplate="{StaticResource TextBoxErrorTemplate}" Text="{Binding CaseNo, UpdateSourceTrigger=PropertyChanged}"
+                         IsEnabled="{Binding CaseNoEnabled}"/>
+				<TextBox Grid.Column="1" Margin="5" TextWrapping="Wrap" VerticalAlignment="Center" RenderTransformOrigin="0.518,3.266" Grid.Row="1" TabIndex="1"
+                         Text="{Binding LegalCase.Defendant, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False"/>
+			</Grid>
+			<Rectangle Grid.Row="1" Fill="Black" Margin="0,5" Stroke="Silver" Height="2"/>
+			<Grid Grid.Row="2" Background="#FFC8C7C9">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+
+				</Grid.RowDefinitions>
+				<TextBlock Margin="3" TextWrapping="Wrap" Text="تاريخ المتابعة" VerticalAlignment="Center"/>
+				<TextBlock Margin="3" TextWrapping="Wrap" Text="جهة المتابعة" VerticalAlignment="Center" Grid.Row="1"/>
+				<TextBlock Margin="3" TextWrapping="Wrap" Text="النتيجة" VerticalAlignment="Center" Grid.Row="2"/>
+				<TextBlock Margin="3" TextWrapping="Wrap" Text="تاريخ المتابعة القادمة" VerticalAlignment="Center" Grid.Row="3"/>
+				<TextBlock Margin="3" TextWrapping="Wrap" Text="جهة المتابعة القادمة" VerticalAlignment="Center" Grid.Row="4"/>
+				<extToolkit:MaskedTextBox Grid.Column="1" Grid.Row="0" Mask="## /##/ ####"
+													  ValueDataType="{x:Type system:String}"
+													  Value="{Binding FollowingDate, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource LiteralConverter}}"
+													  Margin="5,5,125,5" TabIndex="2" Validation.ErrorTemplate="{StaticResource TextBoxErrorTemplate}"/>
+                 <TextBox Grid.Column="1" Margin="3" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="1" TabIndex="3" Text="{Binding FollowingDestination , UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource TextBoxErrorTemplate}"/>
+                    <TextBox Grid.Column="1" Margin="3" TextWrapping="Wrap" Grid.Row="2" AcceptsReturn="True" TabIndex="4" Text="{Binding FollowingDescription, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource TextBoxErrorTemplate}"/>
+				<extToolkit:MaskedTextBox Grid.Column="1" Grid.Row="3" Mask="## /##/ ####"
+													  ValueDataType="{x:Type system:String}"
+													  Value="{Binding NextFollowingDate, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource LiteralConverter}}"
+													  Margin="5,5,150,5" TabIndex="5" Validation.ErrorTemplate="{StaticResource TextBoxErrorTemplate}"/>
+                    <TextBox Grid.Column="1" Margin="3" TextWrapping="Wrap" Grid.Row="4" VerticalAlignment="Center" TabIndex="6" Text="{Binding NextFollowingDestination, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource TextBoxErrorTemplate}"/>
+                    <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource AddNewButtonStyle}"
+                                  Command="{Binding AddNewCommand}" ToolTip="أضف متابعة (Escape)"/>
+                </Grid>
+		</Grid>
+		<Rectangle Grid.Column="1" Fill="#FFF4F4F5" Margin="0" Stroke="#FFE7463E" Width="3"/>
+		<Grid Grid.Column="2" IsEnabled="{Binding ListEnabled}">
+			<DataGrid x:Name="dgFollowings" ItemsSource="{Binding Followings}"
+						  SelectionMode="Single" AutoGenerateColumns="False" TabIndex="7" Margin="3" CanUserAddRows="False">
+					<DataGrid.Columns>
+                        <DataGridHyperlinkColumn Header="تاريخ المتابعة" Binding="{Binding FollowingDate, Converter={StaticResource AddMaskConverter}}"  Width="Auto" IsReadOnly="True" >
+							<DataGridHyperlinkColumn.ElementStyle>
+								<Style TargetType="TextBlock">
+									<EventSetter Event="Hyperlink.Click" Handler="OnHyperlinkClick"/>
+									<Setter Property="IsHitTestVisible" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=DataGrid}, Path=IsEnabled}"/>
+								</Style>
+							</DataGridHyperlinkColumn.ElementStyle>
+						</DataGridHyperlinkColumn>
+
+						<DataGridTextColumn Header="الجهة" Binding="{Binding FollowingDestination}" Width="Auto" IsReadOnly="True"/>
+						<DataGridTextColumn Header="النتيجة" Binding="{Binding FollowingDescription}" Width="*" IsReadOnly="True"/>
+					</DataGrid.Columns>
+
+				</DataGrid>
+		</Grid>
+		
+	</Grid>
+
+	</DockPanel>
+    
+</Window>
