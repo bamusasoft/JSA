@@ -14,6 +14,7 @@ C:\repose\Jeddah Automation Project\JSA\DomainModel\bin\x86\Debug\EntityFramewor
 C:\repose\Jeddah Automation Project\JSA\DomainModel\bin\x86\Debug\EntityFramework.SqlServer.dll
 C:\repose\Jeddah Automation Project\JSA\DomainModel\bin\x86\Debug\EntityFramework.xml
 C:\repose\Jeddah Automation Project\JSA\DomainModel\bin\x86\Debug\EntityFramework.SqlServer.xml
+C:\repose\Jeddah Automation Project\JSA\DomainModel\obj\x86\Debug\DomainModel.csprojAssemblyReference.cache
 C:\repose\Jeddah Automation Project\JSA\DomainModel\obj\x86\Debug\DomainModel.csproj.CoreCompileInputs.cache
 C:\repose\Jeddah Automation Project\JSA\DomainModel\obj\x86\Debug\DomainModel.csproj.CopyComplete
 C:\repose\Jeddah Automation Project\JSA\DomainModel\obj\x86\Debug\DomainModel.dll

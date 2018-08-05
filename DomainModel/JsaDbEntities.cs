@@ -85,6 +85,9 @@ namespace Jsa.DomainModel
         public virtual DbSet<Schedule> Schedules { get; set; }
         public virtual DbSet<Signer> Signers { get; set; }
         public virtual DbSet<CustomerClass> CustomersClasses { get; set; }
+        public virtual DbSet<Destination> Destinations { get; set; }
+        public virtual DbSet<DocRecordFollow> DocRecordFollows { get; set; }
+        public virtual DbSet<DocRecord> DocRecords { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -373,7 +376,39 @@ namespace Jsa.DomainModel
                 .HasMany(e => e.Schedules)
                 .WithRequired(e => e.Signer)
                 .WillCascadeOnDelete(false);
-           
+
+            modelBuilder.Entity<Destination>()
+                .HasMany(e => e.DocRecords)
+                .WithRequired(e => e.Destination)
+                .HasForeignKey(e => e.DestId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<DocRecordFollow>()
+                .Property(e => e.Id)
+                .IsFixedLength();
+
+            modelBuilder.Entity<DocRecordFollow>()
+                .Property(e => e.FollowDate)
+                .IsFixedLength();
+
+            modelBuilder.Entity<DocRecordFollow>()
+                .Property(e => e.DocRecodId)
+                .IsFixedLength();
+
+            modelBuilder.Entity<DocRecord>()
+                .Property(e => e.Id)
+                .IsFixedLength();
+
+            modelBuilder.Entity<DocRecord>()
+                .Property(e => e.DocDate)
+                .IsFixedLength();
+
+            modelBuilder.Entity<DocRecord>()
+                .HasMany(e => e.DocRecordFollows)
+                .WithRequired(e => e.DocRecord)
+                .HasForeignKey(e => e.DocRecodId)
+                .WillCascadeOnDelete(false);
+
         }
 
     }

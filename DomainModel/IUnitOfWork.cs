@@ -78,6 +78,10 @@ namespace Jsa.DomainModel
         RepositoryBase<CaseFollowing> CaseFollowings { get; }
         RepositoryBase<CustomerClass> CustomersClasses { get;}
 
+        RepositoryBase<Destination> Destinations { get; }
+        RepositoryBase<DocRecord> DocRecords { get; }
+        RepositoryBase<DocRecordFollow> DocRecordFollows { get; }
+
 
         /// <summary>
         /// Saves all changes made to current unit of work.

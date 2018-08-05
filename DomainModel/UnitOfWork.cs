@@ -34,6 +34,10 @@ namespace Jsa.DomainModel
         private RepositoryBase<CaseFollowing> _caseFollowings;
         private RepositoryBase<CustomerClass> _customersClasses;
 
+        private RepositoryBase<Destination> _destinations;
+        private RepositoryBase<DocRecord> _docRecords;
+        private RepositoryBase<DocRecordFollow> _docRecordFollows;
+
         #endregion
 
         #region Contsturctor
@@ -203,6 +207,21 @@ namespace Jsa.DomainModel
         public RepositoryBase<CustomerClass> CustomersClasses
         {
             get { return _customersClasses ?? (_customersClasses = new CustomersClassesRepository(_context)); }
+        }
+
+        public RepositoryBase<Destination> Destinations
+        {
+            get { return _destinations ?? (_destinations = new DestinationRepository(_context)); }
+        }
+
+        public RepositoryBase<DocRecord> DocRecords
+        {
+            get { return _docRecords ?? (_docRecords = new DocRecordRepository(_context)); }
+        }
+
+        public RepositoryBase<DocRecordFollow> DocRecordFollows
+        {
+            get { return _docRecordFollows ?? (_docRecordFollows = new DocRecordFollowRepository(_context)); }
         }
 
         /// <summary>

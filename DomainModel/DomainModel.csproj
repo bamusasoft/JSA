@@ -80,6 +80,9 @@
     <Compile Include="ContractsActivity.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="CustomerClass.cs" />
+    <Compile Include="Destination.cs" />
+    <Compile Include="DocRecord.cs" />
+    <Compile Include="DocRecordFollow.cs" />
     <Compile Include="Exceptions\DataModelException.cs" />
     <Compile Include="GlobalConst.cs" />
     <Compile Include="IUnitOfWork.cs" />
@@ -97,6 +100,9 @@
     <Compile Include="Repositories\ContractsRepository.cs" />
     <Compile Include="Repositories\CustomersClassesRepository.cs" />
     <Compile Include="Repositories\CustomersRepository.cs" />
+    <Compile Include="Repositories\DestinationRepository.cs" />
+    <Compile Include="Repositories\DocRecordFollowRepository.cs" />
+    <Compile Include="Repositories\DocRecordRepository.cs" />
     <Compile Include="Repositories\LegalCaseRepository.cs" />
     <Compile Include="Repositories\OutboxRepository.cs" />
     <Compile Include="Repositories\PaymentRepository.cs" />
