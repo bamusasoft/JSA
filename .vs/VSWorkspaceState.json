@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\DomainModel",
+    "\\ViewsModel",
+    "\\ViewsModel\\ViewsControllers"
   ],
-  "SelectedNode": "\\JSA.sln",
+  "SelectedNode": "\\ViewsModel\\ViewsControllers\\DocRecordController.cs",
   "PreviewInSolutionExplorer": false
 }

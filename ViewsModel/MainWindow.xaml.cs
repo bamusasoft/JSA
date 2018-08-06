@@ -178,5 +178,11 @@ namespace Jsa.ViewsModel
             var v = new CustomersClassesView();
             ShowChiled(v);
         }
+
+        private void OpenDocRecord(object sender, RoutedEventArgs e)
+        {
+            var v = new DocRecordView();
+
+        }
     }
 }

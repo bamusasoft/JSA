@@ -27,6 +27,8 @@
                 <MenuItem Header="سجل الصادر" Click="OpenOutbox"/>
             </MenuItem>
             <MenuItem Header="الشؤون الحكومية">
+                <MenuItem Header="تسجيل معاملة" Click="OpenDocRecord"/>
+                <Separator/>
                 <MenuItem Header="تسجيل قضية" Click="OpenLegalCase"/>
                 <MenuItem Header="متابعة القضايا" Click="OpenFollowingCase"/>
                 <MenuItem Header="مواعيد الجلسات" Click="OpenCaseAppointment"/>

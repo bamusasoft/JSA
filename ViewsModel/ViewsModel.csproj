@@ -259,8 +259,8 @@
     <Compile Include="Views\CustomersClassesView.xaml.cs">
       <DependentUpon>CustomersClassesView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DocRecord.xaml.cs">
-      <DependentUpon>DocRecord.xaml</DependentUpon>
+    <Compile Include="Views\DocRecordView.xaml.cs">
+      <DependentUpon>DocRecordView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DocRecordFollow.xaml.cs">
       <DependentUpon>DocRecordFollow.xaml</DependentUpon>
@@ -490,7 +490,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\DocRecord.xaml">
+    <Page Include="Views\DocRecordView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

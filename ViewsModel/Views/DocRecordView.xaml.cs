@@ -17,9 +17,9 @@ namespace Jsa.ViewsModel.Views
     /// <summary>
     /// Interaction logic for DocRecord.xaml
     /// </summary>
-    public partial class DocRecord : Window
+    public partial class DocRecordView : Window
     {
-        public DocRecord()
+        public DocRecordView()
         {
             InitializeComponent();
         }

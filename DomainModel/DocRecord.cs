@@ -31,7 +31,7 @@ namespace Jsa.DomainModel
 
         public string DocPath { get; set; }
 
-        public int Status { get; set; }
+        public DocRecordStatus DocStatus { get; set; }
 
         public int SecurityLevel { get; set; }
 
