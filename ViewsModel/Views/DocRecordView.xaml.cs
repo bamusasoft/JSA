@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jsa.ViewsModel.ViewsControllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,8 @@ namespace Jsa.ViewsModel.Views
         public DocRecordView()
         {
             InitializeComponent();
+            DocRecordController controller = new DocRecordController();
+            DataContext = controller;
         }
     }
 }

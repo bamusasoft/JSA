@@ -198,6 +198,7 @@
     <Compile Include="ViewsControllers\LegalCaseController.cs" />
     <Compile Include="ViewsControllers\LegalCaseReportController.cs" />
     <Compile Include="ViewsControllers\NotificationCenterController.cs" />
+    <Compile Include="ViewsControllers\ObservableCollecion.cs" />
     <Compile Include="ViewsControllers\ScheduleDetailsController.cs" />
     <Compile Include="ViewsControllers\SelectContractsController.cs" />
     <Compile Include="ViewsControllers\SelectSheduleController.cs" />

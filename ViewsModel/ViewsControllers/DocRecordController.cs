@@ -2,6 +2,8 @@
 using Jsa.ViewsModel.ViewsControllers.Core;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -14,7 +16,49 @@ namespace Jsa.ViewsModel.ViewsControllers
 
         public DocRecordController()
         {
+            Initialize();
+            LoadDestinations();
             ControlState(ControllerStates.Blank);
+        }
+        private void Initialize()
+        {
+            
+            Errors = new Dictionary<string, List<string>>();
+            DocStatuses = new Dictionary<DocRecordStatus, string>();
+            DocStatuses.Add(DocRecordStatus.Open, "تحت الإجراء");
+            DocStatuses.Add(DocRecordStatus.Closed, "منتهية");
+            DocStatuses.Add(DocRecordStatus.Hold, "متوقفة");
+
+        }
+        private async Task LoadDestinations()
+        {
+            Task<List<Destination>> task = null;
+            try
+            {
+                task = LoadDesintationsAsync();
+                List<Destination> result = await task;
+                DocDestinations = new ObservableCollection<Destination>(result);
+            }
+            catch(Exception ex)
+            {
+                Helper.LogShowError(task.Exception);
+                Helper.LogShowError(ex);
+            }
+        }
+        private Task<List<Destination>> LoadDesintationsAsync()
+        {
+            Task<List<Destination>> task = Task.Run(() =>
+            {
+                throw new InvalidOperationException("BLOOOOOOOOOOOOOOO");
+                List<Destination> destinations = null;
+                using (IUnitOfWork unit = new UnitOfWork())
+                {
+                    destinations = unit.Destinations.GetAll().ToList();
+                }
+                return destinations;
+            });
+
+            return task;
         }
         #region Fields
         string _id;
@@ -24,7 +68,9 @@ namespace Jsa.ViewsModel.ViewsControllers
         Destination _destination;
         string _docPath;
         DocRecordStatus _docStatus;
-
+        ObservableCollection<Destination> _docDestinations;
+        Dictionary<DocRecordStatus, string> _docStatuses;
+        KeyValuePair<DocRecordStatus, string> _selectedStatus;
         ControllerStates _controllerStates;
         string _idSearchTerm;
         string _refSearchTerm;
@@ -85,16 +131,7 @@ namespace Jsa.ViewsModel.ViewsControllers
                 ControlState(ControllerStates.Edited);
             }
         }
-        public DocRecordStatus DocStatus
-        {
-            get { return _docStatus; }
-            set
-            {
-                _docStatus = value;
-                RaisePropertyChanged();
-                ControlState(ControllerStates.Edited);
-            }
-        }
+        
         public string DocPath
         {
             get { return _docPath; }
@@ -106,6 +143,35 @@ namespace Jsa.ViewsModel.ViewsControllers
             }
         }
         private int SecurityLevel {get; set ;}
+
+        public ObservableCollection<Destination> DocDestinations
+        {
+            get { return _docDestinations; }
+            set
+            {
+                _docDestinations = value;
+                RaisePropertyChanged("DocDestinations");
+            }
+        }
+        public Dictionary<DocRecordStatus, string> DocStatuses
+        {
+            get { return _docStatuses; }
+            set
+            {
+                _docStatuses = value;
+                RaisePropertyChanged("DocStatuses");
+            }
+        }
+        public KeyValuePair<DocRecordStatus, string> SelectedDocStatus
+        {
+            get { return _selectedStatus; }
+            set
+            {
+                _selectedStatus = value;
+                RaisePropertyChanged("SelectedDocStatus");
+
+            }
+        }
         //
         public string IdSearchTerm
         {
@@ -125,6 +191,7 @@ namespace Jsa.ViewsModel.ViewsControllers
                 RaisePropertyChanged();
             }
         }
+
 
         #endregion
         #region Base
@@ -198,7 +265,7 @@ namespace Jsa.ViewsModel.ViewsControllers
             Subject = "";
             Destination = null;
             DocPath = "";
-            DocStatus = DocRecordStatus.Open;
+            SelectedDocStatus = DocStatuses.SingleOrDefault(x => x.Key == DocRecordStatus.Open);
 
         }
 
@@ -333,7 +400,7 @@ namespace Jsa.ViewsModel.ViewsControllers
             Subject = docRecord.Subject;
             Destination = docRecord.Destination;
             DocPath = docRecord.DocPath;
-            DocStatus = docRecord.DocStatus;
+            SelectedDocStatus = DocStatuses.SingleOrDefault(x => x.Key == docRecord.DocStatus);
 
         }
 
@@ -346,7 +413,7 @@ namespace Jsa.ViewsModel.ViewsControllers
             docRecord.Subject = Subject;
             docRecord.Destination = Destination;
             docRecord.DocPath = DocPath;
-            docRecord.DocStatus = DocStatus;
+            docRecord.DocStatus = SelectedDocStatus.Key;
             docRecord.SecurityLevel = 0;
             return docRecord;
         }
@@ -358,7 +425,7 @@ namespace Jsa.ViewsModel.ViewsControllers
             docRecord.Subject = Subject;
             docRecord.Destination = Destination;
             docRecord.DocPath = DocPath;
-            docRecord.DocStatus = DocStatus;
+            docRecord.DocStatus = SelectedDocStatus.Key;
             docRecord.SecurityLevel = 0;
         }
         

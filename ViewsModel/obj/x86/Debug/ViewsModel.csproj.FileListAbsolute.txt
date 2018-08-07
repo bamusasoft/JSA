@@ -251,7 +251,6 @@ C:\repose\Jeddah Automation Project\JSA\ViewsModel\obj\x86\Debug\Views\ContractR
 C:\repose\Jeddah Automation Project\JSA\ViewsModel\obj\x86\Debug\Views\CasesReportView.g.cs
 C:\repose\Jeddah Automation Project\JSA\ViewsModel\obj\x86\Debug\Views\CustomerHistoryView.g.cs
 C:\repose\Jeddah Automation Project\JSA\ViewsModel\obj\x86\Debug\Views\CustomersClassesView.g.cs
-C:\repose\Jeddah Automation Project\JSA\ViewsModel\obj\x86\Debug\Views\DocRecord.g.cs
 C:\repose\Jeddah Automation Project\JSA\ViewsModel\obj\x86\Debug\Views\DocRecordFollow.g.cs
 C:\repose\Jeddah Automation Project\JSA\ViewsModel\obj\x86\Debug\Views\LegalCaseView.g.cs
 C:\repose\Jeddah Automation Project\JSA\ViewsModel\obj\x86\Debug\Views\MonthlyContractView.g.cs
@@ -287,7 +286,6 @@ C:\repose\Jeddah Automation Project\JSA\ViewsModel\obj\x86\Debug\Views\AddSchedu
 C:\repose\Jeddah Automation Project\JSA\ViewsModel\obj\x86\Debug\Views\ContractRentMaint.baml
 C:\repose\Jeddah Automation Project\JSA\ViewsModel\obj\x86\Debug\Views\CustomerHistoryView.baml
 C:\repose\Jeddah Automation Project\JSA\ViewsModel\obj\x86\Debug\Views\CustomersClassesView.baml
-C:\repose\Jeddah Automation Project\JSA\ViewsModel\obj\x86\Debug\Views\DocRecord.baml
 C:\repose\Jeddah Automation Project\JSA\ViewsModel\obj\x86\Debug\Views\DocRecordFollow.baml
 C:\repose\Jeddah Automation Project\JSA\ViewsModel\obj\x86\Debug\Views\ContractPaymentsStatus.baml
 C:\repose\Jeddah Automation Project\JSA\ViewsModel\obj\x86\Debug\MainWindow.baml
@@ -300,3 +298,5 @@ C:\repose\Jeddah Automation Project\JSA\ViewsModel\obj\x86\Debug\ViewsModel.cspr
 C:\repose\Jeddah Automation Project\JSA\ViewsModel\obj\x86\Debug\ViewsModel.csproj.CopyComplete
 C:\repose\Jeddah Automation Project\JSA\ViewsModel\obj\x86\Debug\ViewsModel.exe
 C:\repose\Jeddah Automation Project\JSA\ViewsModel\obj\x86\Debug\ViewsModel.pdb
+C:\repose\Jeddah Automation Project\JSA\ViewsModel\obj\x86\Debug\Views\DocRecordView.g.cs
+C:\repose\Jeddah Automation Project\JSA\ViewsModel\obj\x86\Debug\Views\DocRecordView.baml

@@ -182,6 +182,7 @@ namespace Jsa.ViewsModel
         private void OpenDocRecord(object sender, RoutedEventArgs e)
         {
             var v = new DocRecordView();
+            ShowChiled(v);
 
         }
     }
