@@ -22,6 +22,18 @@ namespace Jsa.DomainModel
         public string Description { get; set; }
 
         public virtual ICollection<DocRecord> DocRecords { get; set; }
-
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
+        }
+        public override bool Equals(object obj)
+        {
+           
+            if(obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+            return ((Destination)obj).Id == Id;
+        }
     }
 }

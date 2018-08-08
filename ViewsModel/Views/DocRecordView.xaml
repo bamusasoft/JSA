@@ -70,7 +70,7 @@
 
             <TextBlock Margin="5"  Grid.Row="8" Text="الجهة"/>
             <ComboBox Margin="5" Grid.Row="9" ItemsSource="{Binding DocDestinations}" 
-						  SelectedValue="Key" DisplayMemberPath="Description" 
+						  DisplayMemberPath="Description" 
                           IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding Destination}" />
                          
             <TextBlock Margin="5" Grid.Row="10" Text="الحالة"/>

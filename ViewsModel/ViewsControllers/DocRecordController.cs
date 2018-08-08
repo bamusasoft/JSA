@@ -33,23 +33,21 @@ namespace Jsa.ViewsModel.ViewsControllers
         private async Task LoadDestinations()
         {
             Task<List<Destination>> task = null;
-            try
-            {
+            //try
+            //{
                 task = LoadDesintationsAsync();
                 List<Destination> result = await task;
                 DocDestinations = new ObservableCollection<Destination>(result);
-            }
-            catch(Exception ex)
-            {
-                Helper.LogShowError(task.Exception);
-                Helper.LogShowError(ex);
-            }
+            //}
+            //catch(Exception ex)
+            //{
+            //    Helper.LogShowError(ex);
+            //}
         }
         private Task<List<Destination>> LoadDesintationsAsync()
         {
             Task<List<Destination>> task = Task.Run(() =>
             {
-                throw new InvalidOperationException("BLOOOOOOOOOOOOOOO");
                 List<Destination> destinations = null;
                 using (IUnitOfWork unit = new UnitOfWork())
                 {
