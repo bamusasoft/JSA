@@ -6,39 +6,57 @@
         xmlns:local="clr-namespace:Jsa.ViewsModel.Views"
         xmlns:extToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
-
         mc:Ignorable="d"
-        Title="تسجيل معاملة" Height="450" Width="800" FlowDirection="RightToLeft">
+        Title="تسجيل معاملة" Height="450" Width="800" FlowDirection="RightToLeft"
+        >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            
         </Grid.RowDefinitions>
         <ToolBarTray Grid.Row="0">
             <ToolBar>
-                <Button Command="{Binding AddNew}" IsEnabled="{Binding SearchEnabled}" Margin="0,0,5,0">
-                     <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                <Button Command="{Binding AddNew}" IsEnabled="{Binding SearchEnabled}" Margin="0,0,5,0"
+                        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
                         <Image Style="{StaticResource ToolbarAddNewStyle}"/>
                         <TextBlock Margin="5,0,0,0" Text="{StaticResource Menu_AddNew}" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
-                <Button Command="{Binding SaveCommand}" IsEnabled="{Binding SaveEnabled}" Margin="0,0,5,0">
+                <Button Command="{Binding SaveCommand}" IsEnabled="{Binding SaveEnabled}" Margin="0,0,5,0"
+                        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
                     <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
                         <Image Style="{StaticResource ToolbarSaveStyle}"/>
                         <TextBlock Margin="5,0,0,0" Text="{StaticResource Menu_Save}" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
-                <Button Command="{Binding PrintCommand}" IsEnabled="{Binding PrintEnabled}" Margin="0,0,5,0">
+                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey} }"/>
+                <Button Command="{Binding PrintCommand}" IsEnabled="{Binding PrintEnabled}" Margin="0,0,5,0"
+                        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
                     <StackPanel Orientation="Horizontal" Margin="0">
                         <Image Style="{StaticResource TollbarPrintStyle}"/>
                         <TextBlock Margin="5,0,0,0" Text="{StaticResource Menu_Print}" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
+                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey} }"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="رقم المعاملة" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBox Text="{Binding IdSearchTerm}" Style="{StaticResource {x:Static ToolBar.TextBoxStyleKey}}"
+                             MinWidth="120" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="رقم القيد" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBox Text="{Binding IdSearchTerm}" Style="{StaticResource {x:Static ToolBar.TextBoxStyleKey}}"
+                             MinWidth="120" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Button Command="{Binding PrintCommand}" IsEnabled="{Binding PrintEnabled}" Margin="0,0,5,0"
+                        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
+                    <StackPanel Orientation="Horizontal" Margin="0">
+                        <Image Style="{StaticResource ToolbarSearchStyle}"/>
+                        <TextBlock Margin="5,0,0,0" Text="{StaticResource Menu_Print}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
             </ToolBar>
         </ToolBarTray>
 
-        <Grid   Grid.Row="1">
+        <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -54,33 +72,33 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <TextBlock Margin="5" Grid.Row="0"  Text="الرقم"/>
-            <TextBox Margin="5" Grid.Row="1" Text="{Binding Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Margin="5,5,250,5" Grid.Row="1" Text="{Binding Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <TextBlock Margin="5" Grid.Row="2"  Text="رقم المرجع"/>
-            <TextBox Margin="5" Grid.Row="3" Text="{Binding RefId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Margin="5,5,250,5" Grid.Row="3" Text="{Binding RefId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <TextBlock Margin="5" Grid.Row="4" Text="التاريخ"/>
             <extToolkit:MaskedTextBox Grid.Row="5" Mask="## /##/ ####"
 													  ValueDataType="{x:Type system:String}"
-													  Value="{Binding DocDate, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource LiteralConverter}}"
-													  />
+													  Value="{Binding DocDate, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource LiteralConverter}}" 
+                                      Margin="5,5,250,5"/>
 
             <TextBlock Margin="5" Grid.Row="6" Text="الموضوع"/>
-             <TextBox Margin="5" Grid.Row="7" Text="{Binding Subject, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Margin="5" Grid.Row="7" Text="{Binding Subject, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                     
 
             <TextBlock Margin="5"  Grid.Row="8" Text="الجهة"/>
             <ComboBox Margin="5" Grid.Row="9" ItemsSource="{Binding DocDestinations}" 
 						  DisplayMemberPath="Description" 
                           IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding Destination}" />
-                         
+
             <TextBlock Margin="5" Grid.Row="10" Text="الحالة"/>
             <ComboBox Margin="5" Grid.Row="11" 
                           ItemsSource="{Binding DocStatuses}" 
                           SelectedItem="{Binding SelectedDocStatus}"
                           SelectedValuePath="Key" DisplayMemberPath="Value"
 						  IsSynchronizedWithCurrentItem="True"  />
-
-           
-        </Grid> 
+        </Grid>
     </Grid>
 </Window>

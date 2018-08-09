@@ -6,6 +6,7 @@
     <s:String x:Key="Menu_Etl">بيانات المستأجرين</s:String>
     <s:String x:Key="Menu_Print">طباعة</s:String>
     <s:String x:Key="Menu_AddNew">جديد</s:String>
+    <s:String x:Key="Menu_Search">بحث</s:String>
     <s:String x:Key="General_CustomerIdLabel">رقم المستأجر</s:String>
     <s:String x:Key="General_CustomerNameLabel">الإسم</s:String>
     <s:String x:Key="General_PropertyNoLabel">رقم العين</s:String>

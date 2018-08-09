@@ -19,3 +19,15 @@ C:\repose\Jeddah Automation Project\JSA\DomainModel\obj\x86\Debug\DomainModel.cs
 C:\repose\Jeddah Automation Project\JSA\DomainModel\obj\x86\Debug\DomainModel.csproj.CopyComplete
 C:\repose\Jeddah Automation Project\JSA\DomainModel\obj\x86\Debug\DomainModel.dll
 C:\repose\Jeddah Automation Project\JSA\DomainModel\obj\x86\Debug\DomainModel.pdb
+C:\div\Jeddah Station Automation\JSA\DomainModel\bin\x86\Debug\DomainModel.dll.config
+C:\div\Jeddah Station Automation\JSA\DomainModel\bin\x86\Debug\DomainModel.dll
+C:\div\Jeddah Station Automation\JSA\DomainModel\bin\x86\Debug\DomainModel.pdb
+C:\div\Jeddah Station Automation\JSA\DomainModel\bin\x86\Debug\EntityFramework.dll
+C:\div\Jeddah Station Automation\JSA\DomainModel\bin\x86\Debug\EntityFramework.SqlServer.dll
+C:\div\Jeddah Station Automation\JSA\DomainModel\bin\x86\Debug\EntityFramework.xml
+C:\div\Jeddah Station Automation\JSA\DomainModel\bin\x86\Debug\EntityFramework.SqlServer.xml
+C:\div\Jeddah Station Automation\JSA\DomainModel\obj\x86\Debug\DomainModel.csprojAssemblyReference.cache
+C:\div\Jeddah Station Automation\JSA\DomainModel\obj\x86\Debug\DomainModel.csproj.CoreCompileInputs.cache
+C:\div\Jeddah Station Automation\JSA\DomainModel\obj\x86\Debug\DomainModel.csproj.CopyComplete
+C:\div\Jeddah Station Automation\JSA\DomainModel\obj\x86\Debug\DomainModel.dll
+C:\div\Jeddah Station Automation\JSA\DomainModel\obj\x86\Debug\DomainModel.pdb
