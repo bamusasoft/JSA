@@ -70,7 +70,7 @@
                     <RowDefinition Height="0.60*"/>
 
                 </Grid.RowDefinitions>
-                <GroupBox Grid.Row="0" Header="المعاملة" IsEnabled="False">
+                <GroupBox Grid.Row="0" Header="بيانات المعاملة" IsEnabled="False">
                     <Grid >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -93,30 +93,51 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Row="0" Text="التاريخ" Margin="5"/>
                         <extToolkit:MaskedTextBox Grid.Row="1" Mask="## /##/ ####"
 													  ValueDataType="{x:Type system:String}"
-													  Value="{Binding FollowDate, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource LiteralConverter}}" 
-                                      Margin="5"/>
-                        <TextBlock Grid.Row="2" Text="الإحراء" Margin="5"/>
-                        <TextBox  Grid.Row="3" Margin="5" Text="{Binding FollowContent, UpdateSourceTrigger=PropertyChanged}"/>
+													  Value="{Binding FollowDate, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource LiteralConverter}}"
+                                      Margin="5" AutoSelectBehavior="OnFocus"/>
+                        <TextBlock Grid.Row="2" Text="الإجراء" Margin="5"/>
+                        <TextBox Grid.Row="3" Margin="5" Text="{Binding FollowContent, UpdateSourceTrigger=PropertyChanged}"
+                                 AcceptsReturn="True" TextWrapping="Wrap" TextAlignment="Justify"
+                                 ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                        <Button Grid.Row="4" Margin="5" Content="متابعة جديدة" Height="45" HorizontalAlignment="Right"
+                                Command="{Binding ClearFollowCommand}" />
                     </Grid>
                 </GroupBox>
 
             </Grid>
 
-            <Grid Grid.Column="1" Margin="10,0,0,0">
+            <Grid Grid.Column="1" Margin="10,0,5,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Content="المتابعات" FontSize="25"/>
                 <DataGrid Grid.Row="1" ItemsSource="{Binding DocFollows}"
-						  SelectionMode="Single" AutoGenerateColumns="False">
+						  SelectionMode="Single" AutoGenerateColumns="False"
+                          CanUserAddRows="False" IsReadOnly="True" CanUserSortColumns="False">
+                    <DataGrid.ItemContainerStyle>
+                        <Style TargetType="DataGridRow">
+                            <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick"/>
+                        </Style>
+                    </DataGrid.ItemContainerStyle>
+
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="التاريخ" Binding="{Binding Date}" Width="0.30*" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="الموضوع" Binding="{Binding Subject}" Width="0.30*" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="التاريخ" Binding="{Binding FollowDate, Converter={StaticResource AddMaskConverter}}" 
+                                            Width="Auto" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="الموضوع" Binding="{Binding FollowContent}" Width="*" IsReadOnly="True">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style>
+                                    <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
+                                    <Setter Property="TextBlock.TextAlignment" Value="Justify"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                                            
                     </DataGrid.Columns>
 
                 </DataGrid>

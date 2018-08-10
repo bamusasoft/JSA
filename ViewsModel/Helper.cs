@@ -541,7 +541,7 @@ namespace Jsa.ViewsModel
                 {
                     incrementedNo++;
                 }
-            return baseNo + AddMissingZeros(incrementedNo);
+            return basePortion + AddMissingZeros(incrementedNo);
             
         }
         private static string AddMissingZeros(int no)

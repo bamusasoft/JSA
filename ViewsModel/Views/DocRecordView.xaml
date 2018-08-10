@@ -88,9 +88,8 @@
 
             <TextBlock Margin="5" Grid.Row="6" Text="الموضوع"/>
             <TextBox Margin="5" Grid.Row="7" Text="{Binding Subject, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"
-                     />
-                     
+                     AcceptsReturn="True" TextWrapping="Wrap" TextAlignment="Justify"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto"/>
 
             <TextBlock Margin="5"  Grid.Row="8" Text="الجهة"/>
             <ComboBox Margin="5" Grid.Row="9" 

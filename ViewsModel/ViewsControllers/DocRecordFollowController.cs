@@ -1,4 +1,5 @@
-﻿using Jsa.DomainModel;
+﻿using GalaSoft.MvvmLight.Command;
+using Jsa.DomainModel;
 using Jsa.DomainModel.Repositories;
 using Jsa.ViewsModel.ViewsControllers.Core;
 using System;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Jsa.ViewsModel.ViewsControllers
 {
@@ -40,6 +42,10 @@ namespace Jsa.ViewsModel.ViewsControllers
         bool _canSearch;
         //
         ControllerStates _controllerStates;
+        //
+        private RelayCommand _clearFollowCommand;
+
+        
         #endregion
 
         #region Properties
@@ -154,6 +160,21 @@ namespace Jsa.ViewsModel.ViewsControllers
 
         #endregion
 
+        #region Commands
+        public ICommand ClearFollowCommand
+        {
+            get { return _clearFollowCommand ?? (_clearFollowCommand = new RelayCommand(ClearFollow)); }
+        }
+        private void ClearFollow()
+        {
+            FollowId = "";
+            FollowContent = "";
+            FollowDate = "";
+            FollowPath = null;
+            ControlState(ControllerStates.Saved);
+
+        }
+        #endregion
         #region Base
 
 
@@ -176,6 +197,7 @@ namespace Jsa.ViewsModel.ViewsControllers
                     _canSave = true;
                     _canPrint = true;
                     _canSearch = false;
+                    RefreshFollows();
                     break;
                 case ControllerStates.Loaded:
                     break;
@@ -219,13 +241,14 @@ namespace Jsa.ViewsModel.ViewsControllers
                 }
 
             }
+            FollowId = "";
             DocId = "";
             RefId = "";
             DocDate = "";
             Subject = "";
             FollowContent = "";
             FollowDate = "";
-            FollowPath = "";
+            FollowPath = null;
             DocFollows.Clear();
             ControlState(ControllerStates.Blank);
 
@@ -294,7 +317,8 @@ namespace Jsa.ViewsModel.ViewsControllers
                 if (resultDoc != null)
                 {
                     ShowDocRecord(resultDoc);
-                    DocFollows = new ObservableCollection<DocRecordFollow>(resultDoc.DocRecordFollows.ToList());
+                    var sortedFollows = resultDoc.DocRecordFollows.OrderBy(x => x.FollowDate);
+                    DocFollows = new ObservableCollection<DocRecordFollow>(sortedFollows);
                     ControlState(ControllerStates.Saved);
                 }
             }
@@ -395,6 +419,16 @@ namespace Jsa.ViewsModel.ViewsControllers
             Subject = docRecord.Subject;
             
         }
+        private void RefreshFollows()
+        {
+            using (IUnitOfWork unit = new UnitOfWork())
+            {
+                var follows = unit.DocRecordFollows.Query(x => x.DocRecodId == DocId)
+                    .OrderBy(p => p.FollowDate)
+                    .ToList();
+                DocFollows = new ObservableCollection<DocRecordFollow>(follows);
+            }
+        }
         private string GenerateFollowId(string docId)
         {
             string generateFollowId;
@@ -412,8 +446,19 @@ namespace Jsa.ViewsModel.ViewsControllers
             }
             return generateFollowId;
         }
-        
+
         #endregion
 
+        #region Public Methods
+        public void OnSelectedFollowChanged(DocRecordFollow recordFollow)
+        {
+            FollowId = recordFollow.Id;
+            FollowDate = recordFollow.FollowDate;
+            FollowContent = recordFollow.FollowContent;
+            FollowPath = recordFollow.FollowPath;
+            ControlState(ControllerStates.Saved);
+        }
+        #endregion
     }
+
 }

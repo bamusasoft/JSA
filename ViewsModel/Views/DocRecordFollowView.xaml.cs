@@ -1,4 +1,5 @@
-﻿using Jsa.ViewsModel.ViewsControllers;
+﻿using Jsa.DomainModel;
+using Jsa.ViewsModel.ViewsControllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,20 @@ namespace Jsa.ViewsModel.Views
             InitializeComponent();
             _controller = new DocRecordFollowController();
             DataContext = _controller;
+        }
+
+        private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DataGridRow selectedRow = sender as DataGridRow;
+            if(selectedRow != null)
+            {
+                DocRecordFollow recordFollow = selectedRow.Item as DocRecordFollow;
+                if(recordFollow != null)
+                {
+                    _controller.OnSelectedFollowChanged(recordFollow);
+                }
+            }
+            
         }
     }
 }
