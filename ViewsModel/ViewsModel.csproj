@@ -1,0 +1,781 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7028F430-0B13-4063-B697-EFF31EE12600}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Jsa.ViewsModel</RootNamespace>
+    <AssemblyName>ViewsModel</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
+    <ExpressionBlendVersion>12.0.50716.0</ExpressionBlendVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Automation.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\TwainDotNet.1.0.0\lib\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Word.15.0.4797.1003\lib\net20\Microsoft.Office.Interop.Word.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="PresentationFramework.Aero" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Printing" />
+    <Reference Include="system.windows.controls.ribbon" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="TwainDotNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d3cd6e1539fa8c71, processorArchitecture=x86">
+      <HintPath>..\packages\TwainDotNet.1.0.0\lib\TwainDotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="TwainDotNet.WinFroms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d3cd6e1539fa8c71, processorArchitecture=x86">
+      <HintPath>..\packages\TwainDotNet.1.0.0\lib\TwainDotNet.WinFroms.dll</HintPath>
+    </Reference>
+    <Reference Include="TwainDotNet.Wpf, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d3cd6e1539fa8c71, processorArchitecture=x86">
+      <HintPath>..\packages\TwainDotNet.1.0.0\lib\TwainDotNet.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Converters\BooleanOrConverter.cs" />
+    <Compile Include="Converters\StringTrimmingConverter .cs" />
+    <Compile Include="DomainEntities\CustomerHistory.cs" />
+    <Compile Include="DomainEntities\CustomerPaymentDto.cs" />
+    <Compile Include="DomainEntities\CustomerPropertyDto.cs" />
+    <Compile Include="Helpers\CustomerComparer.cs" />
+    <Compile Include="Helpers\CustomerStartRent.cs" />
+    <Compile Include="Mediator\OpenDialogProxy.cs" />
+    <Compile Include="Reports\CustomerClassFields.cs" />
+    <Compile Include="Reports\ClassContractFields.cs" />
+    <Compile Include="DomainEntities\ContractDto.cs" />
+    <Compile Include="DomainEntities\CustomerSchedule.cs" />
+    <Compile Include="DomainEntities\DomainLegalCase.cs" />
+    <Compile Include="Helpers\CompareDetailsByContract.cs" />
+    <Compile Include="Helpers\CustomersRules.cs" />
+    <Compile Include="Printers\AshrafContractPrinter.cs" />
+    <Compile Include="Printers\GeneralConractPrinter.cs" />
+    <Compile Include="Printers\SchedulePrinter.cs" />
+    <Compile Include="Reports\ClassesReport.cs" />
+    <Compile Include="Reports\FollowingReportFields.cs" />
+    <Compile Include="Reports\ExcelReport.cs" />
+    <Compile Include="Reports\FollowingsReport.cs" />
+    <Compile Include="Reports\IReport.cs" />
+    <Compile Include="Reports\MaintReportFields.cs" />
+    <Compile Include="Reports\RentReportFields.cs" />
+    <Compile Include="Reports\ScheduleDetailReport.cs" />
+    <Compile Include="Reports\ScheduleReport.cs" />
+    <Compile Include="UserControlls\CaseAppointNotifier.xaml.cs">
+      <DependentUpon>CaseAppointNotifier.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlls\FollowingAppointNotifier.xaml.cs">
+      <DependentUpon>FollowingAppointNotifier.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewsControllers\AddSchedulDetailsController.cs" />
+    <Compile Include="ViewsControllers\CaseAppointmentController.cs" />
+    <Compile Include="ViewsControllers\CaseFollowingController.cs" />
+    <Compile Include="ViewsControllers\Core\DialogControllerBase.cs" />
+    <Compile Include="Reports\ExcelProperties.cs" />
+    <Compile Include="ViewsControllers\CustomerHistoryController.cs" />
+    <Compile Include="ViewsControllers\CustomersClassesController.cs" />
+    <Compile Include="ViewsControllers\DocRecordController.cs" />
+    <Compile Include="ViewsControllers\DocRecordFollowController.cs" />
+    <Compile Include="ViewsControllers\LegalCaseController.cs" />
+    <Compile Include="ViewsControllers\LegalCaseReportController.cs" />
+    <Compile Include="ViewsControllers\NotificationCenterController.cs" />
+    <Compile Include="ViewsControllers\ObservableCollecion.cs" />
+    <Compile Include="ViewsControllers\ScheduleDetailsController.cs" />
+    <Compile Include="ViewsControllers\SelectContractsController.cs" />
+    <Compile Include="ViewsControllers\SelectSheduleController.cs" />
+    <Compile Include="ViewsControllers\SignerController.cs" />
+    <Compile Include="Views\AddActivityView.xaml.cs">
+      <DependentUpon>AddActivityView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\AddBlacklistView.xaml.cs">
+      <DependentUpon>AddBlacklistView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddScheduleDetailsDialog.xaml.cs">
+      <DependentUpon>AddScheduleDetailsDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BulkIresContractsView.xaml.cs">
+      <DependentUpon>BulkIresContractsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CaseAppointView.xaml.cs">
+      <DependentUpon>CaseAppointView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CaseFollowingView.xaml.cs">
+      <DependentUpon>CaseFollowingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ClaimView.xaml.cs">
+      <DependentUpon>ClaimView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContractDueCalcView.xaml.cs">
+      <DependentUpon>ContractDueCalcView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContractRentMaint.xaml.cs">
+      <DependentUpon>ContractRentMaint.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\OutboxConverter.cs" />
+    <Compile Include="DomainEntities\DomainEntityBase.cs" />
+    <Compile Include="DomainEntities\DomainMonthlyContract.cs" />
+    <Compile Include="DomainEntities\INotifyDetailsCollectionChanged.cs" />
+    <Compile Include="Helpers\ClaimPrinter.cs" />
+    <Compile Include="Helpers\ContractPaymentDetails.cs" />
+    <Compile Include="Helpers\ContractPaymentsCriteria.cs" />
+    <Compile Include="Helpers\CustomerPrinter.cs" />
+    <Compile Include="SearchCriteria\ICriteria.cs" />
+    <Compile Include="Helpers\MonthlyContractPrinter.cs" />
+    <Compile Include="Helpers\OutboxNoComparer.cs" />
+    <Compile Include="Helpers\SearchedClaim.cs" />
+    <Compile Include="Helpers\SystemFileWrapper.cs" />
+    <Compile Include="Helpers\UserSettingAttribute.cs" />
+    <Compile Include="Helpers\UserSettings.cs" />
+    <Compile Include="Helpers\ViewClaim.cs" />
+    <Compile Include="Helpers\ViewClaimDetail.cs" />
+    <Compile Include="Views\CasesReportView.xaml.cs">
+      <DependentUpon>CasesReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CustomerHistoryView.xaml.cs">
+      <DependentUpon>CustomerHistoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CustomersClassesView.xaml.cs">
+      <DependentUpon>CustomersClassesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DocRecordView.xaml.cs">
+      <DependentUpon>DocRecordView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DocRecordFollowView.xaml.cs">
+      <DependentUpon>DocRecordFollowView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LegalCaseView.xaml.cs">
+      <DependentUpon>LegalCaseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MonthlyContractView.xaml.cs">
+      <DependentUpon>MonthlyContractView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OpenClaimDialog.xaml.cs">
+      <DependentUpon>OpenClaimDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OpenContractDialog.xaml.cs">
+      <DependentUpon>OpenContractDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OpenCustomerDialog.xaml.cs">
+      <DependentUpon>OpenCustomerDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OutboxView.xaml.cs">
+      <DependentUpon>OutboxView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PaymentControl.xaml.cs">
+      <DependentUpon>PaymentControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContractPaymentsStatus.xaml.cs">
+      <DependentUpon>ContractPaymentsStatus.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContractsView.xaml.cs">
+      <DependentUpon>ContractsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContractView.xaml.cs">
+      <DependentUpon>ContractView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\AddDateMaskConverter.cs" />
+    <Compile Include="Views\CustomerView.xaml.cs">
+      <DependentUpon>CustomerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helper.cs" />
+    <Compile Include="Helpers\Access.cs" />
+    <Compile Include="Helpers\Contract.cs" />
+    <Compile Include="Helpers\ContractPayments.cs" />
+    <Compile Include="Helpers\IresContractsSet.cs" />
+    <Compile Include="Helpers\ContractsCriteria.cs" />
+    <Compile Include="Helpers\Excel.cs" />
+    <Compile Include="Helpers\ExcelMail.cs" />
+    <Compile Include="Helpers\GridColumnPreference.cs" />
+    <Compile Include="Helpers\Logger.cs" />
+    <Compile Include="Helpers\PrintingHelper.cs" />
+    <Compile Include="Helpers\ProgressEventArgs.cs" />
+    <Compile Include="Helpers\SayNumber.cs" />
+    <Compile Include="Helpers\SerializableDictionary.cs" />
+    <Compile Include="Helpers\ExtensionMethods.cs" />
+    <Compile Include="Helpers\PeriodSchedules.cs" />
+    <Compile Include="Helpers\PeriodSchedulesCriteria.cs" />
+    <Compile Include="Helpers\RelayCommand.cs" />
+    <Compile Include="Helpers\DetailsStatistics.cs" />
+    <Compile Include="Helpers\Enums.cs" />
+    <Compile Include="Helpers\RuleViolation.cs" />
+    <Compile Include="Views\OpenSignerDialog.xaml.cs">
+      <DependentUpon>OpenSignerDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OptionsView.xaml.cs">
+      <DependentUpon>OptionsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PeriodSchedulesView.xaml.cs">
+      <DependentUpon>PeriodSchedulesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="SearchCriteria\RentMaintCriteria.cs" />
+    <Compile Include="Reports\ContractsReport.cs" />
+    <Compile Include="Reports\MaintReport.cs" />
+    <Compile Include="Reports\PeriodSchedulesReport.cs" />
+    <Compile Include="Reports\RentReport.cs" />
+    <Compile Include="Reports\ReportLayout.cs" />
+    <Compile Include="Reports\RglReport.cs" />
+    <Compile Include="Views\RepView.xaml.cs">
+      <DependentUpon>RepView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ScanDialog.xaml.cs">
+      <DependentUpon>ScanDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ScheduleView.xaml.cs">
+      <DependentUpon>ScheduleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectContractsDialog.xaml.cs">
+      <DependentUpon>SelectContractsDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectScheduleDialog.xaml.cs">
+      <DependentUpon>SelectScheduleDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SharedFolderDialog.xaml.cs">
+      <DependentUpon>SharedFolderDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SingerView.xaml.cs">
+      <DependentUpon>SingerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SyncIrsView.xaml.cs">
+      <DependentUpon>SyncIrsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SyncStrategy\IReportProgress.cs" />
+    <Compile Include="SyncStrategy\ISyncIrs.cs" />
+    <Compile Include="SyncStrategy\SyncIrsContext.cs" />
+    <Compile Include="SyncStrategy\SyncPayments.cs" />
+    <Compile Include="Templates\RentMaintTemplateSelector.cs" />
+    <Compile Include="TestWriteOnContractImage.xaml.cs">
+      <DependentUpon>TestWriteOnContractImage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UIBehaviors\DataGridBehavior.cs" />
+    <Compile Include="ViewsControllers\AmounDueCalcController.cs" />
+    <Compile Include="ViewsControllers\ContractsController.cs" />
+    <Compile Include="ViewsControllers\Core\ControllerAction.cs" />
+    <Compile Include="ViewsControllers\Core\ControllerChangedEventArgs.cs" />
+    <Compile Include="ViewsControllers\Core\ControllerChangedEventHandler.cs" />
+    <Compile Include="ViewsControllers\Core\EditableControllerBase.cs" />
+    <Compile Include="ViewsControllers\Core\IDialogController.cs" />
+    <Compile Include="ViewsControllers\Core\IEditableController.cs" />
+    <Compile Include="ViewsControllers\Core\IReportController.cs" />
+    <Compile Include="ViewsControllers\Core\IController.cs" />
+    <Compile Include="ViewsControllers\Core\ControllerStates.cs" />
+    <Compile Include="ViewsControllers\Core\ISyncStore.cs" />
+    <Compile Include="ViewsControllers\Core\ReportControllerBase.cs" />
+    <Compile Include="ViewsControllers\MonthlyContractController.cs" />
+    <Compile Include="ViewsControllers\OutboxController.cs" />
+    <Compile Include="ViewsControllers\RentMaintController.cs" />
+    <Compile Include="ViewsControllers\RepreController.cs" />
+    <Compile Include="ViewsControllers\ScheduleViewController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Converters\MaskDateConverter.cs" />
+    <Compile Include="Converters\MaskLiteralsConverter.cs" />
+    <Compile Include="Converters\OutboxNoConverter.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Resources\AppStringsResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UITemplates\UIControlsTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlls\CaseAppointNotifier.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlls\FollowingAppointNotifier.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddActivityView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddBlacklistView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddScheduleDetailsDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BulkIresContractsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CaseAppointView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CaseFollowingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ClaimView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContractDueCalcView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContractRentMaint.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CasesReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CustomerHistoryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CustomersClassesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DocRecordView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DocRecordFollowView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LegalCaseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MonthlyContractView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OpenClaimDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OpenContractDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\OpenCustomerDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OutboxView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PaymentControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContractPaymentsStatus.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContractsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContractView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CustomerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OpenSignerDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OptionsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PeriodSchedulesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RepView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Brushes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\ControlsResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\DataGridResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\ImageResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\ListViewResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ScanDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ScheduleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SelectContractsDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SelectScheduleDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SharedFolderDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SingerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SyncIrsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TestWriteOnContractImage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DomainModel\DomainModel.csproj">
+      <Project>{f916f1fe-9e3e-42f0-8356-d18d63843465}</Project>
+      <Name>DomainModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WinIrsService\WinIrsService.csproj">
+      <Project>{128ea085-aef5-4372-8cb7-e855d0b94c15}</Project>
+      <Name>WinIrsService</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\AddNew.png" />
+    <Resource Include="Resources\Images\DisDel.jpg" />
+    <Resource Include="Resources\Images\DisOk.jpg" />
+    <Resource Include="Resources\Images\DisSave.jpg" />
+    <Resource Include="Resources\Images\EnDel.png" />
+    <Resource Include="Resources\Images\EnOk.png" />
+    <Resource Include="Resources\Images\EnSave.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Payments.png" />
+    <Resource Include="Resources\Images\Schedule.png" />
+    <Resource Include="Resources\Images\EnSigner.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="JsaIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\DisPrint.png" />
+    <Resource Include="Resources\Images\EnPrint.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\EnContract.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\DisContract.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\DisSearch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\DisSyncDb.png" />
+    <Resource Include="Resources\Images\EnSyncDb.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\DisSigner.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Automation.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UnsignedContract.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\EnScanner.png" />
+    <Resource Include="Resources\Images\EnSharedFolder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\DisSharedFolder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\DisScanner.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Month.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Repre.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Calculator.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\DisCalculator.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\WordPrinter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\MainClaim.png" />
+    <Resource Include="Resources\Images\MainContract.png" />
+    <Resource Include="Resources\Images\MainCustomer.png" />
+    <Resource Include="Resources\Images\MainRefresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\MainOutbox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\DisOpen.png" />
+    <Resource Include="Resources\Images\EnOpen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\EnCase.png" />
+    <Resource Include="Resources\Images\EnFollow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\EnAppointment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\AddNew2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\EnSchedule.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\ETL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\DisFilter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\EnFilter.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Expression\Blend\.NETFramework\v4.5\Microsoft.Expression.Blend.WPF.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <Import Project="$(XamlSpyInstallPath)MSBuild\FirstFloor.XamlSpy.WPF.targets" Condition="'$(XamlSpyInstallPath)' != '' and '$(Configuration)' == 'DEBUG'" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

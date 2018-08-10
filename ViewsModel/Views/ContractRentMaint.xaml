@@ -1,0 +1,147 @@
+﻿<Window x:Class="Jsa.ViewsModel.Views.ContractRentMaint"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:templates="clr-namespace:Jsa.ViewsModel.Templates"
+        xmlns:extToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        x:Name="RentMaintWindow" Title="ContractRentMaint" Style="{StaticResource WindowCommonStyle}"
+        WindowState="Maximized">
+    <Window.Resources>
+        <DataTemplate x:Key="RentTemplate">
+            <Grid>
+                <DataGrid DataContext="{Binding DataContext, ElementName=RentMaintWindow}"
+                          ItemsSource="{Binding RentReports}"
+                          AutoGenerateColumns="False" CanUserAddRows="False" RowHeaderWidth="25"
+                          SelectionMode="Extended"
+                          SelectionUnit="FullRow" ClipboardCopyMode="IncludeHeader">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="رقم العقد" Binding="{Binding ContractNo}" Width="0.07*" />
+                        <DataGridTextColumn Header="رقم العقار" Binding="{Binding PropertyNo}" Width="0.07*" />
+                        <DataGridTextColumn Header="رقم المستأجر" Binding="{Binding CustomerNo}" Width="0.07*" />
+                        <DataGridTextColumn Header="النوع" Binding="{Binding PropertyType}" Width="0.05*" />
+                        <DataGridTextColumn Header="الإسم" Binding="{Binding CustomerName}" Width="0.22*" />
+                        <DataGridTextColumn Header="رقم العين" Binding="{Binding PropertyDescription}" Width="0.10*" />
+                        <DataGridTextColumn Header="الموقع" Binding="{Binding Location}" Width="0.08*" />
+                        <DataGridTextColumn Header="الربط" Binding="{Binding AgreedRent, StringFormat=N0}"  Width="0.08*" />
+                        <DataGridTextColumn Header="المستحق" Binding="{Binding RentDue, StringFormat=N0}" Width="0.08*" />
+                        <DataGridTextColumn Header="المسدد" Binding="{Binding Paid, StringFormat=N0}" Width="0.08*" />
+                        <DataGridTextColumn Header="الرصيد" Binding="{Binding Balance, StringFormat=N0}" Width="0.10*" />
+                        <DataGridTextColumn Header="جوال1" Binding="{Binding Mobile1}" Width="0.10*" />
+                        <DataGridTextColumn Header="جوال2" Binding="{Binding Mobile2}" Width="0.10*" />
+                        <DataGridTextColumn Header="هاتف العمل" Binding="{Binding WorkPhone}" Width="0.10*" />
+                        <DataGridTextColumn Header="هاتف المنزل" Binding="{Binding HomePhone}" Width="0.10*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="MaintTemplate">
+            <Grid>
+                <DataGrid DataContext="{Binding DataContext, ElementName=RentMaintWindow}"
+                          ItemsSource="{Binding MaintReports}"
+                          AutoGenerateColumns="False" CanUserAddRows="False" RowHeaderWidth="25"
+                          SelectionMode="Extended"
+                          SelectionUnit="FullRow" ClipboardCopyMode="IncludeHeader">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="رقم العقد" Binding="{Binding ContractNo}" Width="0.07*" />
+                        <DataGridTextColumn Header="رقم العقار" Binding="{Binding PropertyNo}" Width="0.07*" />
+                        <DataGridTextColumn Header="رقم المستأجر" Binding="{Binding CustomerNo}" Width="0.07*" />
+                        <DataGridTextColumn Header="النوع" Binding="{Binding PropertyType}" Width="0.05*" />
+                        <DataGridTextColumn Header="الإسم" Binding="{Binding CustomerName}" Width="0.22*" />
+                        <DataGridTextColumn Header="رقم العين" Binding="{Binding PropertyDescription}" Width="0.10*" />
+                        <DataGridTextColumn Header="الموقع" Binding="{Binding Location}" Width="0.08*" />
+                        <DataGridTextColumn Header="الصيانة" Binding="{Binding AgreedMaint, StringFormat=N0}"
+                                            Width="0.06*" />
+                        <DataGridTextColumn Header="المسدد" Binding="{Binding Paid, StringFormat=N0}" Width="0.06*" />
+                        <DataGridTextColumn Header="الرصيد" Binding="{Binding Balance, StringFormat=N0}" Width="0.06*" />
+                        <DataGridTextColumn Header="رقم السند" Binding="{Binding ReceiptNo}" Width="0.08*" />
+                        <DataGridTemplateColumn Header="تاريخه" CellTemplate="{StaticResource ShowMaskedCellTemplate}"
+                                                Width="0.08*" />
+
+
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </DataTemplate>
+        <templates:RentMaintTemplateSelector x:Key="RentMaintTemplateSelector" />
+    </Window.Resources>
+    <DockPanel>
+        <Ribbon DockPanel.Dock="Top" ShowQuickAccessToolBarOnTop="False">
+            <RibbonTab Header="عام">
+                <RibbonGroup Header="تحرير">
+                    <RibbonButton Command="{Binding PrintCommand}" ToolTip="طباعة (Ctrl + P)" Height="Auto"
+                                  Style="{DynamicResource PrintButtonStyle}" />
+                </RibbonGroup>
+                <RibbonGroup Header="العقد">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="رقم العقار" />
+                        <RibbonTextBox Grid.Column="1" Grid.Row="0"
+                                       Text="{Binding Criteria.PropertyNo, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="رقم المستأجر" />
+                        <RibbonTextBox Grid.Column="1" Grid.Row="1"
+                                       Text="{Binding Criteria.CustomerNo, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock Grid.Column="2" Grid.Row="0" Text="من تاريخ" />
+                        <extToolkit:MaskedTextBox Grid.Column="3" Grid.Row="0" IncludeLiteralsInValue="False"
+                                                  Mask="##/ ## /####" ValueDataType="{x:Type system:String}"
+                                                  Value="{Binding Criteria.StartDate, Converter={StaticResource DateConverter}, UpdateSourceTrigger=PropertyChanged}"
+                                                  MinWidth="100" AutoSelectBehavior="OnFocus" />
+
+                        <TextBlock Grid.Column="2" Grid.Row="1" Text="إلى تاريخ" />
+                        <RibbonTextBox Grid.Column="3" Grid.Row="1" Text="ddddd" />
+                        <extToolkit:MaskedTextBox Grid.Column="3" Grid.Row="1" IncludeLiteralsInValue="False"
+                                                  Mask="##/ ## /####" ValueDataType="{x:Type system:String}"
+                                                  Value="{Binding Criteria.EndDate, Converter={StaticResource DateConverter}, UpdateSourceTrigger=PropertyChanged}"
+                                                  MinWidth="100" AutoSelectBehavior="OnFocus" />
+                    </Grid>
+                </RibbonGroup>
+                <RibbonGroup Header="حركة التسديد">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="من تاريخ"/>
+                        <extToolkit:MaskedTextBox  Grid.Row="0" Grid.Column="1" IncludeLiteralsInValue="False"
+                                                  Mask="##/ ## /####" ValueDataType="{x:Type system:String}"
+                                                  Value="{Binding PaidFrom, Converter={StaticResource DateConverter}, UpdateSourceTrigger=PropertyChanged}"
+                                                  MinWidth="100" AutoSelectBehavior="OnFocus" />
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="إلى تاريخ"/>
+                        <extToolkit:MaskedTextBox  Grid.Row="1" Grid.Column="1" IncludeLiteralsInValue="False"
+                                                  Mask="##/ ## /####" ValueDataType="{x:Type system:String}"
+                                                  Value="{Binding PaidTo, Converter={StaticResource DateConverter}, UpdateSourceTrigger=PropertyChanged}"
+                                                  MinWidth="100" AutoSelectBehavior="OnFocus" />
+                    </Grid>
+                </RibbonGroup>
+                <RibbonGroup>
+                    <StackPanel Orientation="Vertical">
+                        <RadioButton Content="عرض الإيجار" IsThreeState="False" IsChecked="True" Margin="5" />
+                        <RadioButton Content="عرض الصيانة" IsThreeState="False" IsChecked="{Binding ShowMaint}"
+                                     Margin="5    " />
+                    </StackPanel>
+
+                </RibbonGroup>
+                <RibbonGroup>
+                    <RibbonButton Command="{Binding SearchCommand}" ToolTip="حفظ (Ctrl + S)"
+                                  Style="{StaticResource SearchButtonStyle}" />
+                </RibbonGroup>
+            </RibbonTab>
+        </Ribbon>
+        <ContentPresenter ContentTemplateSelector="{StaticResource RentMaintTemplateSelector}"
+                          Content="{Binding ShowMaint}" />
+    </DockPanel>
+</Window>

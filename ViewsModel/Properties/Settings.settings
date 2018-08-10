@@ -1,0 +1,73 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Jsa.ViewsModel.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="IrsDbPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\BaMusaSoft\JeddahStation\Property.mdb</Value>
+    </Setting>
+    <Setting Name="CurrentYear" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1434</Value>
+    </Setting>
+    <Setting Name="Branch" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="PeriodSchedulesGridPreference" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" /&gt;</Value>
+    </Setting>
+    <Setting Name="PeriodSchedulesExcelTemplate" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\BaMusaSoft\JeddahStation\Templates\PeriodSchedules.xltx</Value>
+    </Setting>
+    <Setting Name="ContractReportExcelTemplate" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\BaMusaSoft\JeddahStation\Templates\ContractsReport.xltx</Value>
+    </Setting>
+    <Setting Name="LogFilePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="RglTemplatePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\BaMusaSoft\JeddahStation\Templates\RGL.xlt</Value>
+    </Setting>
+    <Setting Name="UpgradedVersion" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ClaimTextPartOne" Type="System.String" Scope="User">
+      <Value Profile="(Default)">نآمل سرعة مراجعة إدارة الوقف لتسديد المستحق عليكم والمبين أدناه وقدره </Value>
+    </Setting>
+    <Setting Name="ClaimTextPartTwo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">. وذلك خلال أسبوع من تاريخه</Value>
+    </Setting>
+    <Setting Name="ClaimTemplatePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ScanShareFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\Abdullah\Pictures\2013-02-21</Value>
+    </Setting>
+    <Setting Name="ContractsPhotosPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CustomerCardTemplatePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\BaMusaSoft\JeddahStationProject\Templates</Value>
+    </Setting>
+    <Setting Name="MonthlyContractTemplate" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\BaMusaSoft\JeddahStation\Templates\MonthlyContract.dotx</Value>
+    </Setting>
+    <Setting Name="ScheduleTemplatePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="RentTempatePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MaintTemplatePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="AppointDueDays" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">60</Value>
+    </Setting>
+    <Setting Name="GeneralContractTemplate" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\BaMusaSoft\JeddahStationProject\Templates\GeneralContract.docx</Value>
+    </Setting>
+    <Setting Name="ClassesTemplate" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
+</SettingsFile>

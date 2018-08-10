@@ -1,0 +1,52 @@
+﻿<Window x:Class="Jsa.ViewsModel.Views.ScanDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:extToolkit="http://schemas.xceed.com/wpf/xaml/toolkit" 
+        Title="المسح الضوئي" Height="500" Width="600" Style="{StaticResource WindowCommonStyle}" WindowStyle="ToolWindow">
+       
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+    
+    <Grid Grid.Row="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Margin="5">
+            <GroupBox Header="الماسح الضوئي">
+                <ComboBox x:Name="cmbSources" Margin="5"/>
+            </GroupBox>
+            <GroupBox Header="خيارات">
+                <StackPanel Orientation="Vertical">
+                    <CheckBox x:Name="chkUseTwainUI" Content="أظهر شاشة الماسح" Margin="5"/>
+                    <CheckBox x:Name="chkUseFeeder" Content="أستخدم Feeder(ADF)" Margin="5"/>
+                </StackPanel>
+            </GroupBox>
+            <Button Content="إبدء" Margin="5" Command="{Binding StartScanCommand}"/>
+        </StackPanel>
+        <Border Grid.Column="1" BorderBrush="Blue" BorderThickness="2" Margin="5">
+            <extToolkit:Zoombox ZoomModifiers="Ctrl+Exact" PanDistance="5" AutoWrapContentWithViewbox="True"
+                                            MaxScale="100" MinScale="0.01" ZoomOrigin="0.5,0.5" ZoomPercentage="5"
+                                            ZoomOnPreview="True" IsAnimated="True" ViewStackIndex="0">
+                <extToolkit:Zoombox.ViewStack>
+                    <extToolkit:ZoomboxView>Fit</extToolkit:ZoomboxView>
+                </extToolkit:Zoombox.ViewStack>
+                    <Image Source="{Binding ScannedImageSource}"/>
+            </extToolkit:Zoombox>
+        </Border>
+    </Grid>
+        <Border Grid.Row="1" Background="#FFD2E8F1" Margin="0,5,0,0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="موافق" MinHeight="35" MinWidth="75" Margin="5" Command="{Binding OkCommand}"
+                        IsDefault="True"/>
+                <Button Content="إلغاء" MinHeight="35" MinWidth="75" Margin="5" Command="{Binding CancelCommand}"
+                       IsCancel="True"/>
+
+            </StackPanel>
+        </Border>
+        
+    </Grid>
+</Window>

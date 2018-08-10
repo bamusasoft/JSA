@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?dfine PRODUCT="JSA"?>
+  <?define MAINEXE=$(var.ViewsModel.TargetFileName)?>
+  <?define VERSION=!(bind.FileVersion.$(var.MAINEXE))?>
+	<Product Id="*"
+           Name="Jsa" Language="1033" Version="$(var.VERSION)" 
+           Manufacturer="BaMusaSoft" 
+           UpgradeCode="6a69e46d-6e7a-4396-a507-1bd804ebae8c">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+    <Icon Id="AppIcon" SourceFile="C:\BaMusaSoft\JeddahStationProject\Automation.ico"/>
+		<Feature Id="ProductFeature" Title="JsaSetup" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+      <ComponentGroupRef Id="AppShortcut"/>
+      <ComponentGroupRef Id="AppDesktopShortcut"/>
+		</Feature>
+    
+    <UIRef Id="WixUI_Minimal"/>
+    
+ 
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="Jsa">
+          
+        </Directory>
+       
+			</Directory>
+      
+      <Directory Id="ProgramMenuFolder">
+      <Directory Id="ApplicationProgramsFolder" Name="Jsa"/>
+    </Directory>
+      
+     <Directory Id="DesktopFolder">
+   
+    </Directory>
+ 
+		</Directory>
+ 
+    
+	</Fragment>
+  <Fragment>
+	  <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			  <!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+        <Component Id="CmpDomainModel" Guid="{8A2B4CB6-8B44-40B7-9F3E-618E21631E60}">
+          <File Id="DomainModel.dll" Source="$(var.DomainModel.TargetPath)" KeyPath="yes"/>
+        </Component>
+        <Component Id="CmpWinIrsService" Guid="{8B774E05-2BAD-4D12-B0EF-F22523F3FF86}">
+          <File Id="WinIrsService.dll" Source="$(var.WinIrsService.TargetPath)" KeyPath="yes"/>
+        </Component>
+        <Component Id="CmpViewsModel" Guid="{56083F28-325D-452D-B7BC-7CE49A589FF9}">
+          <File Id="ViewsModel.exe" Source="$(var.ViewsModel.TargetPath)" KeyPath="yes"/>
+        </Component>
+        <Component Id="CmpEntityFramework" Guid="{919B8C59-FEF6-4E47-AF5B-6EA481CCEB53}">
+          <File Id="EntityFramework.dll" Source="..\ViewsModel\bin\Debug\" KeyPath="yes"/>
+        </Component>
+      <Component Id="CmpEntityFrameworkSql" Guid="{998EEEEA-F296-4F38-8597-31FF0C0C776C}">
+          <File Id="EntityFramework.SqlServer.dll" Source="..\ViewsModel\bin\Debug\" KeyPath="yes"/>
+        </Component>
+        <Component Id="CmpViewModelConfig" Guid="{0E8E0973-D196-41B4-8A07-48131FC5629B}">
+          <File Id="ViewsModel.exe.config" Source="..\ViewsModel\bin\Debug\" KeyPath="yes"/>
+        </Component>
+        <Component Id="CmpWpfToolkitExtended" Guid="{7D3872A0-5100-471D-89C4-2ABB07853259}">
+          <File Id="Xceed.Wpf.Toolkit.dll" Source="..\ViewsModel\bin\Debug\" KeyPath="yes"/>
+        </Component>
+      <Component Id="CmpTwainDotNetWpf" Guid="{D84D5589-88C6-4EB1-8B4E-C052D3BA29AA}">
+        <File Id="TwainDotNet.Wpf.dll" Source="..\ViewsModel\bin\Debug\" KeyPath="yes"/>
+      </Component>
+      <Component Id="CmpLog4Net" Guid="{788FD35A-C54A-4D35-AD47-C3FDA3F89F20}">
+        <File Id="log4net.dll" Source="..\ViewsModel\bin\Debug\" KeyPath="yes"/>
+      </Component>
+      <Component Id="CmpTwainDotNet" Guid="{97AA06EE-4135-4804-B3DA-287E37545E5A}">
+        <File Id="TwainDotNet.dll" Source="..\ViewsModel\bin\Debug\" KeyPath="yes"/>
+      </Component>
+		  </ComponentGroup>
+    
+    <ComponentGroup Id="AppShortcut" Directory="ApplicationProgramsFolder">
+      <Component Id="CmpAppShortcut" Guid="{AF7BA7A9-1963-4D0F-80DF-AD64C0BC259B}">
+        <Shortcut Id="AppStartMenuShortcut"
+                  Name="Jsa"
+                  Description="Automate Jeddah office daily work"
+                  Target="[INSTALLFOLDER]ViewsModel.exe"
+                  WorkingDirectory="ApplicationProgramsFolder"
+                  Icon="AppIcon">
+          <ShortcutProperty Key="System.AppUserModel.ID" Value="AppUserModelID" />
+        </Shortcut>
+        <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
+        <RegistryValue Root="HKCU" Key="Software\Microsoft\Jsa" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+   
+    </ComponentGroup>
+    
+    <ComponentGroup Id="AppDesktopShortcut" Directory="DesktopFolder">
+      <Component Id="CmpAppDesktopShortcut" Guid="{9E14ED29-3BE8-47AC-A41C-748290DAAEB6}">
+        <Shortcut Id="AppDesktopShortcut" Name="Jsa" Description="Automate Jeddah office daily work"
+                  Target="[INSTALLFOLDER]ViewsModel.exe"
+                  WorkingDirectory="DesktopFolder" 
+                  Icon="AppIcon">
+          <ShortcutProperty Key="System.AppUserModel.ID" Value="AppUserModelID" />
+      </Shortcut>
+        <RemoveFolder Id="AppDesktopFolder" On="uninstall"/>
+      <RegistryValue Root="HKCU" Key="Software\Microsoft\Jsa" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+    </ComponentGroup>
+   
+	</Fragment>
+
+</Wix>

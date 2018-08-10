@@ -1,0 +1,126 @@
+﻿<Window x:Class="Jsa.ViewsModel.Views.PeriodSchedulesView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:extToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" 
+        Title="تعهدات الفترة" Style="{StaticResource WindowCommonStyle}" Closing="WindowClosing" Loaded="WindowLoaded">
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Control" Key="P" Command="{Binding PrintCommand}"/>
+        <KeyBinding Modifiers="Control" Key="F" Command="{Binding SearchCommand}"/>
+        <KeyBinding Modifiers="Control" Key="O" Command="{Binding EditCommand}"/>
+    </Window.InputBindings>
+    <Grid x:Name="layout" KeyDown="OnGridContentKeyDown" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Ribbon Grid.Row="0">
+            <RibbonTab x:Name="homeTab" Header="بحث">
+                <RibbonGroup Header="الفترة">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Content="من"/>
+                        <Label Grid.Row="0" Grid.Column="2" Content="إلى"/>
+                        <extToolkit:MaskedTextBox Grid.Row="0" Grid.Column="1" IncludeLiteralsInValue="False" 
+                                                  Mask="##/ ## /####" ValueDataType="{x:Type system:String}"
+                                                  Value="{Binding Criteria.StartDate, Converter={StaticResource DateConverter}, UpdateSourceTrigger=PropertyChanged}" 
+                                                  MinWidth="100" AutoSelectBehavior="OnFocus" x:Name="txtStartDate"/>
+                        <extToolkit:MaskedTextBox Grid.Row="0" Grid.Column="3" IncludeLiteralsInValue="False"
+                                                  Mask="##/ ## /####" ValueDataType="{x:Type system:String}"
+                                                  Value="{Binding Criteria.EndDate, Converter={StaticResource DateConverter}, UpdateSourceTrigger=PropertyChanged}" 
+                                                  MinWidth="100" AutoSelectBehavior="OnFocus"/>
+                    </Grid>
+                </RibbonGroup>
+                <RibbonGroup Header="العقار">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Content="رقم العقار"/>
+                        <RibbonTextBox Grid.Row="0" Grid.Column="1" MinWidth="100"   
+                                                  Text="{Binding Criteria.PropertyNo, UpdateSourceTrigger=PropertyChanged}"/> 
+                    </Grid>
+                </RibbonGroup>
+                <RibbonGroup Header="إدراج">
+                    <StackPanel >
+                        <RibbonCheckBox IsChecked="{Binding Criteria.PaidFilter}" Label="الدفعات المسددة"
+                                        HorizontalAlignment="Left"/>
+                        <RibbonCheckBox IsChecked="{Binding Criteria.UnPaidFilter}" Label="الدفعات غير المسددة" 
+                                        HorizontalAlignment="Left"/>
+                    </StackPanel>
+                </RibbonGroup>
+                <RibbonGroup Header="تنفيذ">
+                    <RibbonButton LargeImageSource="..\Resources/Images/Search.png"
+                                  
+                                  Command="{Binding SearchCommand}"/>
+                    <RibbonButton LargeImageSource="..\Resources/Images/Refresh.png"
+                                  Command="{Binding RefreshCommand}"/>
+                </RibbonGroup>
+                <RibbonGroup Header="تحرير">
+                    <RibbonSplitButton Command="{Binding PrintCommand}" LargeImageSource="..\Resources/Images/EnPrint.png" >
+                        <RibbonSplitButton.Items>
+                            <MenuItem Header="طباعة التقرير" Command="{Binding PrintCommand}" >
+                                <MenuItem.Icon>
+                                    <Image Source="..\Resources/Images/EnPrint.png"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Header="طباعة التحديد" Command="{Binding PrintScheduleCommand}" >
+                                <MenuItem.Icon>
+                                    <Image Source="..\Resources/Images/WordPrinter.png"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </RibbonSplitButton.Items>
+                    </RibbonSplitButton>  
+                    
+                        
+                    <RibbonButton LargeImageSource="..\Resources/Images/Edit.png"
+                                  Command="{Binding EditCommand}"/>
+
+                </RibbonGroup>
+
+            </RibbonTab>
+         </Ribbon>
+        <DataGrid Grid.Row="1" x:Name="dgResult" ItemsSource="{Binding SearchResult}" IsReadOnly="True" AutoGenerateColumns="False" 
+                  SelectionUnit="FullRow" SelectionMode="Single" RowHeaderWidth="25"
+                  IsSynchronizedWithCurrentItem="True" Margin="0,5,0,0" 
+                  SelectedItem="{Binding SelectedSchedule}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="رقم التعهد" Binding="{Binding ScheduleId}"/>
+                <DataGridTextColumn Header="الاسم" Binding="{Binding CustomerName}"/>
+                <DataGridTextColumn Header="رقم العين" Binding="{Binding PropertyDescription}"/>
+                <DataGridTextColumn Header="الدفعة" Binding="{Binding AmountDue, StringFormat=N0}"/>
+                <DataGridTemplateColumn Header="تاريخها" CellTemplate="{StaticResource ShowMaskedCellTemplate}"/>
+                <DataGridTextColumn Header="المدفوع" Binding="{Binding AmountPaid, StringFormat=N0}"/>
+                <DataGridTextColumn Header="الرصيد" Binding="{Binding Balance, StringFormat=N0}"/>
+                <DataGridTextColumn Header="المتعهد" Binding="{Binding SignerName}"/>
+                <DataGridTextColumn Header="الجوال" Binding="{Binding SignerMobile}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StatusBar Grid.Row="2"  >
+            <TextBlock Text="إجمالي الدفعات"/>
+            <Label Content="{Binding AmountDueTotal}" Margin="10,0,0,0"/>
+            <TextBlock Text="إجمالي المسدد"/>
+            <Label Content="{Binding PaidTotal}" Margin="10,0,0,0"/>
+            <TextBlock Text="إجمالي الرصيد"/>
+            <Label Content="{Binding BalanceTotal}"/>
+        </StatusBar>
+    </Grid>
+</Window>

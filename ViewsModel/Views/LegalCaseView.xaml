@@ -1,0 +1,71 @@
+﻿<Window x:Class="Jsa.ViewsModel.Views.LegalCaseView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:extToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+		xmlns:system="clr-namespace:System;assembly=mscorlib"
+		Title="سجل الصادر" Style="{StaticResource WindowCommonStyle}" Width="700" Height="500">
+    <Window.InputBindings>
+        <KeyBinding Key="Escape" Command="{Binding ClearCommand}"/>
+        <KeyBinding Key="S" Modifiers="Control" Command="{Binding SaveCommand}"/>
+        <KeyBinding Key="D" Modifiers="Control" Command="{Binding DeleteCommand}"/>
+    </Window.InputBindings>
+    <DockPanel Margin="0">
+
+        <Ribbon DockPanel.Dock="Top">
+            <RibbonTab Header="عام">
+                <RibbonGroup Header="تحرير">
+                    <RibbonButton LargeImageSource="..\Resources/Images/AddNew.png" Command="{Binding ClearCommand}" ToolTip="جديد (Escape)" />
+                    <RibbonButton Command="{Binding SaveCommand}" ToolTip="حفظ (Ctrl + S)" Style="{StaticResource SaveButtonStyle}"/>
+                    <RibbonButton Command="{Binding DeleteCommand}" ToolTip="حذف (Ctrl + D)" Style="{StaticResource DeleteButtonStyle}"/>
+                </RibbonGroup>
+                <RibbonGroup Header="بحث">
+                    <StackPanel Orientation="Horizontal">
+                        <RibbonTextBox Text="{Binding SearchField, UpdateSourceTrigger=PropertyChanged}" BorderThickness="1" Margin="0,15,0,0"/>
+                        <RibbonButton Command="{Binding SearchCommand}" Style="{StaticResource SearchButtonStyle}" Height="Auto" 
+                                      Margin="0,10,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </RibbonGroup>
+            </RibbonTab>
+        </Ribbon>
+        <Grid Margin="0" KeyDown="OnGridContentKeyDown">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Margin="5" TextWrapping="Wrap" Text="رقم القضية" VerticalAlignment="Center"/>
+            <TextBlock Margin="5" TextWrapping="Wrap" Text="تاريخ قيدها" VerticalAlignment="Center" Grid.Row="1"/>
+            <TextBlock Margin="5" TextWrapping="Wrap" Text="المدعى عليه" VerticalAlignment="Center" Grid.Row="2"/>
+            <TextBlock Margin="5" TextWrapping="Wrap" Text="وصف القضية" VerticalAlignment="Center" Grid.Row="3"/>
+            <TextBox Grid.Column="1" Margin="5,5,250,5" TextWrapping="Wrap" VerticalAlignment="Center" Text="{Binding CaseNo, UpdateSourceTrigger=PropertyChanged}" x:Name="txtCaseNo" Validation.ErrorTemplate="{StaticResource TextBoxErrorTemplate}"
+                     PreviewKeyDown="OnCaseNoKeyDown"/>
+            <extToolkit:MaskedTextBox Grid.Column="1" Grid.Row="1" Mask="## /##/ ####" ValueDataType="{x:Type system:String}"
+													  Value="{Binding RegisteredAt, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource LiteralConverter}}"
+													  Margin="5,5,250,5" Validation.ErrorTemplate="{StaticResource TextBoxErrorTemplate}"/>
+            <TextBox Grid.Column="1" Margin="5" TextWrapping="Wrap" Grid.Row="2" VerticalAlignment="Center" Text="{Binding Defendant, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource TextBoxErrorTemplate}"/>
+            <TextBox Grid.Column="1" Margin="5" TextWrapping="Wrap" Grid.Row="3" AcceptsReturn="True" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" VerticalScrollBarVisibility="Auto" Validation.ErrorTemplate="{StaticResource TextBoxErrorTemplate}"/>
+            
+			<!--Error Description Lables-->
+			<TextBlock Grid.Column="2" Height="21" Margin="0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Center" Width="108" Foreground="#FFF71313" Visibility="Hidden"/>
+            <TextBlock Grid.Column="2" Height="21" Margin="0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Center" Width="108" Grid.Row="1" Foreground="#FFF71313" Visibility="Hidden"/>
+            <TextBlock Grid.Column="2" Height="21" Margin="0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Center" Width="108" Grid.Row="2" Foreground="#FFF71313" Visibility="Hidden"/>
+            <TextBlock Grid.Column="2" Height="21" Margin="0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Center" Width="108" Grid.Row="3" Foreground="#FFF71313" Visibility="Hidden"/>
+            
+			<TextBlock Margin="5" TextWrapping="Wrap" Text="حالة القضية" VerticalAlignment="Center" Grid.Row="4"/>
+              <!--Note: To force th combox showing the dispaly member path of the selected item you have to override the equals method in the CaseStatus object,
+                and same for any other object you want to bind to a combox-->
+            <ComboBox Grid.Column="1" Margin="5" Grid.Row="4" SelectedItem="{Binding CaseStatus}" ItemsSource="{Binding CaseStatuses}" DisplayMemberPath="Description"
+                      SelectedValuePath="Id" VerticalAlignment="Center" Validation.ErrorTemplate="{StaticResource TextBoxErrorTemplate}"/>
+            <TextBlock Grid.Column="2" Height="21" Margin="0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Center" Width="108" Grid.Row="4" Foreground="#FFF71313" Visibility="Hidden"/>
+        </Grid>
+
+    </DockPanel>
+
+</Window>

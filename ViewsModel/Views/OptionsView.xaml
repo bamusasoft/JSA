@@ -1,0 +1,162 @@
+﻿<Window x:Class="Jsa.ViewsModel.Views.OptionsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:extToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
+        Style="{StaticResource WindowCommonStyle}"
+        Title="خيارات" Loaded="WindowLoaded" SizeToContent="WidthAndHeight">
+    <Grid x:Name="layout">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Ribbon Grid.Row="0">
+            <RibbonTab x:Name="homeTab" Header="عام">
+                <RibbonGroup Header="عام">
+                    <RibbonButton LargeImageSource="..\Resources/Images/EnSave.png"
+                                  Command="{Binding SaveCommand}"/>
+                </RibbonGroup>
+            </RibbonTab>
+        </Ribbon>
+        <Grid Grid.Row="1" x:Name="content">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" x:Name="right">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+
+                </Grid.RowDefinitions>
+                <GroupBox Grid.Row="0" Header="عام">
+                    <Grid Grid.Row="0" Margin="0,0,0,5" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition  Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="السنة الحالية" Margin="3" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="الفرع" Margin="3" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="مسار قاعدة البيانات العقار" Margin="3" VerticalAlignment="Center"/>
+                        <extToolkit:MaskedTextBox Grid.Column="1" Grid.Row="0" Mask="0000" ValueDataType="{x:Type System:String}"
+                                                  IncludeLiteralsInValue="False" IncludePromptInValue="False"
+                                                  Value="{Binding CurrentYear, UpdateSourceTrigger=PropertyChanged}" Margin="3"
+                                                  IsEnabled="False"/>
+                        <ComboBox Grid.Column="1" Grid.Row="1" x:Name="cmbBranches"
+                        ItemsSource="{Binding Branches}" IsSynchronizedWithCurrentItem="True"
+                        SelectedItem="{Binding SelectedBranch}" Margin="3" Height="24" VerticalAlignment="Top"/>
+                        <TextBox Grid.Column="1" Grid.Row="2"  Text="{Binding PropertyDbPath, UpdateSourceTrigger=PropertyChanged}" Margin="3" FlowDirection="LeftToRight"/>
+                        <Button  Grid.Column="2" Grid.Row="2" Content="..." Command="{Binding OpenAccessDbCommand}" Margin="3"/>
+                        <TextBlock Grid.Column="0" Grid.Row="3" Text="رسالة المطالبة _الجزء 1" Margin="3" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding ClaimLetterPartOne, UpdateSourceTrigger=PropertyChanged}"
+                                 Height="100" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                 TextWrapping="Wrap" Margin="3"/>
+                        <TextBlock Grid.Column="0" Grid.Row="4" Text="رسالة المطالبة _الجزء 2" Margin="3" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding ClaimLetterPartTwo, UpdateSourceTrigger=PropertyChanged}"
+                                 Height="100" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                 TextWrapping="Wrap" Margin="3"/>
+                        <TextBlock Grid.Row="5" Grid.Column="0"  Text="مجلد مشاركة المسح الضوئي" Margin="3" />
+                        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding SharedScaneFolderPath, UpdateSourceTrigger=PropertyChanged}" Margin="3,2,3,4" FlowDirection="LeftToRight"/>
+                        <Button Grid.Row="5" Grid.Column="2" Content="..." Command="{Binding OpenScanShareCommand}" Margin="3"/>
+                        <TextBlock Grid.Row="6" Grid.Column="0"  Text="مجلد حفظ صور العقود" Margin="3" />
+                        <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding ContractsPhotosFolderPath, UpdateSourceTrigger=PropertyChanged}" Margin="3" FlowDirection="LeftToRight"/>
+                        <Button Grid.Row="6" Grid.Column="2" Content="..." Command="{Binding OpenContractsPhotosFolderCommand}" Margin="3"/>
+                        
+                        <TextBlock Grid.Row="7" Grid.Column="0" Text="بحث المواعيد خلال" Margin="3"/>
+                        <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding AppointsDue, UpdateSourceTrigger=PropertyChanged}" Margin="3"/>
+                        <TextBlock Grid.Row="7" Grid.Column="2" Text="يوم" Margin="3"/>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+            <Grid Grid.Column="1" x:Name="left">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="29*"/>
+                    <RowDefinition Height="16*"/>
+                    <RowDefinition Height="45*"/>
+                </Grid.RowDefinitions>
+                <GroupBox Grid.Row="0" Header="تقارير" Grid.RowSpan="2">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="تقرير تعهدات الفترة" Margin="3" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding PeriodScheduelsReportPath, UpdateSourceTrigger=PropertyChanged}" Margin="3" FlowDirection="LeftToRight" VerticalAlignment="Center"/>
+                        <Button  Grid.Column="2" Grid.Row="0" Content="..." Command="{Binding OpenPeriodTemplateCommand}" Margin="3" VerticalAlignment="Center"/>
+
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="تقرير العقود" Margin="3" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding ContractsReportPath, UpdateSourceTrigger=PropertyChanged}" Margin="3" FlowDirection="LeftToRight" VerticalAlignment="Center"/>
+                        <Button  Grid.Column="2" Grid.Row="1" Content="..." Command="{Binding OpenContractsReportCommand}" Margin="3" VerticalAlignment="Center" />
+
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="تقرير تسديد العقود" Margin="3" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding RglTemplatePath, UpdateSourceTrigger=PropertyChanged}" Margin="3" FlowDirection="LeftToRight" VerticalAlignment="Center"/>
+                        <Button  Grid.Column="2" Grid.Row="2" Content="..." Command="{Binding OpenRglTemplateCommand}" Margin="3" VerticalAlignment="Center" />
+
+                        <TextBlock Grid.Column="0" Grid.Row="3" Text="نموذج المطالبة" Margin="3" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding ClaimTemplatePath, UpdateSourceTrigger=PropertyChanged}" Margin="3" FlowDirection="LeftToRight" VerticalAlignment="Center"/>
+                        <Button  Grid.Column="2" Grid.Row="3" Content="..." Command="{Binding OpenClaimTemplateCommand}" Margin="3" VerticalAlignment="Center" />
+
+                        <TextBlock Grid.Column="0" Grid.Row="4" Text="نموذج بطاقة مستأجر" Margin="3" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding CustomerCardTemplatePath, UpdateSourceTrigger=PropertyChanged}" Margin="3" FlowDirection="LeftToRight" VerticalAlignment="Center"/>
+                        <Button  Grid.Column="2" Grid.Row="4" Content="..." Command="{Binding OpenCustomerCardTemplateCommand}" Margin="3" VerticalAlignment="Center" />
+
+                        <TextBlock Grid.Column="0" Grid.Row="5" Text="نموذج عقد الأشراف والشرائبي" Margin="3" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding MonthlyContractTemplatePath, UpdateSourceTrigger=PropertyChanged}" Margin="3" FlowDirection="LeftToRight" VerticalAlignment="Center"/>
+                        <Button  Grid.Column="2" Grid.Row="5" Content="..." Command="{Binding OpenMonthlyContractTemplateCommand}" Margin="3" VerticalAlignment="Center" />
+
+                        <TextBlock Grid.Column="0" Grid.Row="6" Text="نموذج تعهد المستأجر" Margin="3" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding ScheduleTemplatePath, UpdateSourceTrigger=PropertyChanged}" Margin="3" FlowDirection="LeftToRight" VerticalAlignment="Center"/>
+                        <Button  Grid.Column="2" Grid.Row="6" Content="..." Command="{Binding OpenScheduleTemplateCommand}" Margin="0,3,3,3" VerticalAlignment="Center" HorizontalAlignment="Right" Width="21" />
+
+                        <TextBlock Grid.Column="0" Grid.Row="7" Text="نموذج تقرير الإيجار" Margin="3" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding RentTemplatePath, UpdateSourceTrigger=PropertyChanged}" Margin="3" FlowDirection="LeftToRight" VerticalAlignment="Center"/>
+                        <Button  Grid.Column="2" Grid.Row="7" Content="..." Command="{Binding OpenRentTemplateCommand}" Margin="0,3,3,3" VerticalAlignment="Center" HorizontalAlignment="Right" Width="21" />
+
+                        <TextBlock Grid.Column="0" Grid.Row="8" Text="نموذج تقرير الصيانة" Margin="3" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" Grid.Row="8" Text="{Binding MaintTemplatePath, UpdateSourceTrigger=PropertyChanged}" Margin="3" FlowDirection="LeftToRight" VerticalAlignment="Center"/>
+                        <Button  Grid.Column="2" Grid.Row="8" Content="..." Command="{Binding OpenMaintTemplateCommand}" Margin="0,3,3,3" VerticalAlignment="Center" HorizontalAlignment="Right" Width="21" />
+
+                        <TextBlock Grid.Column="0" Grid.Row="9" Text="نموذج عقد المستأجرين" Margin="3" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" Grid.Row="9" Text="{Binding ContractTemplatePath, UpdateSourceTrigger=PropertyChanged}" Margin="3" FlowDirection="LeftToRight" VerticalAlignment="Center"/>
+                        <Button  Grid.Column="2" Grid.Row="9" Content="..." Command="{Binding OpenContractTemplateCommand}" Margin="0,3,3,3" VerticalAlignment="Center" HorizontalAlignment="Right" Width="21" />
+
+                        <TextBlock Grid.Column="0" Grid.Row="10" Text="نموذج فئات المستأجرين" Margin="3" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" Grid.Row="10" Text="{Binding ClassesTemplatePath, UpdateSourceTrigger=PropertyChanged}" Margin="3" FlowDirection="LeftToRight" VerticalAlignment="Center"/>
+                        <Button  Grid.Column="2" Grid.Row="10" Content="..." Command="{Binding OpenClassesTemplateCommand}" Margin="0,3,3,3" VerticalAlignment="Center" HorizontalAlignment="Right" Width="21" />
+
+
+
+                    </Grid>
+                </GroupBox>
+            </Grid>
+        </Grid>
+
+    </Grid>
+
+</Window>
