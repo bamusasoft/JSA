@@ -1,7 +1,0 @@
-obj\Debug\Product.wixobj
-C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\JsaSetup\bin\Debug\cab1.cab
-C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\JsaSetup\bin\Debug\JsaSetup.msi
-C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\JsaSetup\bin\Debug\JsaSetup.wixpdb
-obj\Debug\JsaSetup.wixproj.BindContentsFileListnull.txt
-obj\Debug\JsaSetup.wixproj.BindOutputsFileListnull.txt
-obj\Debug\JsaSetup.wixproj.BindBuiltOutputsFileListnull.txt

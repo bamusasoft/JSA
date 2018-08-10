@@ -1,9 +1,0 @@
-C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\DomainModel\bin\Release\DomainModel.dll.config
-C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\DomainModel\bin\Release\DomainModel.dll
-C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\DomainModel\bin\Release\DomainModel.pdb
-C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\DomainModel\bin\Release\EntityFramework.dll
-C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\DomainModel\bin\Release\EntityFramework.SqlServer.dll
-C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\DomainModel\bin\Release\EntityFramework.xml
-C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\DomainModel\bin\Release\EntityFramework.SqlServer.xml
-C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\DomainModel\obj\Release\DomainModel.dll
-C:\BaMusaSoft\JeddahStationProject\Development\Iteration 1\JSA\DomainModel\obj\Release\DomainModel.pdb
