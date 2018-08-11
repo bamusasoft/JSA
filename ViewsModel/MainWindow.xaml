@@ -29,6 +29,7 @@
             <MenuItem Header="الشؤون الحكومية">
                 <MenuItem Header="تسجيل معاملة" Click="OpenDocRecord"/>
                 <MenuItem Header="متابعة معاملة" Click="OpenDocRecordFollow"/>
+                <MenuItem Header="تقرير المعاملات" Click="OpenDocRecordReport"/>
                 <Separator/>
                 <MenuItem Header="تسجيل قضية" Click="OpenLegalCase"/>
                 <MenuItem Header="متابعة القضايا" Click="OpenFollowingCase"/>

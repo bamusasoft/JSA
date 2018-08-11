@@ -191,5 +191,11 @@ namespace Jsa.ViewsModel
             var v = new DocRecordFollowView();
             ShowChiled(v);
         }
+
+        private void OpenDocRecordReport(object sender, RoutedEventArgs e)
+        {
+            var v = new DocRecordReportView();
+            ShowChiled(v);
+        }
     }
 }

@@ -271,6 +271,11 @@ namespace Jsa.DomainModel
             _signer = null;
         }
 
+        public DbRawSqlQuery<TElement> SqlQuery<TElement>(string sql, params object[] parameters)
+        {
+            return _context.Database.SqlQuery<TElement>(sql, parameters);
+        }
+
         #endregion
 
 
