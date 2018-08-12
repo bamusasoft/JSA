@@ -96,14 +96,15 @@
                           SelectedItem="{Binding Destination}"
                           ItemsSource="{Binding DocDestinations}" 
 						  DisplayMemberPath="Description" 
-                           />
+                          IsSynchronizedWithCurrentItem="True" />
 
             <TextBlock Margin="5" Grid.Row="10" Text="الحالة"/>
             <ComboBox Margin="5" Grid.Row="11" 
-                          ItemsSource="{Binding DocStatuses}" 
-                          SelectedItem="{Binding SelectedDocStatus}"
-                          SelectedValuePath="Key" DisplayMemberPath="Value"
-						  IsSynchronizedWithCurrentItem="True"  />
+                      SelectedItem="{Binding SelectedDocStatus}"
+                      ItemsSource="{Binding DocStatuses}" 
+                      SelectedValuePath="Key" DisplayMemberPath="Value"
+                      IsSynchronizedWithCurrentItem="True"/>
+						 
         </Grid>
     </Grid>
 </Window>

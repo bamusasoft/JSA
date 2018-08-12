@@ -29,6 +29,7 @@ namespace Jsa.ViewsModel.ViewsControllers
             DocStatuses.Add(DocRecordStatus.Open, "تحت الإجراء");
             DocStatuses.Add(DocRecordStatus.Closed, "منتهية");
             DocStatuses.Add(DocRecordStatus.Hold, "متوقفة");
+            SelectedDocStatus = DocStatuses.FirstOrDefault();
 
         }
         private async Task LoadDestinations()
@@ -39,6 +40,8 @@ namespace Jsa.ViewsModel.ViewsControllers
                 task = LoadDesintationsAsync();
                 List<Destination> result = await task;
                 DocDestinations = new ObservableCollection<Destination>(result);
+                AddEmptyDestination(DocDestinations);
+                Destination = DocDestinations.Where(x => x.Id == -1).SingleOrDefault();
             }
             catch(Exception ex)
             {
@@ -262,7 +265,7 @@ namespace Jsa.ViewsModel.ViewsControllers
             RefId = "";
             DocDate = "";
             Subject = "";
-            Destination = null;
+            Destination = DocDestinations.Where(x => x.Id == -1).FirstOrDefault();
             DocPath = "";
             SelectedDocStatus = DocStatuses.SingleOrDefault(x => x.Key == DocRecordStatus.Open);
             ControlState(ControllerStates.Blank);
@@ -403,7 +406,7 @@ namespace Jsa.ViewsModel.ViewsControllers
                 AddError("Subject", msg);
                 isValid = false;
             }
-            if (Destination == null)
+            if (Destination == null || Destination.Id == -1)
             {
                 string msg = "ادخل الجهة";
                 AddError("Destination", msg);
@@ -430,7 +433,7 @@ namespace Jsa.ViewsModel.ViewsControllers
             docRecord.RefId = RefId;
             docRecord.DocDate = DocDate;
             docRecord.Subject = Subject;
-            docRecord.Destination = Destination;
+            docRecord.DestId = Destination.Id;
             docRecord.DocPath = DocPath;
             docRecord.DocStatus = SelectedDocStatus.Key;
             docRecord.SecurityLevel = 0;
@@ -447,7 +450,18 @@ namespace Jsa.ViewsModel.ViewsControllers
             docRecord.DocStatus = SelectedDocStatus.Key;
             docRecord.SecurityLevel = 0;
         }
-
+        /// <summary>
+        /// Use this method to add a reset item, so user has the choice to not selected any of the item in combox.
+        /// The id of added item is -1 which you can use to test for that.
+        /// </summary>
+        /// <param name="list"></param>
+        private void AddEmptyDestination(ObservableCollection<Destination> list)
+        {
+            Destination d = new Destination();
+            d.Id = -1;
+            d.Description = "اختر جهة";
+            list.Insert(0, d);
+        }
         #endregion
 
         #region Public Methods

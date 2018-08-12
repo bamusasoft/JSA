@@ -1,4 +1,5 @@
 ﻿using Jsa.DomainModel;
+using Jsa.ViewsModel.Reports;
 using Jsa.ViewsModel.ViewsControllers.Core;
 using System;
 using System.Collections.Generic;
@@ -13,15 +14,66 @@ namespace Jsa.ViewsModel.ViewsControllers
     public class DocRecordReportController : ReportControllerBase
     {
 
+        public DocRecordReportController()
+        {
+            LoadDocStatuses();
+            LoadDestinations();
+
+        }
+        private void LoadDocStatuses()
+        {
+            DocStatuses = new Dictionary<DocRecordStatus, string>();
+            DocStatuses.Add(DocRecordStatus.All, "الكل");
+            DocStatuses.Add(DocRecordStatus.Open, "تحت الإجراء");
+            DocStatuses.Add(DocRecordStatus.Closed, "منتهية");
+            DocStatuses.Add(DocRecordStatus.Hold, "متوقفة");
+            SelectedDocStatus = DocStatuses.FirstOrDefault(x => x.Key == DocRecordStatus.All);
+        }
+        private async Task LoadDestinations()
+        {
+            Task<List<Destination>> task = null;
+            try
+            {
+                task = LoadDesintationsAsync();
+                List<Destination> result = await task;
+                Destinations = new ObservableCollection<Destination>(result);
+                AddEmptyDestination(Destinations);
+                SelectedDestination = Destinations.Where(x => x.Id == -1).FirstOrDefault(); ;
+            }
+            catch (Exception ex)
+            {
+                Helper.LogShowError(ex);
+            }
+        }
+        private Task<List<Destination>> LoadDesintationsAsync()
+        {
+            Task<List<Destination>> task = Task.Run(() =>
+            {
+                List<Destination> destinations = null;
+                using (IUnitOfWork unit = new UnitOfWork())
+                {
+                    destinations = unit.Destinations.GetAll().ToList();
+                }
+                return destinations;
+            });
+
+            return task;
+        }
         #region Fields
         string _docId;
         string _refId;
         string _docDate;
-        string _followDate;
-        Destination _destination;
+        string _notFollowedSince;
+        string _hadFollowedSince;
+        Destination _selectedDestination;
         string _subject;
-        DocRecordStatus _status;
+        ObservableCollection<Destination> _destinations;
+        Dictionary<DocRecordStatus, string> _docStatuses;
+        KeyValuePair<DocRecordStatus, string> _selectedStatus;
+        //
+        ObservableCollection<DocRecordReprot> _docRecordReport;
         #endregion
+
         #region Properties
         public string DocId
         {
@@ -41,12 +93,92 @@ namespace Jsa.ViewsModel.ViewsControllers
                 RaisePropertyChanged();
             }
         }
-
+        public string DocDate
+        {
+            get { return _docDate; }
+            set
+            {
+                _docDate = value;
+                RaisePropertyChanged();
+            }
+        }
+        public string NotFollowedSince
+        {
+            get { return _notFollowedSince; }
+            set
+            {
+                _notFollowedSince = value;
+                RaisePropertyChanged();
+            }
+        }
+        public string HadFollowedSince
+        {
+            get { return _hadFollowedSince; }
+            set
+            {
+                _hadFollowedSince = value;
+                RaisePropertyChanged();
+            }
+        }
+        public string Subject
+        {
+            get { return _subject; }
+            set
+            {
+                _subject = value;
+                RaisePropertyChanged();
+            }
+        }
         public ObservableCollection<Destination> Destinations
         {
-            get;set;
+            get { return _destinations; }
+            set {
+                _destinations = value;
+                RaisePropertyChanged();
+
+            }
         }
+        public Destination SelectedDestination
+        {
+            get { return _selectedDestination; }
+            set
+            {
+                _selectedDestination = value;
+                RaisePropertyChanged();
+            }
+        }
+        public Dictionary<DocRecordStatus, string> DocStatuses
+        {
+            get { return _docStatuses; }
+            set
+            {
+                _docStatuses = value;
+                RaisePropertyChanged("DocStatuses");
+            }
+        }
+        public KeyValuePair<DocRecordStatus, string> SelectedDocStatus
+        {
+            get { return _selectedStatus; }
+            set
+            {
+                _selectedStatus = value;
+                RaisePropertyChanged("SelectedDocStatus");
+
+            }
+        }
+        public ObservableCollection<DocRecordReprot> DocRecordReport
+        {
+            get { return _docRecordReport; }
+            set
+            {
+                _docRecordReport = value;
+                RaisePropertyChanged();
+
+            }
+        }
+
         #endregion
+
         #region Base
 
 
@@ -83,6 +215,11 @@ namespace Jsa.ViewsModel.ViewsControllers
 
         protected override void Print()
         {
+            string path = @"C:\repose\Jeddah Automation Project\Book1.xltx";
+            var source = DocRecordReport.ToList();
+            ExcelProperties excelProp = new ExcelProperties(2, 1, false);
+            DocRecordPrintReport report = new DocRecordPrintReport(source, path, excelProp);
+            report.Print();
         }
 
         protected override void Refresh()
@@ -102,9 +239,9 @@ namespace Jsa.ViewsModel.ViewsControllers
                            ON DocRecords.Id = DocRecordFollows.DocRecodId
                            INNER JOIN Destinations
                            ON DocRecords.DestId = Destinations.Id ";
-           var query =  BuildQuery();
+            var query =  BuildQuery();
             string whereClause = "";
-            object[] paramters = query.Values.ToArray(); ;
+            object[] paramters = query.Values.ToArray(); 
             int counter = 0;
             foreach (var item in query)
             {
@@ -114,20 +251,22 @@ namespace Jsa.ViewsModel.ViewsControllers
                 }
                 else
                 {
-                    whereClause += "AND " + item.Key;
+                    whereClause += " AND " + item.Key;
                 }
                 counter++;
             }
             sql += whereClause;
+            sql += BuildOrderBy();
             using (IUnitOfWork unit = new UnitOfWork())
             {
-                var s = unit.SqlQuery<DocRecordReprot>(sql, paramters).ToList(); ;
+                var s = unit.SqlQuery<DocRecordReprot>(sql, paramters).ToList(); 
+                DocRecordReport = new ObservableCollection<DocRecordReprot>(s);
             }
         }
         #endregion
 
         #region Methods
-        public Dictionary<string, SqlParameter> BuildQuery()
+        private Dictionary<string, SqlParameter> BuildQuery()
         {
             Dictionary<String, SqlParameter> query = new Dictionary<string, SqlParameter>();
             if (!string.IsNullOrEmpty(DocId))
@@ -139,8 +278,52 @@ namespace Jsa.ViewsModel.ViewsControllers
                 query.Add("DocRecords.RefId = @RefId", new SqlParameter("@RefId", RefId));
 
             }
+            if(SelectedDocStatus.Key != DocRecordStatus.All)
+            {
+                query.Add("DocRecords.DocStatus = @DocStatus", new SqlParameter("@DocStatus", SelectedDocStatus.Key));
+            }
+            if(SelectedDestination != null && SelectedDestination.Id != -1)
+            {
+                query.Add("DocRecords.DestId = @DestId", new SqlParameter("@DestId", SelectedDestination.Id));
+
+            }
+            if (!string.IsNullOrEmpty(Subject))
+            {
+                query.Add("DocRecords.Subject LIKE @Subject", new SqlParameter("@Subject", Subject));
+
+            }
+            if (!string.IsNullOrEmpty(NotFollowedSince))
+            {
+                query.Add("DocRecordFollows.FollowDate <= @NotFollowed", new SqlParameter("@NotFollowed", NotFollowedSince));
+
+            }
+            if (!string.IsNullOrEmpty(HadFollowedSince))
+            {
+                query.Add("DocRecordFollows.FollowDate >= @HadFollowed", new SqlParameter("@HadFollowed", HadFollowedSince));
+
+            }
+
+            
             return query;
 
+        }
+        private string BuildOrderBy()
+        {
+            string orderBy = " ORDER BY Destination, DocDate, FollowDate";
+            return orderBy;
+        }
+
+        /// <summary>
+        /// Use this method to add a reset item, so user has the choice to not selected any of the item in combox.
+        /// The id of added item is -1 which you can use to test for that.
+        /// </summary>
+        /// <param name="list"></param>
+        private void AddEmptyDestination(ObservableCollection<Destination> list)
+        {
+            Destination d = new Destination();
+            d.Id = -1;
+            d.Description = "اختر جهة";
+            list.Insert(0,d);
         }
         #endregion
     }

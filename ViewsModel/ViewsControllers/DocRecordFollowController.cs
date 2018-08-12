@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using Jsa.DomainModel;
 using Jsa.DomainModel.Repositories;
+using Jsa.ViewsModel.Reports;
 using Jsa.ViewsModel.ViewsControllers.Core;
 using System;
 using System.Collections.Generic;
@@ -261,7 +262,11 @@ namespace Jsa.ViewsModel.ViewsControllers
 
         protected override void Print()
         {
-
+            //string path = @"C:\repose\Jeddah Automation Project\Book1.xltx";
+            //var source = DocRecordReport.ToList();
+            //ExcelProperties excelProp = new ExcelProperties(2, 1, false);
+            //DocRecordPrintReport report = new DocRecordPrintReport(source, path, excelProp);
+            //report.Print();
         }
 
         protected override void Save()

@@ -24,7 +24,10 @@ namespace Jsa.DomainModel
         public virtual ICollection<DocRecord> DocRecords { get; set; }
         public override int GetHashCode()
         {
-            return Id.GetHashCode();
+            int hash = 13;
+            hash = hash * Id;
+            hash = hash + 17;
+            return hash;
         }
         public override bool Equals(object obj)
         {

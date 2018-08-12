@@ -72,32 +72,35 @@
 
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0" Text="رقم المعاملة" Margin="5"/>
-            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding DocId, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding DocId, UpdateSourceTrigger=PropertyChanged}" Margin="5"
+                     MaxLength="8"/>
 
             <TextBlock Grid.Row="1" Grid.Column="0" Text="رقم القيد" Margin="5"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding RefId, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding RefId, UpdateSourceTrigger=PropertyChanged}" Margin="5"
+                     MaxLength="10"/>
 
             <TextBlock Grid.Row="2" Grid.Column="0" Text="الجهة" Margin="5"/>
             <ComboBox Margin="5" Grid.Row="2" Grid.Column="1" 
-                          SelectedItem="{Binding Destination}"
-                          ItemsSource="{Binding DocDestinations}" 
-						  DisplayMemberPath="Description"/>
+                      SelectedItem="{Binding SelectedDestination}"
+                      ItemsSource="{Binding Destinations}" 
+				      DisplayMemberPath="Description"
+                      IsSynchronizedWithCurrentItem="True"/>
 
             <TextBlock Grid.Row="0" Grid.Column="2" Text="الموضوع" Margin="5"/>
             <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Subject, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
 
             <TextBlock Grid.Row="1" Grid.Column="2" Text="لم تتابع منذ" Margin="5"/>
-            <extToolkit:MaskedTextBox Grid.Row="1" Grid.Column="3" Mask="## /##/ ####"
+            <extToolkit:MaskedTextBox Grid.Row="1" Grid.Column="3" Mask="## /##/ ####" IncludeLiteralsInValue="False"
                                     ValueDataType="{x:Type system:String}"
-									Value="{Binding FollowDate, UpdateSourceTrigger=PropertyChanged, 
-                                    Converter={StaticResource LiteralConverter}}"
+									Value="{Binding NotFollowedSince, UpdateSourceTrigger=PropertyChanged, 
+                                    Converter={StaticResource DateConverter}}"
                                     Margin="5" AutoSelectBehavior="OnFocus"/>
 
             <TextBlock Grid.Row="2" Grid.Column="2" Text="المتابعات منذ" Margin="5"/>
-            <extToolkit:MaskedTextBox Grid.Row="2" Grid.Column="3" Mask="## /##/ ####"
+            <extToolkit:MaskedTextBox Grid.Row="2" Grid.Column="3" Mask="## /##/ ####" IncludeLiteralsInValue="False"
                                     ValueDataType="{x:Type system:String}"
-									Value="{Binding FollowDate, UpdateSourceTrigger=PropertyChanged, 
-                                    Converter={StaticResource LiteralConverter}}"
+									Value="{Binding HadFollowedSince, UpdateSourceTrigger=PropertyChanged, 
+                                    Converter={StaticResource DateConverter}}"
                                     Margin="5" AutoSelectBehavior="OnFocus"/>
 
             <TextBlock Grid.Row="3" Grid.Column="0" Text="الحالة" Margin="5"/>
@@ -145,7 +148,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="الحالة" Binding="{Binding DocStatus}" 
+                <DataGridTextColumn Header="الحالة" Binding="{Binding StatusArabic}" 
                                             Width="Auto" IsReadOnly="True"/>
 
             </DataGrid.Columns>

@@ -22,5 +22,23 @@ namespace Jsa.DomainModel
         public string FollowDate { get; set; }
         public string FollowContent { get; set; }
         public string FollowPath { get; set; }
+
+        public string StatusArabic
+        {
+            get
+            {
+                switch (DocStatus)
+                {
+                    case DocRecordStatus.Open:
+                        return "تحت الإجراء";
+                    case DocRecordStatus.Closed:
+                        return "منتهية";
+                    case DocRecordStatus.Hold:
+                        return "متوقفة";
+                    default:
+                        throw new NotSupportedException("Status is not supprted");
+                }
+            }
+        }
     }
 }
