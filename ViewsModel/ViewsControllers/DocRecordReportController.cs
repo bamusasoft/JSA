@@ -2,6 +2,7 @@
 using Jsa.ViewsModel.ViewsControllers.Core;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -41,14 +42,9 @@ namespace Jsa.ViewsModel.ViewsControllers
             }
         }
 
-        public Obser Destination
+        public ObservableCollection<Destination> Destinations
         {
-            get { return _destination; }
-            set
-            {
-                _destination = value;
-                RaisePropertyChanged();
-            }
+            get;set;
         }
         #endregion
         #region Base
