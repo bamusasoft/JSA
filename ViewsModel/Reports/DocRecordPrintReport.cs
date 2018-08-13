@@ -18,7 +18,7 @@ namespace Jsa.ViewsModel.Reports
 
         protected override sealed DataTable CreateReport(List<DocRecordReprot> source)
         {
-            source.OrderBy(x => x.DocId).ThenBy(p => p.FollowDate);
+            //source.OrderBy(x => x.Destination).ThenBy(p => p.FollowDate);
             DataTable table = CreateTable();
             AddColumns(table);
 

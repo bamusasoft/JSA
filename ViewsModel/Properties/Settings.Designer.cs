@@ -287,5 +287,17 @@ namespace Jsa.ViewsModel.Properties {
                 this["ClassesTemplate"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DocFollowTemplate {
+            get {
+                return ((string)(this["DocFollowTemplate"]));
+            }
+            set {
+                this["DocFollowTemplate"] = value;
+            }
+        }
     }
 }

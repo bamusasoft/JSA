@@ -84,7 +84,7 @@
 				<ComboBox Grid.Column="1" Margin="5" FontSize="17.333" ItemsSource="{Binding Years}" 
 						  SelectedValue="Key" DisplayMemberPath="Value" SelectedIndex="{Binding SelectedYearIndex, Mode=OneWay}" TabIndex="11"
 						  IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding SelectedYear}"
-                          Visibility="Visible"/>
+                          Visibility="Visible" IsEnabled="False"/>
 				<TextBox Grid.Column="1" Margin="5" Grid.Row="2" TextWrapping="Wrap" FontSize="17.333" Text="{Binding SearchValue, UpdateSourceTrigger=PropertyChanged}" TabIndex="6"/>
 				<DataGrid x:Name="listOutboxes" Grid.ColumnSpan="3" Margin="0,14,0,0" Grid.Row="4" FontSize="17.333" ItemsSource="{Binding Outboxes}"
 						  SelectionMode="Single" AutoGenerateColumns="False" TabIndex="8">

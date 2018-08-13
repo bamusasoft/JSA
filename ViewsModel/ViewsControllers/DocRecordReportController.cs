@@ -18,6 +18,7 @@ namespace Jsa.ViewsModel.ViewsControllers
         {
             LoadDocStatuses();
             LoadDestinations();
+            ShowProgress = false;
 
         }
         private void LoadDocStatuses()
@@ -67,6 +68,8 @@ namespace Jsa.ViewsModel.ViewsControllers
         string _hadFollowedSince;
         Destination _selectedDestination;
         string _subject;
+        double _printProgress;
+        bool _showProgress;
         ObservableCollection<Destination> _destinations;
         Dictionary<DocRecordStatus, string> _docStatuses;
         KeyValuePair<DocRecordStatus, string> _selectedStatus;
@@ -176,7 +179,24 @@ namespace Jsa.ViewsModel.ViewsControllers
 
             }
         }
-
+        public double PrintProgress
+        {
+            get { return _printProgress; }
+            set
+            {
+                _printProgress = value;
+                RaisePropertyChanged();
+            }
+        }
+        public bool ShowProgress
+        {
+            get { return _showProgress; }
+            set
+            {
+                _showProgress = value;
+                RaisePropertyChanged();
+            }
+        }
         #endregion
 
         #region Base
@@ -215,11 +235,46 @@ namespace Jsa.ViewsModel.ViewsControllers
 
         protected override void Print()
         {
-            string path = @"C:\Users\xman\Desktop\DocFollows.xltx";
-            var source = DocRecordReport.ToList();
-            ExcelProperties excelProp = new ExcelProperties(2, 1, false);
-            DocRecordPrintReport report = new DocRecordPrintReport(source, path, excelProp);
-            report.Print();
+            PrintReport();
+            
+        }
+        private async Task PrintReport()
+        {
+            string path = Properties.Settings.Default.DocFollowTemplate;
+            if (string.IsNullOrEmpty(path))
+            {
+                string msg = "يجب تحديد مسار تقرير المتابعة";
+                Helper.ShowMessage(msg);
+                return;
+            }
+            try
+            {
+                ShowProgress = true;
+                await PrintAsync(path);
+                ShowProgress = false;
+            }
+            catch (Exception ex)
+            {
+
+                Helper.LogShowError(ex);
+            }
+        }
+        private Task PrintAsync(string path)
+        {
+            Task task = Task.Run(() => {
+                var source = DocRecordReport.ToList();
+                ExcelProperties excelProp = new ExcelProperties(2, 1, false);
+                DocRecordPrintReport report = new DocRecordPrintReport(source, path, excelProp);
+                report.ReportProgress += Report_ReportProgress;
+                report.Print();
+
+            });
+            return task;
+        }
+
+        private void Report_ReportProgress(object sender, Helpers.ProgressEventArgs e)
+        {
+            PrintProgress = e.Progress;
         }
 
         protected override void Refresh()
@@ -309,7 +364,7 @@ namespace Jsa.ViewsModel.ViewsControllers
         }
         private string BuildOrderBy()
         {
-            string orderBy = " ORDER BY Destination, DocDate, FollowDate";
+            string orderBy = " ORDER BY Destination, DocDate, DocId, FollowDate";
             return orderBy;
         }
 

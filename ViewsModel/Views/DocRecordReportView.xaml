@@ -13,24 +13,10 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <ToolBarTray Grid.Row="0">
             <ToolBar KeyboardNavigation.TabNavigation="Continue">
-                <Button Command="{Binding ClearCommand}" Margin="0,0,5,0"
-                        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
-                    <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
-                        <Image Style="{StaticResource ToolbarAddNewStyle}"/>
-                        <TextBlock Margin="5,0,0,0" Text="{StaticResource Menu_AddNew}" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </Button>
-                <Button Command="{Binding SaveCommand}" Margin="0,0,5,0"
-                        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
-                    <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
-                        <Image Style="{StaticResource ToolbarSaveStyle}"/>
-                        <TextBlock Margin="5,0,0,0" Text="{StaticResource Menu_Save}" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </Button>
-                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey} }"/>
                 <Button Command="{Binding PrintCommand}" Margin="0,0,5,0"
                         Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
                     <StackPanel Orientation="Horizontal" Margin="0">
@@ -153,5 +139,8 @@
             </DataGrid.Columns>
 
         </DataGrid>
+        <ProgressBar Grid.Row="3" Visibility="{Binding ShowProgress, Converter={StaticResource BoolToVisiblity}}"
+                     Value="{Binding Path= PrintProgress}"
+                     HorizontalContentAlignment="Stretch" MinHeight="20"/>
     </Grid>
 </Window>

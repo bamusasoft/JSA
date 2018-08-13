@@ -69,6 +69,7 @@ namespace Jsa.DomainModel.Repositories
         {
             return Context.DocRecords
                 .Include(a => a.Destination)
+                .Include(p => p.DocRecordFollows)
                 .Where(filter);
         }
 

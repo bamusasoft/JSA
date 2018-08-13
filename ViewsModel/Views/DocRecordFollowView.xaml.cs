@@ -28,6 +28,10 @@ namespace Jsa.ViewsModel.Views
             _controller = new DocRecordFollowController();
             DataContext = _controller;
         }
+        public DocRecordFollowView(string docId):this()
+        {
+            _controller.ShowDocFollow(docId);
+        }
 
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {

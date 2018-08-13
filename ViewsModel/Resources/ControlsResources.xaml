@@ -10,7 +10,8 @@
   <converters:AddDateMaskConverter x:Shared="False" x:Key="AddMaskConverter" />
   <converters:OutboxConverter x:Shared="False"   x:Key="OpenOutboxConverter"/>
   <converters:StringTrimmingConverter x:Shared="False" x:Key="TrimmingConverter"/>
-    <converters:BooleanOrConverter x:Shared="False" x:Key="BooleanOrConverter"/>
+  <converters:BooleanOrConverter x:Shared="False" x:Key="BooleanOrConverter"/>
+    <BooleanToVisibilityConverter x:Shared="False" x:Key="BoolToVisiblity"/>
     <SolidColorBrush x:Key="PrimaryColor-Brush" Color="#FFFF9000" />
   <SolidColorBrush x:Key="ButtonBackground-Brush" Color="#FFB4B4B4" />
   <SolidColorBrush x:Key="Header-Brush" Color="#FF5E5E5E" />

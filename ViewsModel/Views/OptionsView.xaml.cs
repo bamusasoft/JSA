@@ -45,11 +45,13 @@ namespace Jsa.ViewsModel.Views
         private RelayCommand _openScanShareCommand;
         private RelayCommand _openScheduleTemplateCommand;
         private RelayCommand _openClassesTemplateCommand;
+        private RelayCommand _openDocFollowTemplateCommand;
         private string _periodScheduleTemplatePath;
         private string _propertyDbPath;
         private string _rentTamplatePath;
         private string _rglTemplatePath;
         private string _classesTemplatePath;
+        private string _docFollowTemplatePath;
         private RelayCommand _saveCommand;
         private string _scheduleTemplatePath;
         private string _selectedBranch;
@@ -356,6 +358,15 @@ namespace Jsa.ViewsModel.Views
                 RaisePropertyChanged();
             }
         }
+        public string DocFollowTemplatePath
+        {
+            get { return _docFollowTemplatePath; }
+            set
+            {
+                _docFollowTemplatePath = value;
+                RaisePropertyChanged();
+            }
+        }
         #endregion
 
         #region "INotifyPropertyChanged Members"
@@ -589,6 +600,18 @@ namespace Jsa.ViewsModel.Views
         {
             ClassesTemplatePath = OpenExcelFile();
         }
+        public ICommand OpenDocFollowTemplateCommand
+        {
+            get
+            {
+                return _openDocFollowTemplateCommand ?? (_openDocFollowTemplateCommand = new RelayCommand(OpenDocTemplate));
+            }
+        }
+
+        private void OpenDocTemplate()
+        {
+            DocFollowTemplatePath = OpenExcelFile();
+        }
 
         private void OpenMaintTemplate()
         {
@@ -638,6 +661,7 @@ namespace Jsa.ViewsModel.Views
             _settings.AppointDueDays = AppointsDue;
             _settings.GeneralContractTemplate = ContractTemplatePath;
             _settings.ClassesTemplate = ClassesTemplatePath;
+            _settings.DocFollowTemplate = DocFollowTemplatePath;
             switch (SelectedBranch)
             {
                 case "جدة":
@@ -673,6 +697,7 @@ namespace Jsa.ViewsModel.Views
             AppointsDue = _settings.AppointDueDays;
             ContractTemplatePath = _settings.GeneralContractTemplate;
             ClassesTemplatePath = _settings.ClassesTemplate;
+            DocFollowTemplatePath = _settings.DocFollowTemplate;
             Branches = new ObservableCollection<string>
                 (
                 new List<string>

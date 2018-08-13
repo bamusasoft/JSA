@@ -176,6 +176,7 @@ namespace Jsa.ViewsModel.ViewsControllers
 
         }
         #endregion
+
         #region Base
 
 
@@ -315,25 +316,25 @@ namespace Jsa.ViewsModel.ViewsControllers
         {
             if (string.IsNullOrEmpty(IdSearchTerm) && string.IsNullOrEmpty(RefSearchTerm)) return;
             var criteria = BuildCriteria();
-            DocRecord resultDoc = null;
-            using (IUnitOfWork unit = new UnitOfWork())
-            {
-                var result = unit.DocRecords.Query(criteria);
-                resultDoc = result.FirstOrDefault();
+            DocRecord resultDoc = Find(criteria);
+
                 if (resultDoc != null)
                 {
                     ShowDocRecord(resultDoc);
-                    var sortedFollows = resultDoc.DocRecordFollows.OrderBy(x => x.FollowDate);
-                    DocFollows = new ObservableCollection<DocRecordFollow>(sortedFollows);
                     ControlState(ControllerStates.Saved);
                 }
-            }
-
-
         }
         #endregion
 
         #region Methods
+        private DocRecord Find(Expression<Func<DocRecord, bool>> criteria)
+        {
+            using (IUnitOfWork unit = new UnitOfWork())
+            {
+                var result = unit.DocRecords.Query(criteria);
+                return result.FirstOrDefault();
+            }
+        }
         private Expression<Func<DocRecord, bool>> BuildCriteria()
         {
             ParameterExpression parameter = Expression.Parameter(typeof(DocRecord), "docRecord");
@@ -423,7 +424,9 @@ namespace Jsa.ViewsModel.ViewsControllers
             RefId = docRecord.RefId;
             DocDate = docRecord.DocDate;
             Subject = docRecord.Subject;
-            
+            var sortedFollows = docRecord.DocRecordFollows.OrderBy(x => x.FollowDate);
+            DocFollows = new ObservableCollection<DocRecordFollow>(sortedFollows);
+
         }
         private void RefreshFollows()
         {
@@ -463,6 +466,11 @@ namespace Jsa.ViewsModel.ViewsControllers
             FollowContent = recordFollow.FollowContent;
             FollowPath = recordFollow.FollowPath;
             ControlState(ControllerStates.Saved);
+        }
+        public void ShowDocFollow(string docId)
+        {
+            var docRecord = Find(x => x.Id == docId);
+            ShowDocRecord(docRecord);
         }
         #endregion
     }

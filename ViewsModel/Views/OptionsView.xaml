@@ -100,6 +100,7 @@
                             <RowDefinition/>
                             <RowDefinition/>
                             <RowDefinition/>
+                            <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -149,6 +150,10 @@
                         <TextBlock Grid.Column="0" Grid.Row="10" Text="نموذج فئات المستأجرين" Margin="3" VerticalAlignment="Center"/>
                         <TextBox Grid.Column="1" Grid.Row="10" Text="{Binding ClassesTemplatePath, UpdateSourceTrigger=PropertyChanged}" Margin="3" FlowDirection="LeftToRight" VerticalAlignment="Center"/>
                         <Button  Grid.Column="2" Grid.Row="10" Content="..." Command="{Binding OpenClassesTemplateCommand}" Margin="0,3,3,3" VerticalAlignment="Center" HorizontalAlignment="Right" Width="21" />
+
+                        <TextBlock Grid.Column="0" Grid.Row="11" Text="نموذج تقرير المعاملات" Margin="3" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" Grid.Row="11" Text="{Binding DocFollowTemplatePath, UpdateSourceTrigger=PropertyChanged}" Margin="3" FlowDirection="LeftToRight" VerticalAlignment="Center"/>
+                        <Button  Grid.Column="2" Grid.Row="11" Content="..." Command="{Binding OpenDocFollowTemplateCommand}" Margin="0,3,3,3" VerticalAlignment="Center" HorizontalAlignment="Right" Width="21" />
 
 
 
