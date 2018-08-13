@@ -215,7 +215,7 @@ namespace Jsa.ViewsModel.ViewsControllers
 
         protected override void Print()
         {
-            string path = @"C:\repose\Jeddah Automation Project\Book1.xltx";
+            string path = @"C:\Users\xman\Desktop\DocFollows.xltx";
             var source = DocRecordReport.ToList();
             ExcelProperties excelProp = new ExcelProperties(2, 1, false);
             DocRecordPrintReport report = new DocRecordPrintReport(source, path, excelProp);

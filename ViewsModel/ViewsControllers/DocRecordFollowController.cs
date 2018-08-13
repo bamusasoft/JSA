@@ -299,6 +299,7 @@ namespace Jsa.ViewsModel.ViewsControllers
                         UpdateDocFollow(follow);
                     }
                     unit.Save();
+                    FollowId = follow.Id;
                     ControlState(ControllerStates.Saved);
 
                 }
