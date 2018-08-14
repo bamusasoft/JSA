@@ -30,6 +30,7 @@
                 <MenuItem Header="تسجيل معاملة" Click="OpenDocRecord"/>
                 <MenuItem Header="متابعة معاملة" Click="OpenDocRecordFollow"/>
                 <MenuItem Header="تقرير المعاملات" Click="OpenDocRecordReport"/>
+                <MenuItem Header="تقرير متابعة المعاملات" Click="OpenDocFollowsReport"/>
                 <Separator/>
                 <MenuItem Header="تسجيل قضية" Click="OpenLegalCase"/>
                 <MenuItem Header="متابعة القضايا" Click="OpenFollowingCase"/>

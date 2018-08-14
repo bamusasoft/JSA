@@ -199,6 +199,7 @@
     <Compile Include="ViewsControllers\DocRecordController.cs" />
     <Compile Include="ViewsControllers\DocRecordFollowController.cs" />
     <Compile Include="ViewsControllers\DocRecordReportController.cs" />
+    <Compile Include="ViewsControllers\DocRecordsReportController.cs" />
     <Compile Include="ViewsControllers\LegalCaseController.cs" />
     <Compile Include="ViewsControllers\LegalCaseReportController.cs" />
     <Compile Include="ViewsControllers\NotificationCenterController.cs" />
@@ -264,8 +265,11 @@
     <Compile Include="Views\CustomersClassesView.xaml.cs">
       <DependentUpon>CustomersClassesView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DocRecordReportView.xaml.cs">
-      <DependentUpon>DocRecordReportView.xaml</DependentUpon>
+    <Compile Include="Views\DocFollowsReportView.xaml.cs">
+      <DependentUpon>DocFollowsReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DocRecordsReportView.xaml.cs">
+      <DependentUpon>DocRecordsReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DocRecordView.xaml.cs">
       <DependentUpon>DocRecordView.xaml</DependentUpon>
@@ -498,7 +502,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\DocRecordReportView.xaml">
+    <Page Include="Views\DocFollowsReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DocRecordsReportView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,0 +1,138 @@
+﻿<Window x:Class="Jsa.ViewsModel.Views.DocFollowsReportView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:extToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:Jsa.ViewsModel.Views"
+        mc:Ignorable="d"
+        Title="تقرير المعاملات" Style="{StaticResource WindowCommonStyle}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ToolBarTray Grid.Row="0">
+            <ToolBar KeyboardNavigation.TabNavigation="Continue">
+                <Button Command="{Binding SearchCommand}" Margin="0,0,5,0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                    <StackPanel Orientation="Horizontal" Margin="0">
+                        <Image Style="{StaticResource ToolbarSearchStyle}"/>
+                        <TextBlock Margin="5,0,0,0" Text="{StaticResource Menu_Search}" VerticalAlignment="Center"/>
+
+                    </StackPanel>
+                </Button>
+                <Button Command="{Binding PrintCommand}" Margin="0,0,5,0"
+                        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                    <StackPanel Orientation="Horizontal" Margin="0">
+                        <Image Style="{StaticResource TollbarPrintStyle}"/>
+                        <TextBlock Margin="5,0,0,0" Text="{StaticResource Menu_Print}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+                
+            </ToolBar>
+        </ToolBarTray>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="رقم المعاملة" Margin="5"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding DocId, UpdateSourceTrigger=PropertyChanged}" Margin="5"
+                     MaxLength="8"/>
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="رقم القيد" Margin="5"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding RefId, UpdateSourceTrigger=PropertyChanged}" Margin="5"
+                     MaxLength="10"/>
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="الجهة" Margin="5"/>
+            <ComboBox Margin="5" Grid.Row="2" Grid.Column="1" 
+                      SelectedItem="{Binding SelectedDestination}"
+                      ItemsSource="{Binding Destinations}" 
+				      DisplayMemberPath="Description"
+                      IsSynchronizedWithCurrentItem="True"/>
+
+            <TextBlock Grid.Row="0" Grid.Column="2" Text="الموضوع" Margin="5"/>
+            <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Subject, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+
+            <TextBlock Grid.Row="1" Grid.Column="2" Text="لم تتابع منذ" Margin="5"/>
+            <extToolkit:MaskedTextBox Grid.Row="1" Grid.Column="3" Mask="## /##/ ####" IncludeLiteralsInValue="False"
+                                    ValueDataType="{x:Type system:String}"
+									Value="{Binding NotFollowedSince, UpdateSourceTrigger=PropertyChanged, 
+                                    Converter={StaticResource DateConverter}}"
+                                    Margin="5" AutoSelectBehavior="OnFocus"/>
+
+            <TextBlock Grid.Row="2" Grid.Column="2" Text="المتابعات منذ" Margin="5"/>
+            <extToolkit:MaskedTextBox Grid.Row="2" Grid.Column="3" Mask="## /##/ ####" IncludeLiteralsInValue="False"
+                                    ValueDataType="{x:Type system:String}"
+									Value="{Binding HadFollowedSince, UpdateSourceTrigger=PropertyChanged, 
+                                    Converter={StaticResource DateConverter}}"
+                                    Margin="5" AutoSelectBehavior="OnFocus"/>
+
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="الحالة" Margin="5"/>
+            <ComboBox Margin="5" Grid.Row="3" Grid.Column="1" 
+                          ItemsSource="{Binding DocStatuses}" 
+                          SelectedItem="{Binding SelectedDocStatus}"
+                          SelectedValuePath="Key" DisplayMemberPath="Value"
+						  IsSynchronizedWithCurrentItem="True"  />
+
+        </Grid>
+        <DataGrid Grid.Row="2" ItemsSource="{Binding DocRecordReport}"
+						  SelectionMode="Single" AutoGenerateColumns="False"
+                          CanUserAddRows="False" IsReadOnly="True" CanUserSortColumns="False" Margin="5">
+            <DataGrid.ItemContainerStyle>
+                <Style TargetType="DataGridRow">
+                    <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick"/>
+                </Style>
+            </DataGrid.ItemContainerStyle>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="الرقم" Binding="{Binding DocId}" 
+                                            Width="Auto" IsReadOnly="True"/>
+                <DataGridTextColumn Header="رقم القيد" Binding="{Binding RefId}" 
+                                            Width="Auto" IsReadOnly="True"/>
+
+                <DataGridTextColumn Header="التاريخ" Binding="{Binding DocDate, Converter={StaticResource AddMaskConverter}}" 
+                                            Width="Auto" IsReadOnly="True"/>
+                <DataGridTextColumn Header="الموضوع" Binding="{Binding Subject}" Width="0.30*" IsReadOnly="True">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
+                            <Setter Property="TextBlock.TextAlignment" Value="Justify"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="الجهة" Binding="{Binding Destination}" 
+                                            Width="Auto" IsReadOnly="True"/>
+                <DataGridTextColumn Header="تاريخ المتابعة" Binding="{Binding FollowDate, Converter={StaticResource AddMaskConverter}}" 
+                                            Width="Auto" IsReadOnly="True"/>
+                <DataGridTextColumn Header="الإجراء" Binding="{Binding FollowContent}" Width="0.70*" IsReadOnly="True">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
+                            <Setter Property="TextBlock.TextAlignment" Value="Justify"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="الحالة" Binding="{Binding StatusArabic}" 
+                                            Width="Auto" IsReadOnly="True"/>
+
+            </DataGrid.Columns>
+
+        </DataGrid>
+        <ProgressBar Grid.Row="3" Visibility="{Binding ShowProgress, Converter={StaticResource BoolToVisiblity}}"
+                     Value="{Binding Path= PrintProgress}"
+                     HorizontalContentAlignment="Stretch" MinHeight="20"/>
+    </Grid>
+</Window>

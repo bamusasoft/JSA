@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace Jsa.ViewsModel.ViewsControllers
 {
-    public class DocRecordReportController : ReportControllerBase
+    public class DocFollowsReportController : ReportControllerBase
     {
 
-        public DocRecordReportController()
+        public DocFollowsReportController()
         {
             LoadDocStatuses();
             LoadDestinations();

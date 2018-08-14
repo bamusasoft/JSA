@@ -19,13 +19,13 @@ namespace Jsa.ViewsModel.Views
     /// <summary>
     /// Interaction logic for DocRecordReportView.xaml
     /// </summary>
-    public partial class DocRecordReportView : Window
+    public partial class DocFollowsReportView : Window
     {
-        DocRecordReportController _controller;
-        public DocRecordReportView()
+        DocFollowsReportController _controller;
+        public DocFollowsReportView()
         {
             InitializeComponent();
-            _controller = new DocRecordReportController();
+            _controller = new DocFollowsReportController();
             DataContext = _controller;
         }
 
