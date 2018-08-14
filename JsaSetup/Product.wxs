@@ -11,7 +11,7 @@
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
 		<MediaTemplate />
-    <Icon Id="AppIcon" SourceFile="C:\BaMusaSoft\JeddahStationProject\Automation.ico"/>
+    <Icon Id="AppIcon" SourceFile="C:\div\Jeddah Station Automation\appicon.ico"/>
 		<Feature Id="ProductFeature" Title="JsaSetup" Level="1">
 			<ComponentGroupRef Id="ProductComponents" />
       <ComponentGroupRef Id="AppShortcut"/>

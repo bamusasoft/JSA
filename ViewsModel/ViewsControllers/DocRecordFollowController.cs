@@ -275,9 +275,9 @@ namespace Jsa.ViewsModel.ViewsControllers
             if (!IsValid())
             {
                 string msg = string.Empty;
-                foreach (var error in Errors.Values)
+                foreach (var error in Errors)
                 {
-                    msg += error;
+                    msg += error.Value?.FirstOrDefault() ?? "";
                     msg += "\n";
 
                 }
@@ -377,31 +377,40 @@ namespace Jsa.ViewsModel.ViewsControllers
 
         private bool IsValid()
         {
-            Errors.Clear();
             bool isValid = true;
             if (string.IsNullOrEmpty(DocId))
             {
-                string msg = "يجب فتح معاملة أولاً";
-                AddError("FollowContent", msg);
+                AddError("DocId", DOCNOERROR);
                 isValid = false;
+            }
+            else
+            {
+                RemoveError("DocId", DOCNOERROR);
             }
 
             if (string.IsNullOrEmpty(FollowContent))
             {
-                string msg = "ادخل متابعة للمعاملة";
-                AddError("FollowContent", msg);
+                AddError("FollowContent", FOLLOWCONTERROR);
                 isValid = false;
+            }
+            else
+            {
+                RemoveError("FollowContent", FOLLOWCONTERROR);
             }
 
             if (string.IsNullOrEmpty(FollowDate))
             {
-                string msg = "ادخل التاريخ";
-                AddError("FollowDate", msg);
+                AddError("FollowDate", FOLLOWDATERROR);
                 isValid = false;
             }
-            
+            else
+            {
+                RemoveError("FollowDate", FOLLOWDATERROR);
+            }
             return isValid;
         }
+       
+
         private DocRecordFollow CreateNewDocFollow()
         {
             DocRecordFollow follow = new DocRecordFollow();
@@ -472,6 +481,12 @@ namespace Jsa.ViewsModel.ViewsControllers
             var docRecord = Find(x => x.Id == docId);
             ShowDocRecord(docRecord);
         }
+        #endregion
+
+        #region Error Messaegs
+        private const string DOCNOERROR = "يجب فتح معاملة أولاً";
+        private const string FOLLOWCONTERROR = "ادخل محتوى المتابعة";
+        private const string FOLLOWDATERROR = "ادخل تاريخ المتابعة";
         #endregion
     }
 

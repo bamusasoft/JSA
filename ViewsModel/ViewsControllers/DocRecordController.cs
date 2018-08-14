@@ -42,6 +42,7 @@ namespace Jsa.ViewsModel.ViewsControllers
                 DocDestinations = new ObservableCollection<Destination>(result);
                 AddEmptyDestination(DocDestinations);
                 Destination = DocDestinations.Where(x => x.Id == -1).SingleOrDefault();
+                ControlState(ControllerStates.Blank);
             }
             catch(Exception ex)
             {
@@ -81,6 +82,7 @@ namespace Jsa.ViewsModel.ViewsControllers
         bool _canPrint;
         bool _canSearch;
         #endregion
+
         #region Properties
         public string Id
         {
@@ -127,10 +129,11 @@ namespace Jsa.ViewsModel.ViewsControllers
             get { return _destination; }
             set
             {
+                //var old = _destination; This is if you want to only change the property if the selected not null; 
                 _destination = value;
                 RaisePropertyChanged();
                 ControlState(ControllerStates.Edited);
-                Console.WriteLine("In Destination Property");
+
             }
         }
         
@@ -289,7 +292,7 @@ namespace Jsa.ViewsModel.ViewsControllers
                 string msg = string.Empty;
                 foreach (var error in Errors)
                 {
-                    msg += error;
+                    msg += error.Value?.FirstOrDefault() ?? "";
                     msg += "\n";
 
                 }
@@ -385,32 +388,44 @@ namespace Jsa.ViewsModel.ViewsControllers
 
         private bool IsValid()
         {
-            Errors.Clear();
             bool isValid = true;
             if (string.IsNullOrEmpty(Id))
             {
-                string msg = "ادخل رقم المعاملة";
-                AddError("Id", msg);
+                AddError("Id", DOCNOERROR);
                 isValid = false;
+            }
+            else
+            {
+                RemoveError("Id", DOCNOERROR);
             }
             
             if (string.IsNullOrEmpty(DocDate))
             {
-                string msg = "ادخل التاريخ";
-                AddError("DocDate", msg);
+                AddError("DocDate", DOCDATEERROR);
                 isValid = false;
             }
+            else
+            {
+                RemoveError("DocDate", DOCDATEERROR);
+            }
+
             if (string.IsNullOrEmpty(Subject))
             {
-                string msg = "ادخل الموضوع";
-                AddError("Subject", msg);
+                AddError("Subject", SUBJECTERROR);
                 isValid = false;
+            }
+            else
+            {
+                RemoveError("Subject", SUBJECTERROR);
             }
             if (Destination == null || Destination.Id == -1)
             {
-                string msg = "ادخل الجهة";
-                AddError("Destination", msg);
+                AddError("Destination", DESTINATIOERROR);
                 isValid = false;
+            }
+            else
+            {
+                RemoveError("Destination", DESTINATIOERROR);
             }
             return isValid;
         }
@@ -488,6 +503,12 @@ namespace Jsa.ViewsModel.ViewsControllers
         {
             return _controllerStates != ControllerStates.Edited;
         }
+        #endregion
+        #region Errors Messages
+        private const string DOCNOERROR = "ادخل رقم للمعاملة";
+        private const string DOCDATEERROR = "تاريخ المعاملة مطلوب";
+        private const string SUBJECTERROR = "ادخل وصف لموضوع المعاملة";
+        private const string DESTINATIOERROR = "اختار احد الجهات";
         #endregion
 
     }
