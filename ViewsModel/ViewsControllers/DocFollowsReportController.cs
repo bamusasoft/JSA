@@ -74,7 +74,7 @@ namespace Jsa.ViewsModel.ViewsControllers
         Dictionary<DocRecordStatus, string> _docStatuses;
         KeyValuePair<DocRecordStatus, string> _selectedStatus;
         //
-        ObservableCollection<DocRecordReprot> _docRecordReport;
+        ObservableCollection<DocFollowsReport> _docRecordReport;
         #endregion
 
         #region Properties
@@ -169,7 +169,7 @@ namespace Jsa.ViewsModel.ViewsControllers
 
             }
         }
-        public ObservableCollection<DocRecordReprot> DocRecordReport
+        public ObservableCollection<DocFollowsReport> DocRecordReport
         {
             get { return _docRecordReport; }
             set
@@ -312,10 +312,17 @@ namespace Jsa.ViewsModel.ViewsControllers
             }
             sql += whereClause;
             sql += BuildOrderBy();
-            using (IUnitOfWork unit = new UnitOfWork())
+            try
             {
-                var s = unit.SqlQuery<DocRecordReprot>(sql, paramters).ToList(); 
-                DocRecordReport = new ObservableCollection<DocRecordReprot>(s);
+                using (IUnitOfWork unit = new UnitOfWork())
+                {
+                    var s = unit.SqlQuery<DocFollowsReport>(sql, paramters).ToList();
+                    DocRecordReport = new ObservableCollection<DocFollowsReport>(s);
+                }
+            }
+            catch(Exception e)
+            {
+                Helper.LogShowError(e);
             }
         }
         #endregion

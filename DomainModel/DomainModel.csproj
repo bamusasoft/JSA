@@ -83,7 +83,8 @@
     <Compile Include="Destination.cs" />
     <Compile Include="DocRecord.cs" />
     <Compile Include="DocRecordFollow.cs" />
-    <Compile Include="DocRecordReprot.cs" />
+    <Compile Include="DocFollowsReport.cs" />
+    <Compile Include="DocRecordsReport.cs" />
     <Compile Include="DomainEnums.cs" />
     <Compile Include="Exceptions\DataModelException.cs" />
     <Compile Include="GlobalConst.cs" />

@@ -19,7 +19,7 @@ namespace Jsa.ViewsModel.ViewsControllers
         public DocRecordFollowController()
         {
             Errors = new Dictionary<string, List<string>>();
-            
+
             ControlState(ControllerStates.Blank);
         }
 
@@ -46,7 +46,7 @@ namespace Jsa.ViewsModel.ViewsControllers
         //
         private RelayCommand _clearFollowCommand;
 
-        
+
         #endregion
 
         #region Properties
@@ -263,12 +263,67 @@ namespace Jsa.ViewsModel.ViewsControllers
 
         protected override void Print()
         {
-            //string path = @"C:\repose\Jeddah Automation Project\Book1.xltx";
-            //var source = DocRecordReport.ToList();
-            //ExcelProperties excelProp = new ExcelProperties(2, 1, false);
-            //DocRecordPrintReport report = new DocRecordPrintReport(source, path, excelProp);
-            //report.Print();
+            string path = Properties.Settings.Default.DocFollowTemplate;
+            if (string.IsNullOrEmpty(path))
+            {
+                string msg = "يجب تحديد مسار تقرير المتابعة";
+                Helper.ShowMessage(msg);
+                return;
+            }
+            try
+            {
+                DocRecord currentDoc = null;
+                using (IUnitOfWork unit = new UnitOfWork())
+                {
+
+                    currentDoc = unit.DocRecords.GetById(DocId);
+
+                }
+                if (currentDoc != null)
+                {
+                    List<DocFollowsReport> source = new List<DocFollowsReport>();
+                    if (currentDoc.DocRecordFollows.Count > 0)
+                    {
+                        var follows = currentDoc.DocRecordFollows.OrderBy(x => x.FollowDate);
+                        foreach (var follow in follows)
+                        {
+                            DocFollowsReport row = new DocFollowsReport();
+                            row.DocId = currentDoc.Id;
+                            row.DocDate = currentDoc.DocDate;
+                            row.Destination = currentDoc.Destination.Description;
+                            row.Subject = currentDoc.Subject;
+                            row.DocStatus = currentDoc.DocStatus;
+                            row.FollowDate = follow.FollowDate;
+                            row.FollowContent = follow.FollowContent;
+                            source.Add(row);
+                        }
+
+                    }
+                    else
+                    {
+                        DocFollowsReport header = new DocFollowsReport();
+                        header.DocId = currentDoc.Id;
+                        header.DocDate = currentDoc.DocDate;
+                        header.Destination = currentDoc.Destination.Description;
+                        header.Subject = currentDoc.Subject;
+                        header.DocStatus = currentDoc.DocStatus;
+                        source.Add(header);
+                    }
+
+                    ExcelProperties excelProp = new ExcelProperties(2, 1, false);
+                    DocRecordPrintReport report = new DocRecordPrintReport(source, path, excelProp);
+                    report.Print();
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+
+                Helper.LogShowError(ex);
+            }
         }
+
 
         protected override void Save()
         {
@@ -294,7 +349,7 @@ namespace Jsa.ViewsModel.ViewsControllers
                         follow = CreateNewDocFollow();
                         unit.DocRecordFollows.Add(follow);
                     }
-                     else
+                    else
                     {
                         follow = unit.DocRecordFollows.GetById(FollowId);
                         UpdateDocFollow(follow);
@@ -318,11 +373,11 @@ namespace Jsa.ViewsModel.ViewsControllers
             var criteria = BuildCriteria();
             DocRecord resultDoc = Find(criteria);
 
-                if (resultDoc != null)
-                {
-                    ShowDocRecord(resultDoc);
-                    ControlState(ControllerStates.Saved);
-                }
+            if (resultDoc != null)
+            {
+                ShowDocRecord(resultDoc);
+                ControlState(ControllerStates.Saved);
+            }
         }
         #endregion
 
@@ -409,7 +464,7 @@ namespace Jsa.ViewsModel.ViewsControllers
             }
             return isValid;
         }
-       
+
 
         private DocRecordFollow CreateNewDocFollow()
         {

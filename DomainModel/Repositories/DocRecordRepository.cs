@@ -62,7 +62,10 @@ namespace Jsa.DomainModel.Repositories
         /// </summary>
         public override DocRecord GetById(object id)
         {
-            return Context.DocRecords.Find(id);
+            var docRecord =  Context.DocRecords.Find(id);
+            Context.Entry(docRecord).Reference(x => x.Destination).Load();
+            Context.Entry(docRecord).Collection(p => p.DocRecordFollows).Load();
+            return docRecord;
         }
 
         public override IQueryable<DocRecord> Query(System.Linq.Expressions.Expression<Func<DocRecord, bool>> filter)

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Jsa.DomainModel;
+using Jsa.ViewsModel.ViewsControllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,14 +21,28 @@ namespace Jsa.ViewsModel.Views
     /// </summary>
     public partial class DocRecordsReportView : Window
     {
+        DocRecordsReportController _controller;
         public DocRecordsReportView()
         {
             InitializeComponent();
+            _controller = new DocRecordsReportController();
+            DataContext = _controller;
         }
 
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            DataGridRow selectedRow = sender as DataGridRow;
+            if (selectedRow != null)
+            {
+                DocRecordsReport doc = selectedRow.Item as DocRecordsReport;
+                if (doc != null)
+                {
+                    DocRecordFollowView view = new DocRecordFollowView(doc.Id);
+                    view.Owner = this;
+                    view.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                    view.ShowDialog();
+                }
+            }
         }
     }
 }

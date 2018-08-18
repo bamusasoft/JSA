@@ -198,7 +198,7 @@
     <Compile Include="ViewsControllers\CustomersClassesController.cs" />
     <Compile Include="ViewsControllers\DocRecordController.cs" />
     <Compile Include="ViewsControllers\DocRecordFollowController.cs" />
-    <Compile Include="ViewsControllers\DocRecordReportController.cs" />
+    <Compile Include="ViewsControllers\DocFollowsReportController.cs" />
     <Compile Include="ViewsControllers\DocRecordsReportController.cs" />
     <Compile Include="ViewsControllers\LegalCaseController.cs" />
     <Compile Include="ViewsControllers\LegalCaseReportController.cs" />

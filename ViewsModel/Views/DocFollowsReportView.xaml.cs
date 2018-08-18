@@ -34,7 +34,7 @@ namespace Jsa.ViewsModel.Views
             DataGridRow selectedRow = sender as DataGridRow;
             if (selectedRow != null)
             {
-                DocRecordReprot follow = selectedRow.Item as DocRecordReprot;
+                DocFollowsReport follow = selectedRow.Item as DocFollowsReport;
                 if (follow != null)
                 {
                     DocRecordFollowView view = new DocRecordFollowView(follow.DocId);

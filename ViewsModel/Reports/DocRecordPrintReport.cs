@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace Jsa.ViewsModel.Reports
 {
-    public class DocRecordPrintReport : ExcelReportBase<DocRecordReprot>
+    public class DocRecordPrintReport : ExcelReportBase<DocFollowsReport>
     {
-        public DocRecordPrintReport(List<DocRecordReprot> source, string excelTemplatePath, ExcelProperties excelProperties)
+        public DocRecordPrintReport(List<DocFollowsReport> source, string excelTemplatePath, ExcelProperties excelProperties)
            : base(excelTemplatePath, excelProperties)
         {
             Data = CreateReport(source);
         }
 
-        protected override sealed DataTable CreateReport(List<DocRecordReprot> source)
+        protected override sealed DataTable CreateReport(List<DocFollowsReport> source)
         {
             //source.OrderBy(x => x.Destination).ThenBy(p => p.FollowDate);
             DataTable table = CreateTable();
@@ -61,11 +61,11 @@ namespace Jsa.ViewsModel.Reports
             table.Columns.Add(c6);
         }
 
-        protected override void AddRow(DataTable table, DocRecordReprot data)
+        protected override void AddRow(DataTable table, DocFollowsReport data)
         {
             
         }
-        private void AddDocRow(DataTable table, DocRecordReprot data)
+        private void AddDocRow(DataTable table, DocFollowsReport data)
         {
             DataRow row = table.NewRow();
             row.SetField("DocId", data.DocId);
@@ -91,7 +91,7 @@ namespace Jsa.ViewsModel.Reports
 
 
         }
-        private void AddFollowRow(DataTable table, DocRecordReprot data)
+        private void AddFollowRow(DataTable table, DocFollowsReport data)
         {
             DataRow row = table.NewRow();
             row.SetField("DocId", "");

@@ -24,11 +24,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0" x:Name="right">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-
-                </Grid.RowDefinitions>
+                
                 <GroupBox Grid.Row="0" Header="عام">
                     <Grid Grid.Row="0" Margin="0,0,0,5" >
                         <Grid.RowDefinitions>
@@ -80,12 +76,7 @@
                 </GroupBox>
             </Grid>
             <Grid Grid.Column="1" x:Name="left">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="29*"/>
-                    <RowDefinition Height="16*"/>
-                    <RowDefinition Height="45*"/>
-                </Grid.RowDefinitions>
-                <GroupBox Grid.Row="0" Header="تقارير" Grid.RowSpan="2">
+                <GroupBox Grid.Row="0" Header="تقارير" >
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition/>

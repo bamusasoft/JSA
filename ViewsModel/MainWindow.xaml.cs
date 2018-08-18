@@ -37,50 +37,50 @@ namespace Jsa.ViewsModel
         private void OpenSyncIrs(object sender, RoutedEventArgs e)
         {
             var v = new SyncIrsView();
-            ShowChiled(v, true);
+            ShowChild(v, true);
         }
 
         private void OpenSchedule(object sender, RoutedEventArgs e)
         {
             var v = new ScheduleView();
-            ShowChiled(v);
+            ShowChild(v);
         }
 
         private void OpenSigner(object sender, RoutedEventArgs e)
         {
             var v = new SignerView();
-            ShowChiled(v);
+            ShowChild(v);
         }
 
         private void OpenPeriodSchedules(object sender, RoutedEventArgs e)
         {
             var v = new PeriodSchedulesView();
-            ShowChiled(v);
+            ShowChild(v);
         }
 
         private void OpenOptions(object sender, RoutedEventArgs e)
         {
             var v = new OptionsView();
-            ShowChiled(v);
+            ShowChild(v);
         }
 
         private void OpenLegalCase(object sender, RoutedEventArgs e)
         {
             LegalCaseView v = new LegalCaseView();
-            ShowChiled(v);
+            ShowChild(v);
         }
         private void OpenFollowingCase(object sender, RoutedEventArgs e)
         {
             CaseFollowingView v = new CaseFollowingView();
-            ShowChiled(v);
+            ShowChild(v);
         }
         private void OpenCaseAppointment(object sender, RoutedEventArgs e)
         {
             CaseAppointView v = new CaseAppointView();
-            ShowChiled(v);
+            ShowChild(v);
         }
 
-        private void ShowChiled(Window view, bool modal = false)
+        private void ShowChild(Window view, bool modal = false)
         {
             //Note: setting the Maint window as owner of the child will affect how to find the child window in code
             //so, when looking in code for a child windows, instead of looking at application's windows collection,
@@ -98,49 +98,49 @@ namespace Jsa.ViewsModel
         private void OpenContracts(object sender, RoutedEventArgs e)
         {
             var v = new ContractsView();
-            ShowChiled(v);
+            ShowChild(v);
         }
 
         private void OpenContract(object sender, RoutedEventArgs e)
         {
             var v = new ContractView();
-            ShowChiled(v);
+            ShowChild(v);
         }
 
         private void OpenCustomer(object sender, RoutedEventArgs e)
         {
             var v = new CustomerView();
-            ShowChiled(v);
+            ShowChild(v);
         }
 
         private void OpenBuklIresContracts(object sender, RoutedEventArgs e)
         {
             var v = new BulkIresContractsView();
-            ShowChiled(v);
+            ShowChild(v);
         }
 
         private void OpenContractPayment(object sender, RoutedEventArgs e)
         {
             var v = new ContractPaymentsStatus();
-            ShowChiled(v);
+            ShowChild(v);
         }
 
         private void OpenClaim(object sender, RoutedEventArgs e)
         {
             var v = new ClaimView();
-            ShowChiled(v);
+            ShowChild(v);
         }
 
         private void OpenOutbox(object sender, RoutedEventArgs e)
         {
             var v = new OutboxView();
-            ShowChiled(v);
+            ShowChild(v);
         }
 
         private void OpenRentMaint(object sender, RoutedEventArgs e)
         {
             var v = new ContractRentMaint();
-            ShowChiled(v);
+            ShowChild(v);
 
         }
 
@@ -170,37 +170,38 @@ namespace Jsa.ViewsModel
         private void OpenLegalCaseReport(object sender, RoutedEventArgs e)
         {
             var v = new CasesReportView();
-            ShowChiled(v);
+            ShowChild(v);
         }
 
         private void OpenCustomersClassesView(object sender, RoutedEventArgs e)
         {
             var v = new CustomersClassesView();
-            ShowChiled(v);
+            ShowChild(v);
         }
 
         private void OpenDocRecord(object sender, RoutedEventArgs e)
         {
             var v = new DocRecordView();
-            ShowChiled(v);
+            ShowChild(v);
 
         }
 
         private void OpenDocRecordFollow(object sender, RoutedEventArgs e)
         {
             var v = new DocRecordFollowView();
-            ShowChiled(v);
+            ShowChild(v);
         }
 
         private void OpenDocRecordReport(object sender, RoutedEventArgs e)
         {
-            
+            var v = new DocRecordsReportView();
+            ShowChild(v);
         }
 
         private void OpenDocFollowsReport(object sender, RoutedEventArgs e)
         {
             var v = new DocFollowsReportView();
-            ShowChiled(v);
+            ShowChild(v);
         }
     }
 }
