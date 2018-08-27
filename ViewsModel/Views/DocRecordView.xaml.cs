@@ -59,5 +59,17 @@ namespace Jsa.ViewsModel.Views
             if (e.Key != Key.Enter || e.Key != Key.Return) return;
             ((DocRecordController)_controller).GenerateDocRecordNo();
         }
+
+        private void OnAddDestinationClick(object sender, RoutedEventArgs e)
+        {
+            DocDestinationView v = new DocDestinationView();
+            v.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            bool? result = v.ShowDialog();
+            if(result == true || result == false)
+            {
+                _controller.LoadDestinations();
+            }
+
+        }
     }
 }

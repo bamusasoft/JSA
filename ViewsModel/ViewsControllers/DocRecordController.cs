@@ -32,7 +32,7 @@ namespace Jsa.ViewsModel.ViewsControllers
             SelectedDocStatus = DocStatuses.FirstOrDefault();
 
         }
-        private async Task LoadDestinations()
+        public async Task LoadDestinations()
         {
             Task<List<Destination>> task = null;
             try

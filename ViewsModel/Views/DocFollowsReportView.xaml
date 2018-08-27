@@ -7,7 +7,7 @@
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:Jsa.ViewsModel.Views"
         mc:Ignorable="d"
-        Title="تقرير المعاملات" Style="{StaticResource WindowCommonStyle}">
+        Title="تقرير المعاملات" Style="{StaticResource WindowCommonStyle}" Width="800" Height="600">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

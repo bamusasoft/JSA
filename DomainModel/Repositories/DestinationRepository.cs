@@ -27,7 +27,7 @@ namespace Jsa.DomainModel.Repositories
         public override Destination GetById(object id)
         {
             int i = (int)id;
-            return Query(x => x.Id == i).Single();
+            return Context.Destinations.Find(i);
         }
 
         public override IQueryable<Destination> Query(System.Linq.Expressions.Expression<Func<Destination, bool>> filter)

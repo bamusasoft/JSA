@@ -196,6 +196,7 @@
     <Compile Include="Reports\ExcelProperties.cs" />
     <Compile Include="ViewsControllers\CustomerHistoryController.cs" />
     <Compile Include="ViewsControllers\CustomersClassesController.cs" />
+    <Compile Include="ViewsControllers\DocDestinationController.cs" />
     <Compile Include="ViewsControllers\DocRecordController.cs" />
     <Compile Include="ViewsControllers\DocRecordFollowController.cs" />
     <Compile Include="ViewsControllers\DocFollowsReportController.cs" />
@@ -264,6 +265,9 @@
     </Compile>
     <Compile Include="Views\CustomersClassesView.xaml.cs">
       <DependentUpon>CustomersClassesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DocDestinationView.xaml.cs">
+      <DependentUpon>DocDestinationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DocFollowsReportView.xaml.cs">
       <DependentUpon>DocFollowsReportView.xaml</DependentUpon>
@@ -499,6 +503,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CustomersClassesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DocDestinationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

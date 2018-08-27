@@ -7,7 +7,7 @@
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:Jsa.ViewsModel.Views"
         mc:Ignorable="d"
-        Title="متابعة معاملة" Height="600" Width="800" Style="{StaticResource WindowCommonStyle}">
+        Title="متابعة معاملة" Width="800" Height="600" Style="{StaticResource WindowCommonStyle}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -38,7 +38,6 @@
                     </StackPanel>
                 </Button>
                 <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey} }"/>
-                <StackPanel Orientation="Horizontal">
                     <TextBlock Text="رقم المعاملة" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <TextBox Text="{Binding IdSearchTerm, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource {x:Static ToolBar.TextBoxStyleKey}}"
                              MinWidth="120" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0" MaxLength="8"/>
@@ -52,7 +51,6 @@
 
                         </StackPanel>
                     </Button>
-                </StackPanel>
             </ToolBar>
         </ToolBarTray>
 
