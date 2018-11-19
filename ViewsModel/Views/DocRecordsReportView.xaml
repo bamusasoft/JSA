@@ -89,7 +89,7 @@
 
         </Grid>
         <DataGrid Grid.Row="2" ItemsSource="{Binding DocRecordReport}"
-						  SelectionMode="Single" AutoGenerateColumns="False"
+						  SelectionMode="Extended" AutoGenerateColumns="False"
                           CanUserAddRows="False" IsReadOnly="True" CanUserSortColumns="False" Margin="5">
             <DataGrid.ItemContainerStyle>
                 <Style TargetType="DataGridRow">
