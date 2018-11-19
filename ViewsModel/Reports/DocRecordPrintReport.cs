@@ -8,48 +8,36 @@ using System.Threading.Tasks;
 
 namespace Jsa.ViewsModel.Reports
 {
-    public class DocRecordPrintReport : ExcelReportBase<DocFollowsReport>
+    public class DocRecordPrintReport : ExcelReportBase<DocRecordsReport>
     {
-        public DocRecordPrintReport(List<DocFollowsReport> source, string excelTemplatePath, ExcelProperties excelProperties)
+        public DocRecordPrintReport(List<DocRecordsReport> source, string excelTemplatePath, ExcelProperties excelProperties)
            : base(excelTemplatePath, excelProperties)
         {
             Data = CreateReport(source);
         }
 
-        protected override sealed DataTable CreateReport(List<DocFollowsReport> source)
+        protected sealed override DataTable CreateReport(List<DocRecordsReport> source)
         {
-            //source.OrderBy(x => x.Destination).ThenBy(p => p.FollowDate);
             DataTable table = CreateTable();
             AddColumns(table);
 
-            string currentDocId = "";
-            foreach (var docFollow in source)
+            foreach (var docRecord in source)
             {
-                if(string.IsNullOrEmpty(currentDocId) || currentDocId != docFollow.DocId)
-                {
-                    AddDocRow(table, docFollow);
-                    AddFollowHeader(table);
-                    AddFollowRow(table, docFollow);
-                    currentDocId = docFollow.DocId;
-                }
-                else
-                {
-                    AddFollowRow(table, docFollow);
-                }
+               AddRow(table, docRecord);
             }
             return table;
         }
 
         protected override DataTable CreateTable()
         {
-            return new DataTable("FollowingsReport");
+            return new DataTable("DocRecordsReport");
         }
 
         protected override void AddColumns(DataTable table)
         {
-            DataColumn c1 = new DataColumn("DocId");
+            DataColumn c1 = new DataColumn("Id");
             table.Columns.Add(c1);
-            DataColumn c2 = new DataColumn("DocRefId");
+            DataColumn c2 = new DataColumn("RefId");
             table.Columns.Add(c2);
             DataColumn c3 = new DataColumn("DocDate");
             table.Columns.Add(c3);
@@ -57,56 +45,29 @@ namespace Jsa.ViewsModel.Reports
             table.Columns.Add(c4);
             DataColumn c5 = new DataColumn("Subject");
             table.Columns.Add(c5);
-            DataColumn c6 = new DataColumn("Status");
+            DataColumn c6 = new DataColumn("FollowContent");
             table.Columns.Add(c6);
+            DataColumn c7 = new DataColumn("FollowDate");
+            table.Columns.Add(c7);
+            DataColumn c8 = new DataColumn("Status");
+            table.Columns.Add(c8);
         }
 
-        protected override void AddRow(DataTable table, DocFollowsReport data)
-        {
-            
-        }
-        private void AddDocRow(DataTable table, DocFollowsReport data)
+        protected override void AddRow(DataTable table, DocRecordsReport data)
         {
             DataRow row = table.NewRow();
-            row.SetField("DocId", data.DocId);
-            row.SetField("DocRefId", data.RefId);
+            row.SetField("Id", data.Id);
+            row.SetField("RefId", data.RefId);
             row.SetField("DocDate", Helper.PutMask(data.DocDate));
             row.SetField("Destination", data.Destination);
             row.SetField("Subject", data.Subject);
+            row.SetField("FollowContent", data.FollowContent);
+            row.SetField("FollowDate", Helper.PutMask(data.FollowDate));
             row.SetField("Status", data.StatusArabic);
             table.Rows.Add(row);
             row.AcceptChanges();
         }
-        private void AddFollowHeader(DataTable table)
-        {
-            DataRow row = table.NewRow();
-            row.SetField("DocId", "");
-            row.SetField("DocRefId", "");
-            row.SetField("DocDate", "");
-            row.SetField("Destination", "تاريخ المتابعة");
-            row.SetField("Subject", "الإجراء");
-            row.SetField("Status", "");
-            table.Rows.Add(row);
-            row.AcceptChanges();
-
-
-        }
-        private void AddFollowRow(DataTable table, DocFollowsReport data)
-        {
-            DataRow row = table.NewRow();
-            row.SetField("DocId", "");
-            row.SetField("DocRefId", "");
-            row.SetField("DocDate", "");
-            row.SetField("Destination", Helper.PutMask(data.FollowDate));
-            row.SetField("Subject", data.FollowContent);
-            row.SetField("Status", "");
-            table.Rows.Add(row);
-            row.AcceptChanges();
-        }
-
        
-
-
         public override void Print()
         {
             base.Print();

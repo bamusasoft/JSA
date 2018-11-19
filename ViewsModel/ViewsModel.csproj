@@ -175,6 +175,7 @@
     <Compile Include="Reports\ClassesReport.cs" />
     <Compile Include="Reports\DocFollowingFields.cs" />
     <Compile Include="Reports\DocRecordPrintReport.cs" />
+    <Compile Include="Reports\DocRecordFollowPrintReport.cs" />
     <Compile Include="Reports\FollowingReportFields.cs" />
     <Compile Include="Reports\ExcelReport.cs" />
     <Compile Include="Reports\FollowingsReport.cs" />

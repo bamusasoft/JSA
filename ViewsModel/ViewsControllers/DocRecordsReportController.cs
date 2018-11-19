@@ -240,7 +240,7 @@ namespace Jsa.ViewsModel.ViewsControllers
         }
         private async Task PrintReport()
         {
-            string path = Properties.Settings.Default.DocFollowTemplate;
+            string path = Properties.Settings.Default.DocTemplate;
             if (string.IsNullOrEmpty(path))
             {
                 string msg = "يجب تحديد مسار تقرير المتابعة";
@@ -263,11 +263,11 @@ namespace Jsa.ViewsModel.ViewsControllers
         {
             Task task = Task.Run(() =>
             {
-                //var source = DocRecordReport.ToList();
-                //ExcelProperties excelProp = new ExcelProperties(2, 1, false);
-                //DocRecordPrintReport report = new DocRecordPrintReport(source, path, excelProp);
-                //report.ReportProgress += Report_ReportProgress;
-                //report.Print();
+                var source = DocRecordReport.ToList();
+                ExcelProperties excelProp = new ExcelProperties(2, 1, false);
+                DocRecordPrintReport report = new DocRecordPrintReport(source, path, excelProp);
+                report.ReportProgress += Report_ReportProgress;
+                report.Print();
 
             });
             return task;

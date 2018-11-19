@@ -264,7 +264,7 @@ namespace Jsa.ViewsModel.ViewsControllers
             Task task = Task.Run(() => {
                 var source = DocRecordReport.ToList();
                 ExcelProperties excelProp = new ExcelProperties(2, 1, false);
-                DocRecordPrintReport report = new DocRecordPrintReport(source, path, excelProp);
+                DocRecordFollowPrintReport report = new DocRecordFollowPrintReport(source, path, excelProp);
                 report.ReportProgress += Report_ReportProgress;
                 report.Print();
 

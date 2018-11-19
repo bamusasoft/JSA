@@ -135,8 +135,9 @@ namespace Jsa.ViewsModel.Reports
 
         private void FormatCell(Range cell)
         {
-            cell.Borders[XlBordersIndex.xlEdgeTop].Weight = XlBorderWeight.xlMedium;
-            cell.Borders[XlBordersIndex.xlEdgeTop].Color = Color.Blue.ToArgb();
+            cell.Borders[XlBordersIndex.xlEdgeTop].Weight = XlBorderWeight.xlThin;
+            cell.Borders[XlBordersIndex.xlEdgeTop].Color = Color.Black.ToArgb();
+            cell.Interior.Color = Color.LightGray.ToArgb();
         }
 
         private void StartExcel()

@@ -46,12 +46,14 @@ namespace Jsa.ViewsModel.Views
         private RelayCommand _openScheduleTemplateCommand;
         private RelayCommand _openClassesTemplateCommand;
         private RelayCommand _openDocFollowTemplateCommand;
+        private RelayCommand _openDocTemplateCommand;
         private string _periodScheduleTemplatePath;
         private string _propertyDbPath;
         private string _rentTamplatePath;
         private string _rglTemplatePath;
         private string _classesTemplatePath;
         private string _docFollowTemplatePath;
+        private string _docTemplatePath;
         private RelayCommand _saveCommand;
         private string _scheduleTemplatePath;
         private string _selectedBranch;
@@ -367,6 +369,15 @@ namespace Jsa.ViewsModel.Views
                 RaisePropertyChanged();
             }
         }
+        public string DocTemplatePath
+        {
+            get { return _docTemplatePath; }
+            set
+            {
+                _docTemplatePath = value;
+                RaisePropertyChanged();
+            }
+        }
         #endregion
 
         #region "INotifyPropertyChanged Members"
@@ -604,11 +615,21 @@ namespace Jsa.ViewsModel.Views
         {
             get
             {
-                return _openDocFollowTemplateCommand ?? (_openDocFollowTemplateCommand = new RelayCommand(OpenDocTemplate));
+                return _openDocFollowTemplateCommand ?? (_openDocFollowTemplateCommand = new RelayCommand(OpenDocFollowTemplate));
             }
         }
-
+        public ICommand OpenDocTemplateCommand
+        {
+            get
+            {
+                return _openDocTemplateCommand ?? (_openDocTemplateCommand = new RelayCommand(OpenDocTemplate));
+            }
+        }
         private void OpenDocTemplate()
+        {
+            DocTemplatePath = OpenExcelFile();
+        }
+        private void OpenDocFollowTemplate()
         {
             DocFollowTemplatePath = OpenExcelFile();
         }
@@ -662,6 +683,7 @@ namespace Jsa.ViewsModel.Views
             _settings.GeneralContractTemplate = ContractTemplatePath;
             _settings.ClassesTemplate = ClassesTemplatePath;
             _settings.DocFollowTemplate = DocFollowTemplatePath;
+            _settings.DocTemplate = DocTemplatePath;
             switch (SelectedBranch)
             {
                 case "جدة":
@@ -698,6 +720,7 @@ namespace Jsa.ViewsModel.Views
             ContractTemplatePath = _settings.GeneralContractTemplate;
             ClassesTemplatePath = _settings.ClassesTemplate;
             DocFollowTemplatePath = _settings.DocFollowTemplate;
+            DocTemplatePath = _settings.DocTemplate;
             Branches = new ObservableCollection<string>
                 (
                 new List<string>

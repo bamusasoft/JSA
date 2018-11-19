@@ -311,7 +311,7 @@ namespace Jsa.ViewsModel.ViewsControllers
                     }
 
                     ExcelProperties excelProp = new ExcelProperties(2, 1, false);
-                    DocRecordPrintReport report = new DocRecordPrintReport(source, path, excelProp);
+                    DocRecordFollowPrintReport report = new DocRecordFollowPrintReport(source, path, excelProp);
                     report.Print();
                 }
 
