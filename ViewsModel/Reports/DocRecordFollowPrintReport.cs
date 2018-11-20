@@ -23,10 +23,15 @@ namespace Jsa.ViewsModel.Reports
             AddColumns(table);
 
             string currentDocId = "";
+            int count = 0;
             foreach (var docFollow in source)
             {
                 if(string.IsNullOrEmpty(currentDocId) || currentDocId != docFollow.DocId)
                 {
+                    if (count > 0)
+                    {
+                        AddEmptyRow(table);
+                    }
                     AddDocRow(table, docFollow);
                     AddFollowHeader(table);
                     AddFollowRow(table, docFollow);
@@ -36,6 +41,8 @@ namespace Jsa.ViewsModel.Reports
                 {
                     AddFollowRow(table, docFollow);
                 }
+
+                count++;
             }
             return table;
         }
@@ -98,6 +105,22 @@ namespace Jsa.ViewsModel.Reports
             row.AcceptChanges();
 
 
+        }
+
+        private void AddEmptyRow(DataTable table)
+        {
+            DataRow row = table.NewRow();
+
+            row.SetField("DocId", "");
+            row.SetField("DocRefId", "");
+            row.SetField("DocDate", "");
+            row.SetField("Destination", "");
+            row.SetField("Subject", "");
+            row.SetField("Status", "");
+            row.SetField("HeaderRow", false);
+
+            table.Rows.Add(row);
+            row.AcceptChanges();
         }
         private void AddFollowRow(DataTable table, DocFollowsReport data)
         {

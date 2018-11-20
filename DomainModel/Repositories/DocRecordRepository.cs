@@ -63,8 +63,14 @@ namespace Jsa.DomainModel.Repositories
         public override DocRecord GetById(object id)
         {
             var docRecord =  Context.DocRecords.Find(id);
-            Context.Entry(docRecord).Reference(x => x.Destination).Load();
-            Context.Entry(docRecord).Collection(p => p.DocRecordFollows).Load();
+            if (docRecord != null)
+            {
+                Context.Entry(docRecord).Reference(x => x.Destination).Load();
+                Context.Entry(docRecord).Collection(p => p.DocRecordFollows).Load();
+            }
+
+            //Context.DocRecords.Include(x => x.Destination).Include(p => p.DocRecordFollows)
+            //    .FirstOrDefault(c => c.Id = id);
             return docRecord;
         }
 
