@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using Jsa.DomainModel;
 using Jsa.DomainModel.Repositories;
+using Jsa.ViewsModel.Mediator;
 using Jsa.ViewsModel.Reports;
 using Jsa.ViewsModel.ViewsControllers.Core;
 using System;
@@ -16,11 +17,12 @@ namespace Jsa.ViewsModel.ViewsControllers
 {
     public class DocRecordFollowController : EditableControllerBase
     {
-        public DocRecordFollowController()
+        public DocRecordFollowController(OpenDialogProxy dialog)
         {
+            _dialog = dialog;
             Errors = new Dictionary<string, List<string>>();
-
             ControlState(ControllerStates.Blank);
+            
         }
 
         #region Fields
@@ -33,7 +35,7 @@ namespace Jsa.ViewsModel.ViewsControllers
         string _followContent;
         string _followPath;
         ObservableCollection<DocRecordFollow> _docFollows;
-
+        public event EventHandler<string> DocFilePathChanged;
         //
         string _idSearchTerm;
         string _refSearchTerm;
@@ -45,8 +47,9 @@ namespace Jsa.ViewsModel.ViewsControllers
         ControllerStates _controllerStates;
         //
         private RelayCommand _clearFollowCommand;
-
-
+        private RelayCommand _openDocFileCommand;
+        //
+        readonly OpenDialogProxy _dialog;
         #endregion
 
         #region Properties
@@ -126,6 +129,7 @@ namespace Jsa.ViewsModel.ViewsControllers
             {
                 _followPath = value;
                 RaisePropertyChanged();
+                RaiseFilePathChanged(value);
                 ControlState(ControllerStates.Edited);
             }
         }
@@ -158,6 +162,7 @@ namespace Jsa.ViewsModel.ViewsControllers
             }
         }
 
+       
 
         #endregion
 
@@ -175,6 +180,22 @@ namespace Jsa.ViewsModel.ViewsControllers
             ControlState(ControllerStates.Saved);
 
         }
+
+        public ICommand OpenDocFileCommand
+        {
+            get { return _openDocFileCommand ?? (_openDocFileCommand = new RelayCommand(OpenDocFile)); }
+        }
+
+        private void OpenDocFile()
+        {
+            using (IUnitOfWork unit = new UnitOfWork())
+            {
+                var docFiles = new List<DocRecordFile>();// unit.DocRecordFiles.Query(x => x.DocRecordId == DocId).ToList();
+                _dialog.RaiseOpenDialog<IList<DocRecordFile>>(docFiles);
+
+            }
+           
+        }
         #endregion
 
         #region Base
@@ -189,6 +210,8 @@ namespace Jsa.ViewsModel.ViewsControllers
                     _canSave = true;
                     _canPrint = false;
                     _canSearch = true;
+                    DocFollows = new ObservableCollection<DocRecordFollow>();
+                    RaiseFilePathChanged(string.Empty);
                     break;
                 case ControllerStates.Edited:
                     _canSave = true;
@@ -520,6 +543,15 @@ namespace Jsa.ViewsModel.ViewsControllers
             return generateFollowId;
         }
 
+        private void RaiseFilePathChanged(string path)
+        {
+            if (DocFilePathChanged == null)
+            {
+                return;
+            }
+
+            DocFilePathChanged(this, path);
+        }
         #endregion
 
         #region Public Methods
@@ -542,6 +574,7 @@ namespace Jsa.ViewsModel.ViewsControllers
         private const string DOCNOERROR = "يجب فتح معاملة أولاً";
         private const string FOLLOWCONTERROR = "ادخل محتوى المتابعة";
         private const string FOLLOWDATERROR = "ادخل تاريخ المتابعة";
+      
         #endregion
     }
 

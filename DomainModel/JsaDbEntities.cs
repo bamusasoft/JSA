@@ -88,7 +88,7 @@ namespace Jsa.DomainModel
         public virtual DbSet<Destination> Destinations { get; set; }
         public virtual DbSet<DocRecordFollow> DocRecordFollows { get; set; }
         public virtual DbSet<DocRecord> DocRecords { get; set; }
-
+        public virtual DbSet<DocRecordFile> DocRecordFiles { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CaseAppointment>()
@@ -409,6 +409,20 @@ namespace Jsa.DomainModel
                 .HasForeignKey(e => e.DocRecodId)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<DocRecord>()
+                .HasMany(e => e.DocRecordFiles);
+
+            modelBuilder.Entity<DocRecord>()
+                .HasMany(e => e.DocRecordFiles)
+                .WithRequired(e => e.DocRecord)
+                .HasForeignKey(e => e.DocRecordId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<DocRecordFollow>()
+                .HasMany(e => e.DocRecordFiles)
+                .WithRequired(e => e.DocRecordFollow)
+                .HasForeignKey(e => e.DocFollowId)
+                .WillCascadeOnDelete(false);
         }
 
     }

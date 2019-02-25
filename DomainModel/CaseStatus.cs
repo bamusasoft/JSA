@@ -32,5 +32,10 @@ namespace Jsa.DomainModel
             CaseStatus cs = (CaseStatus) obj;
             return Id == cs.Id;
         }
+
+        public override int GetHashCode()
+        {
+            return 2108858624 + Id.GetHashCode();
+        }
     }
 }

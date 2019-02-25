@@ -12,6 +12,8 @@ namespace Jsa.DomainModel
         public DocRecord()
         {
             DocRecordFollows = new HashSet<DocRecordFollow>();
+            DocRecordFiles = new HashSet<DocRecordFile>();
+
         }
 
         [StringLength(8)]
@@ -38,5 +40,7 @@ namespace Jsa.DomainModel
         public virtual Destination Destination { get; set; }
 
         public virtual ICollection<DocRecordFollow> DocRecordFollows { get; set; }
+
+        public virtual ICollection<DocRecordFile> DocRecordFiles { get; set; }
     }
 }

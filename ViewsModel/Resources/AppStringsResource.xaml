@@ -5,6 +5,9 @@
     <s:String x:Key="Menu_Save">حفظ</s:String>
     <s:String x:Key="Menu_Etl">بيانات المستأجرين</s:String>
     <s:String x:Key="Menu_Print">طباعة</s:String>
+    <s:String x:Key="Menu_Open">ملف المعاملة</s:String>
+    <s:String x:Key="Menu_Next">التالي</s:String>
+    <s:String x:Key="Menu_Previous">السابق</s:String>
     <s:String x:Key="Menu_AddNew">جديد</s:String>
     <s:String x:Key="Menu_Search">بحث</s:String>
     <s:String x:Key="General_CustomerIdLabel">رقم المستأجر</s:String>

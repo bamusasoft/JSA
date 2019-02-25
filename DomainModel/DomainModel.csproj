@@ -82,6 +82,7 @@
     <Compile Include="CustomerClass.cs" />
     <Compile Include="Destination.cs" />
     <Compile Include="DocRecord.cs" />
+    <Compile Include="DocRecordFile.cs" />
     <Compile Include="DocRecordFollow.cs" />
     <Compile Include="DocFollowsReport.cs" />
     <Compile Include="DocRecordsReport.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Repositories\CustomersClassesRepository.cs" />
     <Compile Include="Repositories\CustomersRepository.cs" />
     <Compile Include="Repositories\DestinationRepository.cs" />
+    <Compile Include="Repositories\DocRecordFileRepository.cs" />
     <Compile Include="Repositories\DocRecordFollowRepository.cs" />
     <Compile Include="Repositories\DocRecordRepository.cs" />
     <Compile Include="Repositories\LegalCaseRepository.cs" />

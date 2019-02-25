@@ -37,7 +37,7 @@ namespace Jsa.DomainModel
         private RepositoryBase<Destination> _destinations;
         private RepositoryBase<DocRecord> _docRecords;
         private RepositoryBase<DocRecordFollow> _docRecordFollows;
-
+        private RepositoryBase<DocRecordFile> _docRecordFiles;
         #endregion
 
         #region Contsturctor
@@ -52,6 +52,7 @@ namespace Jsa.DomainModel
         #region Implementation of IDisposable
 
         private bool _disposed;
+       
 
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
@@ -224,6 +225,10 @@ namespace Jsa.DomainModel
             get { return _docRecordFollows ?? (_docRecordFollows = new DocRecordFollowRepository(_context)); }
         }
 
+        public RepositoryBase<DocRecordFile> DocRecordFiles
+        {
+            get { return _docRecordFiles ?? (_docRecordFiles = new DocRecordFileRepository(_context)); }
+        }
         /// <summary>
         /// Saves all changes made to current unit of work.
         /// </summary>

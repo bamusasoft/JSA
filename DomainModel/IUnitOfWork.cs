@@ -81,6 +81,7 @@ namespace Jsa.DomainModel
         RepositoryBase<Destination> Destinations { get; }
         RepositoryBase<DocRecord> DocRecords { get; }
         RepositoryBase<DocRecordFollow> DocRecordFollows { get; }
+        RepositoryBase<DocRecordFile> DocRecordFiles { get; }
 
 
         /// <summary>
