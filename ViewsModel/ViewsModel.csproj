@@ -271,8 +271,8 @@
     <Compile Include="Views\DocDestinationView.xaml.cs">
       <DependentUpon>DocDestinationView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DocFileExplorer.xaml.cs">
-      <DependentUpon>DocFileExplorer.xaml</DependentUpon>
+    <Compile Include="Views\DocFileExplorerView.xaml.cs">
+      <DependentUpon>DocFileExplorerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DocFollowsReportView.xaml.cs">
       <DependentUpon>DocFollowsReportView.xaml</DependentUpon>
@@ -515,7 +515,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\DocFileExplorer.xaml">
+    <Page Include="Views\DocFileExplorerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
