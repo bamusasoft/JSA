@@ -27,7 +27,6 @@ namespace Jsa.DomainModel
         [Required]
         public string FollowContent { get; set; }
 
-        public string FollowPath { get; set; }
 
         public virtual DocRecord DocRecord { get; set; }
 

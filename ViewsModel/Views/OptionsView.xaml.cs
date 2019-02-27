@@ -31,6 +31,9 @@ namespace Jsa.ViewsModel.Views
         private string _logFilePath;
         private string _mainTemplatePath;
         private string _monthlyContractTemplatePath;
+        private string _docFilesFolder;
+
+
         private RelayCommand _openAccessDbCommand;
         private RelayCommand _openClaimTemplateCommand;
         private RelayCommand _openContractsPhotosFolderCommand;
@@ -47,6 +50,8 @@ namespace Jsa.ViewsModel.Views
         private RelayCommand _openClassesTemplateCommand;
         private RelayCommand _openDocFollowTemplateCommand;
         private RelayCommand _openDocTemplateCommand;
+        private RelayCommand _openDocFilesFolderCommand;
+
         private string _periodScheduleTemplatePath;
         private string _propertyDbPath;
         private string _rentTamplatePath;
@@ -378,6 +383,15 @@ namespace Jsa.ViewsModel.Views
                 RaisePropertyChanged();
             }
         }
+        public string DocFilesFolder
+        {
+            get { return _docFilesFolder; }
+            set
+            {
+                _docFilesFolder = value;
+                RaisePropertyChanged();
+            }
+        }
         #endregion
 
         #region "INotifyPropertyChanged Members"
@@ -657,6 +671,22 @@ namespace Jsa.ViewsModel.Views
             WriteOptions();
         }
 
+        public ICommand OpenDocFilesFolderCommand
+        {
+            get
+            {
+                if (_openDocFilesFolderCommand == null)
+                {
+                    _openDocFilesFolderCommand = new RelayCommand(OpenDocFileFolder);
+                }
+                return _openDocFilesFolderCommand;
+            }
+        }
+
+        private void OpenDocFileFolder()
+        {
+            DocFilesFolder = OpenFolder();
+        }
         #endregion
 
         #region "Helper Methods"
@@ -684,6 +714,8 @@ namespace Jsa.ViewsModel.Views
             _settings.ClassesTemplate = ClassesTemplatePath;
             _settings.DocFollowTemplate = DocFollowTemplatePath;
             _settings.DocTemplate = DocTemplatePath;
+            _settings.DocFileFolder = DocFilesFolder;
+
             switch (SelectedBranch)
             {
                 case "جدة":
@@ -721,6 +753,9 @@ namespace Jsa.ViewsModel.Views
             ClassesTemplatePath = _settings.ClassesTemplate;
             DocFollowTemplatePath = _settings.DocFollowTemplate;
             DocTemplatePath = _settings.DocTemplate;
+            DocFilesFolder = _settings.DocFileFolder;
+
+
             Branches = new ObservableCollection<string>
                 (
                 new List<string>

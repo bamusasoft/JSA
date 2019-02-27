@@ -7,6 +7,7 @@ using Jsa.ViewsModel.ViewsControllers.Core;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -20,6 +21,7 @@ namespace Jsa.ViewsModel.ViewsControllers
         public DocRecordFollowController(OpenDialogProxy dialog)
         {
             _dialog = dialog;
+            _docRecordFolder = ViewsModel.Properties.Settings.Default.DocFileFolder;
             Errors = new Dictionary<string, List<string>>();
             ControlState(ControllerStates.Blank);
             
@@ -34,6 +36,7 @@ namespace Jsa.ViewsModel.ViewsControllers
         string _followDate;
         string _followContent;
         string _followPath;
+        string _docRecordFolder;
         ObservableCollection<DocRecordFollow> _docFollows;
         public event EventHandler<string> DocFilePathChanged;
         //
@@ -191,7 +194,7 @@ namespace Jsa.ViewsModel.ViewsControllers
             using (IUnitOfWork unit = new UnitOfWork())
             {
                 var docFiles = new List<DocRecordFile>();// unit.DocRecordFiles.Query(x => x.DocRecordId == DocId).ToList();
-                _dialog.RaiseOpenDialog<IList<DocRecordFile>>(docFiles);
+                _dialog.RaiseOpenDialog<string>(DocId);
 
             }
            
@@ -217,6 +220,7 @@ namespace Jsa.ViewsModel.ViewsControllers
                     _canSave = true;
                     _canPrint = false;
                     _canSearch = false;
+
                     break;
                 case ControllerStates.Saved:
                     _canSave = true;
@@ -369,18 +373,30 @@ namespace Jsa.ViewsModel.ViewsControllers
                     DocRecordFollow follow = null;
                     if (string.IsNullOrEmpty(FollowId))
                     {
+                        
                         follow = CreateNewDocFollow();
                         unit.DocRecordFollows.Add(follow);
+                        DocRecordFile file = CreateDocFile(DocId, follow.Id, FollowPath);
+                        unit.DocRecordFiles.Add(file);
                     }
                     else
                     {
                         follow = unit.DocRecordFollows.GetById(FollowId);
+                        DocRecordFile file = unit.DocRecordFiles.Query(x => x.DocFollowId == FollowId).SingleOrDefault();
+                        if(file != null)
+                        {
+                            UpdateDocFile(file, FollowPath);
+                        }
+                        else
+                        {
+                          var docFile =  CreateDocFile(follow.DocRecodId, follow.Id, FollowPath);
+                          unit.DocRecordFiles.Add(docFile);
+                        }
                         UpdateDocFollow(follow);
                     }
                     unit.Save();
                     FollowId = follow.Id;
                     ControlState(ControllerStates.Saved);
-
                 }
             }
             catch (Exception ex)
@@ -485,6 +501,16 @@ namespace Jsa.ViewsModel.ViewsControllers
             {
                 RemoveError("FollowDate", FOLLOWDATERROR);
             }
+            if (string.IsNullOrEmpty(FollowPath))
+            {
+                AddError("FollowPath", FOLLOWPATHERROR);
+                isValid = false;
+
+            }
+            else
+            {
+                RemoveError("FollowPath", FOLLOWPATHERROR);
+            }
             return isValid;
         }
 
@@ -496,14 +522,41 @@ namespace Jsa.ViewsModel.ViewsControllers
             follow.DocRecodId = DocId;
             follow.FollowContent = FollowContent;
             follow.FollowDate = FollowDate;
-            follow.FollowPath = FollowPath;
             return follow;
         }
         private void UpdateDocFollow(DocRecordFollow follow)
         {
             follow.FollowContent = FollowContent;
             follow.FollowDate = FollowDate;
-            follow.FollowPath = FollowPath;
+        }
+        private DocRecordFile CreateDocFile(string docId, string followId, string path)
+        {
+            string newPath =  CopyDocFile(DocId, followId, FollowPath);
+            return new DocRecordFile()
+            {
+                Id = Guid.NewGuid().ToString(),
+                DocRecordId = docId,
+                DocFollowId = followId,
+                Path = newPath
+
+            };
+        }
+        private void UpdateDocFile(DocRecordFile file, string path)
+        {
+            if(file.Path != path)
+            {
+               string newPath =  CopyDocFile(file.DocRecordId, file.DocFollowId, path);
+               file.Path = newPath;
+
+            }
+        }
+        private string CopyDocFile(string docId, string followId, string path)
+        {
+            string srcFile = path;
+            string fileName = $"{docId}-{followId}-{DateTime.Now.ToString("yyyy-dd-M-HH-mm-ss")}.pdf";
+            string destFile = Path.Combine(_docRecordFolder, fileName);
+            File.Copy(srcFile, destFile);
+            return fileName;
         }
         private void ShowDocRecord(DocRecord docRecord)
         {
@@ -557,11 +610,40 @@ namespace Jsa.ViewsModel.ViewsControllers
         #region Public Methods
         public void OnSelectedFollowChanged(DocRecordFollow recordFollow)
         {
-            FollowId = recordFollow.Id;
-            FollowDate = recordFollow.FollowDate;
-            FollowContent = recordFollow.FollowContent;
-            FollowPath = recordFollow.FollowPath;
-            ControlState(ControllerStates.Saved);
+            try
+            {
+                FollowId = recordFollow.Id;
+                FollowDate = recordFollow.FollowDate;
+                FollowContent = recordFollow.FollowContent;
+                string followFilePath = GetFollowFile(FollowId);
+                if (!string.IsNullOrEmpty(followFilePath))
+                {
+                    FollowPath = Path.Combine(_docRecordFolder, GetFollowFile(FollowId));
+                }
+                else
+                {
+                    FollowPath = string.Empty;
+                }
+                ControlState(ControllerStates.Saved);
+            }
+            catch (Exception ex)
+            {
+                Helper.LogShowError(ex);
+            }
+          
+        }
+        private string GetFollowFile(string followId)
+        {
+            using (IUnitOfWork unit = new UnitOfWork())
+            {
+                var file= unit.DocRecordFiles.Query(x => x.DocFollowId == followId).SingleOrDefault();
+                if(file == null)
+                {
+                    return string.Empty;
+                }
+                return file.Path;
+
+            }
         }
         public void ShowDocFollow(string docId)
         {
@@ -574,7 +656,8 @@ namespace Jsa.ViewsModel.ViewsControllers
         private const string DOCNOERROR = "يجب فتح معاملة أولاً";
         private const string FOLLOWCONTERROR = "ادخل محتوى المتابعة";
         private const string FOLLOWDATERROR = "ادخل تاريخ المتابعة";
-      
+        private const string FOLLOWPATHERROR = "ادخل مستند المتابعة";
+
         #endregion
     }
 

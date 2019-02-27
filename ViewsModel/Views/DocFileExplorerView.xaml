@@ -13,7 +13,7 @@
         </Grid.RowDefinitions>
         <ToolBarTray Grid.Row="0">
             <ToolBar KeyboardNavigation.TabNavigation="Continue">
-                <Button Command="{Binding SaveCommand}" Margin="0,0,5,0"
+                <Button Command="{Binding PrintCommand}" Margin="0,0,5,0"
                         Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
                     <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
                         <Image Style="{StaticResource TollbarPrintStyle}"/>
@@ -38,17 +38,19 @@
                 
             </ToolBar>
         </ToolBarTray>
-        <StackPanel Grid.Row="1">
-            <StackPanel Orientation="Horizontal" Margin="5">
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Margin="5" Grid.Row="0">
                 <TextBlock Text="موضوع الملف"></TextBlock>
                 <TextBlock Text="{Binding Subject}"></TextBlock>
             </StackPanel>
-            <WebBrowser x:Name="browser">
-                
+            <WebBrowser x:Name="browser" Grid.Row="1">
+
             </WebBrowser>
-        </StackPanel>
-
-       
-
+        </Grid>
     </Grid>
 </Window>

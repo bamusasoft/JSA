@@ -2,18 +2,10 @@
 using Jsa.ViewsModel.Mediator;
 using Jsa.ViewsModel.ViewsControllers;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 namespace Jsa.ViewsModel.Views
 {
@@ -43,11 +35,11 @@ namespace Jsa.ViewsModel.Views
             }
             else
             {
-                browser.NavigateToString("No File Selected");
+                browser.NavigateToString("لا يوجد ملف للعرض");
             }
         }
 
-        public DocRecordFollowView(string docId):this()
+        public DocRecordFollowView(string docId) : this()
         {
             _controller.ShowDocFollow(docId);
         }
@@ -55,15 +47,15 @@ namespace Jsa.ViewsModel.Views
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             DataGridRow selectedRow = sender as DataGridRow;
-            if(selectedRow != null)
+            if (selectedRow != null)
             {
                 DocRecordFollow recordFollow = selectedRow.Item as DocRecordFollow;
-                if(recordFollow != null)
+                if (recordFollow != null)
                 {
                     _controller.OnSelectedFollowChanged(recordFollow);
                 }
             }
-            
+
         }
 
         private void OnAddDocFile(object sender, RoutedEventArgs e)
@@ -86,7 +78,7 @@ namespace Jsa.ViewsModel.Views
         void Dialog_OpenDialog(object sender, object e)
         {
             string docRecordId = e as string;
-            DocFileExplorer explorer = new DocFileExplorer(docRecordId);
+            DocFileExplorerView explorer = new DocFileExplorerView(docRecordId);
             explorer.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             explorer.ShowDialog();
         }

@@ -36,6 +36,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -72,6 +73,11 @@
                         <TextBlock Grid.Row="7" Grid.Column="0" Text="بحث المواعيد خلال" Margin="3"/>
                         <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding AppointsDue, UpdateSourceTrigger=PropertyChanged}" Margin="3"/>
                         <TextBlock Grid.Row="7" Grid.Column="2" Text="يوم" Margin="3"/>
+
+                        <TextBlock Grid.Row="8" Grid.Column="0" Text="مجلد ملفات المعاملات" Margin="3"/>
+                        <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding DocFilesFolder, UpdateSourceTrigger=PropertyChanged}" FlowDirection="LeftToRight" Margin="3"/>
+                        <Button Grid.Row="8" Grid.Column="2" Content="..." Command="{Binding OpenDocFilesFolderCommand}" Margin="3"/>
+
                     </Grid>
                 </GroupBox>
             </Grid>

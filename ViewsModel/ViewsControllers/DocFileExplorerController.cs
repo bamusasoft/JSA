@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.Entity;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -26,6 +28,7 @@ namespace Jsa.ViewsModel.ViewsControllers
 
             _ = LoadDocRecordFiles(docRecordId);
             _counter = 0;
+            _docRecordFolder = ViewsModel.Properties.Settings.Default.DocFileFolder;
         }
 
         #region Fields
@@ -35,11 +38,12 @@ namespace Jsa.ViewsModel.ViewsControllers
         public event EventHandler<string> DocFilePathChanged;
         private RelayCommand _nextCommand;
         private RelayCommand _previousCommand;
-
+        string _docRecordFolder;
 
 
 
         #endregion
+
         #region Properties
         public ObservableCollection<DocRecordFile> DocRecordFiles
         {
@@ -51,6 +55,7 @@ namespace Jsa.ViewsModel.ViewsControllers
             }
         }
         #endregion
+
         #region Commands
         public ICommand NextCommand
         {
@@ -58,13 +63,14 @@ namespace Jsa.ViewsModel.ViewsControllers
         }
         private void Next()
         {
-            if(_counter > DocRecordFiles.Count || _counter < 0)
+            if (_counter >= DocRecordFiles.Count || _counter < 0)
             {
                 _counter = 0;
             }
             var next = DocRecordFiles[_counter];
             _counter++;
-            RaiseFilePathChanged(next.Path);
+            string path = Path.Combine(_docRecordFolder, next.Path);
+            RaiseFilePathChanged(path);
 
         }
 
@@ -74,17 +80,18 @@ namespace Jsa.ViewsModel.ViewsControllers
         }
         private void Previous()
         {
-            if (_counter > DocRecordFiles.Count || _counter < 0)
+            if (_counter >= DocRecordFiles.Count || _counter < 0)
             {
                 _counter = 0;
             }
-            var next = DocRecordFiles[_counter];
+            var prev = DocRecordFiles[_counter];
             _counter--;
-
-            RaiseFilePathChanged(next.Path);
+            string path = Path.Combine(_docRecordFolder, prev.Path);
+            RaiseFilePathChanged(path);
 
         }
         #endregion
+
         #region Base
 
 
@@ -100,7 +107,11 @@ namespace Jsa.ViewsModel.ViewsControllers
 
         protected override bool CanPrint()
         {
-            throw new NotImplementedException();
+            if(DocRecordFiles == null)
+            {
+                return false;
+            }
+            return DocRecordFiles.Count > 0;
         }
 
         protected override bool CanRefresh()
@@ -120,7 +131,34 @@ namespace Jsa.ViewsModel.ViewsControllers
 
         protected override void Print()
         {
-            throw new NotImplementedException();
+            try
+            {
+                foreach (var file in DocRecordFiles)
+                {
+                    ProcessStartInfo info = new ProcessStartInfo();
+                    info.Verb = "print";
+                    info.FileName = Path.Combine(_docRecordFolder, file.Path);
+                    info.CreateNoWindow = true;
+                    info.WindowStyle = ProcessWindowStyle.Hidden;
+
+                    Process p = new Process();
+                    p.StartInfo = info;
+                    p.Start();
+
+                    p.WaitForInputIdle();
+                    System.Threading.Thread.Sleep(3000);
+                    if (false == p.CloseMainWindow())
+                    {
+                        p.Kill();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                Helper.LogShowError(ex);
+            }
         }
 
         protected override void Refresh()
@@ -138,7 +176,7 @@ namespace Jsa.ViewsModel.ViewsControllers
         #region Methods
         private async Task LoadDocRecordFiles(string docRecordId)
         {
-           DocRecordFiles =  new ObservableCollection<DocRecordFile>(await GetDocFilesAsync(docRecordId));
+            DocRecordFiles = new ObservableCollection<DocRecordFile>(await GetDocFilesAsync(docRecordId));
         }
 
         async Task<IList<DocRecordFile>> GetDocFilesAsync(string docRecordId)

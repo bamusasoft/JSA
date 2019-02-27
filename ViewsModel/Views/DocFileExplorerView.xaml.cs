@@ -30,6 +30,7 @@ namespace Jsa.ViewsModel.Views
                 return;
             }
             _controller = new DocFileExplorerController(docRecordId);
+            DataContext = _controller;
             _controller.DocFilePathChanged += OnDocFilePathChanged;
         }
 
