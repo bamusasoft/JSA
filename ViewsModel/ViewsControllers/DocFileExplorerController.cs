@@ -4,13 +4,9 @@ using Jsa.ViewsModel.ViewsControllers.Core;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Data.Entity;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -18,7 +14,6 @@ namespace Jsa.ViewsModel.ViewsControllers
 {
     public class DocFileExplorerController : ReportControllerBase
     {
-
         public DocFileExplorerController(string docRecordId)
         {
             if (string.IsNullOrEmpty(docRecordId))
@@ -27,24 +22,27 @@ namespace Jsa.ViewsModel.ViewsControllers
             }
 
             _ = LoadDocRecordFiles(docRecordId);
-            _counter = 0;
-            _docRecordFolder = ViewsModel.Properties.Settings.Default.DocFileFolder;
+            counter = 0;
+            _docRecordFolder = Properties.Settings.Default.DocFileFolder;
         }
 
         #region Fields
-        static int _counter;
 
-        ObservableCollection<DocRecordFile> _docRecordFiles;
-        public event EventHandler<string> DocFilePathChanged;
+        private static int counter;
+
+        private readonly string _docRecordFolder;
+        private ObservableCollection<DocRecordFile> _docRecordFiles;
+        private string _docRecordDescription;
+
         private RelayCommand _nextCommand;
+
         private RelayCommand _previousCommand;
-        string _docRecordFolder;
 
-
-
-        #endregion
+        public event EventHandler<string> DocFilePathChanged;
+        #endregion Fields
 
         #region Properties
+
         public ObservableCollection<DocRecordFile> DocRecordFiles
         {
             get { return _docRecordFiles; }
@@ -54,46 +52,57 @@ namespace Jsa.ViewsModel.ViewsControllers
                 RaisePropertyChanged();
             }
         }
-        #endregion
+        public string DocRecordDescription
+        {
+            get { return _docRecordDescription; }
+            set
+            {
+                _docRecordDescription = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion Properties
 
         #region Commands
+
         public ICommand NextCommand
         {
             get { return _nextCommand ?? (_nextCommand = new RelayCommand(Next)); }
-        }
-        private void Next()
-        {
-            if (_counter >= DocRecordFiles.Count || _counter < 0)
-            {
-                _counter = 0;
-            }
-            var next = DocRecordFiles[_counter];
-            _counter++;
-            string path = Path.Combine(_docRecordFolder, next.Path);
-            RaiseFilePathChanged(path);
-
         }
 
         public ICommand PreviousCommand
         {
             get { return _previousCommand ?? (_previousCommand = new RelayCommand(Previous)); }
         }
+
+        
+
+        private void Next()
+        {
+            if (counter >= DocRecordFiles.Count || counter < 0)
+            {
+                counter = 0;
+            }
+            var next = DocRecordFiles[counter];
+            counter++;
+            string path = Path.Combine(_docRecordFolder, next.Path);
+            RaiseFilePathChanged(path);
+        }
         private void Previous()
         {
-            if (_counter >= DocRecordFiles.Count || _counter < 0)
+            if (counter >= DocRecordFiles.Count || counter < 0)
             {
-                _counter = 0;
+                counter = 0;
             }
-            var prev = DocRecordFiles[_counter];
-            _counter--;
+            var prev = DocRecordFiles[counter];
+            counter--;
             string path = Path.Combine(_docRecordFolder, prev.Path);
             RaiseFilePathChanged(path);
-
         }
-        #endregion
+
+        #endregion Commands
 
         #region Base
-
 
         public override void ControlState(ControllerStates state)
         {
@@ -107,7 +116,7 @@ namespace Jsa.ViewsModel.ViewsControllers
 
         protected override bool CanPrint()
         {
-            if(DocRecordFiles == null)
+            if (DocRecordFiles == null)
             {
                 return false;
             }
@@ -141,8 +150,7 @@ namespace Jsa.ViewsModel.ViewsControllers
                     info.CreateNoWindow = true;
                     info.WindowStyle = ProcessWindowStyle.Hidden;
 
-                    Process p = new Process();
-                    p.StartInfo = info;
+                    Process p = new Process {StartInfo = info};
                     p.Start();
 
                     p.WaitForInputIdle();
@@ -152,11 +160,9 @@ namespace Jsa.ViewsModel.ViewsControllers
                         p.Kill();
                     }
                 }
-
             }
             catch (Exception ex)
             {
-
                 Helper.LogShowError(ex);
             }
         }
@@ -171,29 +177,41 @@ namespace Jsa.ViewsModel.ViewsControllers
             throw new NotImplementedException();
         }
 
-        #endregion
+        #endregion Base
 
         #region Methods
-        private async Task LoadDocRecordFiles(string docRecordId)
-        {
-            DocRecordFiles = new ObservableCollection<DocRecordFile>(await GetDocFilesAsync(docRecordId));
-        }
 
-        async Task<IList<DocRecordFile>> GetDocFilesAsync(string docRecordId)
+        private async Task<IList<DocRecordFile>> GetDocFilesAsync(string docRecordId)
         {
             IUnitOfWork unitOfWork = new UnitOfWork();
             return await unitOfWork.DocRecordFiles.Query(x => x.DocRecordId == docRecordId).ToListAsync();
         }
 
+        private async Task LoadDocRecordFiles(string docRecordId)
+        {
+            DocRecordDescription = await GetDocRecordDescription(docRecordId);
+            DocRecordFiles = new ObservableCollection<DocRecordFile>(await GetDocFilesAsync(docRecordId));
+        }
+
+        private async Task<string> GetDocRecordDescription(string docRecordId)
+        {
+            using (IUnitOfWork unit  = new UnitOfWork())
+            {
+                var docRecord = await unit.DocRecords.Query(x => x.Id == docRecordId).SingleOrDefaultAsync();
+                if(docRecord == null)
+                {
+                    return string.Empty;
+                }
+
+                return docRecord.Subject;
+            }
+        }
+
         private void RaiseFilePathChanged(string path)
         {
-            if (DocFilePathChanged == null)
-            {
-                return;
-            }
-
-            DocFilePathChanged(this, path);
+            DocFilePathChanged?.Invoke(this, path);
         }
-        #endregion
+
+        #endregion Methods
     }
 }
