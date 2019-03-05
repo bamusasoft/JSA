@@ -40,8 +40,8 @@ namespace Jsa.ViewsModel.ViewsControllers
 
         public event EventHandler<string> DocFilePathChanged;
         #endregion Fields
-
         #region Properties
+
 
         public ObservableCollection<DocRecordFile> DocRecordFiles
         {
@@ -142,24 +142,32 @@ namespace Jsa.ViewsModel.ViewsControllers
         {
             try
             {
+                ProcessStartInfo info = new ProcessStartInfo();
+                info.Verb = "Print";
+                info.CreateNoWindow = true;
+                info.WindowStyle = ProcessWindowStyle.Hidden;
+                Queue<Process> processes = new Queue<Process>();
                 foreach (var file in DocRecordFiles)
                 {
-                    ProcessStartInfo info = new ProcessStartInfo();
-                    info.Verb = "print";
-                    info.FileName = Path.Combine(_docRecordFolder, file.Path);
-                    info.CreateNoWindow = true;
-                    info.WindowStyle = ProcessWindowStyle.Hidden;
+                   info.FileName = Path.Combine(_docRecordFolder, file.Path);
+                   Process process = new Process { StartInfo = info };
+                   process.Start();
 
-                    Process p = new Process {StartInfo = info};
-                    p.Start();
-
-                    p.WaitForInputIdle();
-                    System.Threading.Thread.Sleep(3000);
-                    if (false == p.CloseMainWindow())
-                    {
-                        p.Kill();
-                    }
+                   processes.Enqueue(process);
                 }
+
+                while (processes.Count > 0)
+                {
+                    var process = processes.Dequeue();
+                    process.WaitForExit();
+                    System.Threading.Thread.Sleep(3000);
+                    if (process.CloseMainWindow() == false)
+                    {
+                        process.Kill();
+                    }
+
+                }
+                
             }
             catch (Exception ex)
             {

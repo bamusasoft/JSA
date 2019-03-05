@@ -24,7 +24,7 @@ namespace Jsa.ViewsModel.ViewsControllers
             _docRecordFolder = ViewsModel.Properties.Settings.Default.DocFileFolder;
             Errors = new Dictionary<string, List<string>>();
             ControlState(ControllerStates.Blank);
-            
+
         }
 
         #region Fields
@@ -165,7 +165,7 @@ namespace Jsa.ViewsModel.ViewsControllers
             }
         }
 
-       
+
 
         #endregion
 
@@ -197,7 +197,7 @@ namespace Jsa.ViewsModel.ViewsControllers
                 _dialog.RaiseOpenDialog<string>(DocId);
 
             }
-           
+
         }
         #endregion
 
@@ -373,7 +373,7 @@ namespace Jsa.ViewsModel.ViewsControllers
                     DocRecordFollow follow = null;
                     if (string.IsNullOrEmpty(FollowId))
                     {
-                        
+
                         follow = CreateNewDocFollow();
                         unit.DocRecordFollows.Add(follow);
                         DocRecordFile file = CreateDocFile(DocId, follow.Id, FollowPath);
@@ -383,14 +383,14 @@ namespace Jsa.ViewsModel.ViewsControllers
                     {
                         follow = unit.DocRecordFollows.GetById(FollowId);
                         DocRecordFile file = unit.DocRecordFiles.Query(x => x.DocFollowId == FollowId).SingleOrDefault();
-                        if(file != null)
+                        if (file != null)
                         {
                             UpdateDocFile(file, FollowPath);
                         }
                         else
                         {
-                          var docFile =  CreateDocFile(follow.DocRecodId, follow.Id, FollowPath);
-                          unit.DocRecordFiles.Add(docFile);
+                            var docFile = CreateDocFile(follow.DocRecodId, follow.Id, FollowPath);
+                            unit.DocRecordFiles.Add(docFile);
                         }
                         UpdateDocFollow(follow);
                     }
@@ -531,7 +531,7 @@ namespace Jsa.ViewsModel.ViewsControllers
         }
         private DocRecordFile CreateDocFile(string docId, string followId, string path)
         {
-            string newPath =  CopyDocFile(DocId, followId, FollowPath);
+            string newPath = CopyDocFile(DocId, followId, FollowPath);
             return new DocRecordFile()
             {
                 Id = Guid.NewGuid().ToString(),
@@ -543,12 +543,14 @@ namespace Jsa.ViewsModel.ViewsControllers
         }
         private void UpdateDocFile(DocRecordFile file, string path)
         {
-            if(file.Path != path)
+            string storedPath = Path.Combine(_docRecordFolder, file.Path);
+            if (storedPath == path)
             {
-               string newPath =  CopyDocFile(file.DocRecordId, file.DocFollowId, path);
-               file.Path = newPath;
-
+                return;
             }
+            string newPath = CopyDocFile(file.DocRecordId, file.DocFollowId, path);
+            file.Path = newPath;
+
         }
         private string CopyDocFile(string docId, string followId, string path)
         {
@@ -630,14 +632,14 @@ namespace Jsa.ViewsModel.ViewsControllers
             {
                 Helper.LogShowError(ex);
             }
-          
+
         }
         private string GetFollowFile(string followId)
         {
             using (IUnitOfWork unit = new UnitOfWork())
             {
-                var file= unit.DocRecordFiles.Query(x => x.DocFollowId == followId).SingleOrDefault();
-                if(file == null)
+                var file = unit.DocRecordFiles.Query(x => x.DocFollowId == followId).SingleOrDefault();
+                if (file == null)
                 {
                     return string.Empty;
                 }

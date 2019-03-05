@@ -45,8 +45,8 @@
 
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal" Margin="5" Grid.Row="0">
-                <TextBlock Text="موضوع الملف"></TextBlock>
-                <TextBlock Text="{Binding DocRecordDescription}"></TextBlock>
+                <TextBlock Text="موضوع الملف:" Margin="5"></TextBlock>
+                <TextBlock Text="{Binding DocRecordDescription}" Margin="5"></TextBlock>
             </StackPanel>
             <WebBrowser x:Name="browser" Grid.Row="1">
 

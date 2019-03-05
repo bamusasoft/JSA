@@ -21,7 +21,7 @@ namespace Jsa.ViewsModel.Views
     /// </summary>
     public partial class DocFileExplorerView : Window
     {
-        DocFileExplorerController _controller;
+        readonly DocFileExplorerController _controller;
         public DocFileExplorerView(string docRecordId)
         {
             InitializeComponent();
@@ -38,7 +38,15 @@ namespace Jsa.ViewsModel.Views
         {
             if (!string.IsNullOrEmpty(e))
             {
-                browser.Navigate("file:///" + e);
+                try
+                {
+                    browser.Navigate("file:///" + e);
+                }
+                catch (Exception ex)
+                {
+                   Helper.LogShowError(ex);
+                }
+               
             }
             else
             {
