@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
-using Jsa.ViewsModel.Annotations;
 
 namespace Jsa.ViewsModel.ViewsControllers.Core
 {

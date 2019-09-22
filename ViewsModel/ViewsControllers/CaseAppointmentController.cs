@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data.Entity.Migrations.Model;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using Jsa.DomainModel;
 using Jsa.DomainModel.Repositories;
-using Jsa.ViewsModel.Views;
 using Jsa.ViewsModel.ViewsControllers.Core;
 
 namespace Jsa.ViewsModel.ViewsControllers

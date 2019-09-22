@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using Jsa.DomainModel;
-using Jsa.ViewsModel.Helpers;
+using Jsa.ViewsModel.Properties;
 using Jsa.ViewsModel.ViewsControllers.Core;
 
 namespace Jsa.ViewsModel.ViewsControllers
@@ -160,7 +157,7 @@ namespace Jsa.ViewsModel.ViewsControllers
         {
             if (State == ControllerStates.Edited)
             {
-                if (!Helper.UserConfirmed(Properties.Resources.SavePrompetMsg))
+                if (!Helper.UserConfirmed(Resources.SavePrompetMsg))
                 {
                     return;
                 }
@@ -244,7 +241,7 @@ namespace Jsa.ViewsModel.ViewsControllers
 
         private Signer CreateNewSigner()
         {
-            return new Signer()
+            return new Signer
             {
                 SignerId = Id,
                 Name = Name,

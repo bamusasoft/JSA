@@ -1,11 +1,11 @@
-﻿using Jsa.DomainModel;
-using Jsa.ViewsModel.ViewsControllers.Core;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Jsa.DomainModel;
+using Jsa.ViewsModel.Properties;
+using Jsa.ViewsModel.ViewsControllers.Core;
 
 namespace Jsa.ViewsModel.ViewsControllers
 {
@@ -71,8 +71,6 @@ namespace Jsa.ViewsModel.ViewsControllers
                     break;
                 case ControllerStates.Loaded:
                     break;
-                default:
-                    break;
             }
         }
 
@@ -105,7 +103,7 @@ namespace Jsa.ViewsModel.ViewsControllers
         {
             if (_controllerState == ControllerStates.Edited)
             {
-                string msg = Properties.Resources.SavePrompetMsg;
+                string msg = Resources.SavePrompetMsg;
 
                 if (!Helper.UserConfirmed(msg))
                 {

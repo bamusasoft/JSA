@@ -41,13 +41,13 @@ namespace Jsa.DomainModel
 
         public double TotalPayment { get; set; }
 
-        public int Rent { get; set; }
+        public double Rent { get; set; }
 
-        public int Deposit { get; set; }
+        public double Deposit { get; set; }
 
-        public int Maintenance { get; set; }
+        public double Maintenance { get; set; }
 
-        public int Others { get; set; }
+        public double Others { get; set; }
 
         public bool Posted { get; set; }
 
@@ -55,5 +55,7 @@ namespace Jsa.DomainModel
         public string DebitAccount { get; set; }
 
         public short PayCode { get; set; }
+
+        public double? Tax { get; set; }
     }
 }

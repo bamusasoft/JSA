@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using Jsa.DomainModel;
 using Jsa.ViewsModel.ViewsControllers.Core;
-using System;
-using System.Windows.Input;
 
 namespace Jsa.ViewsModel.ViewsControllers
 {
@@ -86,9 +86,9 @@ namespace Jsa.ViewsModel.ViewsControllers
             {
                 var diff = Helper.CaculateDate(_contract.StartDate, _contract.EndDate);
 
-                decimal amounDue = (((agreedAmount / 12.00m) / 30.00m) * (decimal)diff.Item1);
+                decimal amounDue = (((agreedAmount / 12.00m) / 30.00m) * diff.Item1);
 
-                amounDue += ((agreedAmount / 12.00m) * (decimal)diff.Item2);
+                amounDue += ((agreedAmount / 12.00m) * diff.Item2);
                 result = (int)Math.Round(amounDue, 0, MidpointRounding.AwayFromZero);
 
             }

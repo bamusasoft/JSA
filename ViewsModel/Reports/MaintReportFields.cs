@@ -8,7 +8,7 @@ namespace Jsa.ViewsModel.Reports
 {
     public sealed class MaintReportFields
     {
-         public MaintReportFields(int contractNo, string propertyNo, int customerNo, string propertyType, string customerName, string propertyDescription, string location, int agreedMaint, int paid, int receiptNo, string payDate)
+         public MaintReportFields(int contractNo, string propertyNo, int customerNo, string propertyType, string customerName, string propertyDescription, string location, int agreedMaint, double paid, int receiptNo, string payDate)
         {
             DateDue = payDate;
             ReceiptNo = receiptNo;
@@ -31,10 +31,10 @@ namespace Jsa.ViewsModel.Reports
         public string CustomerName { get; private set; }
         public string PropertyDescription { get; private set; }
         public string Location { get; private set; }
-        public int AgreedMaint { get; private set; }
-        public int Paid { get; private set; }
+        public double AgreedMaint { get; private set; }
+        public double Paid { get; private set; }
 
-        public int Balance
+        public double Balance
         {
             get { return AgreedMaint - Paid; }
         }

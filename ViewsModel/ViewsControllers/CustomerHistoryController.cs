@@ -1,11 +1,9 @@
-﻿using Jsa.DomainModel;
-using Jsa.ViewsModel.DomainEntities;
-using Jsa.ViewsModel.ViewsControllers.Core;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Jsa.DomainModel;
+using Jsa.ViewsModel.DomainEntities;
+using Jsa.ViewsModel.ViewsControllers.Core;
 
 namespace Jsa.ViewsModel.ViewsControllers
 {

@@ -9,17 +9,17 @@ using Jsa.WinIrsService;
 
 namespace Jsa.ViewsModel.SyncStrategy
 {
-    public class SyncPayments:ISyncIrs
+    public class SyncPayments : ISyncIrs
     {
         IUnitOfWork _unitOfWork;
         string _paymentYear;
         public SyncPayments(IUnitOfWork unitOfWork, string paymentYear)
         {
             if (unitOfWork == null) throw new ArgumentNullException("unitOfWork");
-            if (! Helper.ValidYear(paymentYear)) throw new InvalidOperationException("Invalid year");
+            if (!Helper.ValidYear(paymentYear)) throw new InvalidOperationException("Invalid year");
             _unitOfWork = unitOfWork;
             _paymentYear = paymentYear;
-        
+
         }
         public Task SyncAsync()
         {
@@ -29,7 +29,7 @@ namespace Jsa.ViewsModel.SyncStrategy
                         string paysYear = _paymentYear.Substring(2, 2);
                         RepositoryBase<Payment> paymentRepository = _unitOfWork.Payments;
                         var sgePayments = paymentRepository.GetAll();
-                        var irsPayments = new PaymentTableAdapter(Properties.Settings.Default.IrsDbPath, 
+                        var irsPayments = new PaymentTableAdapter(Properties.Settings.Default.IrsDbPath,
                                                                    paysYear).GetData();
                         double count = irsPayments.Count;
                         double current = 0.0;
@@ -41,48 +41,49 @@ namespace Jsa.ViewsModel.SyncStrategy
                             {
                                 Payment newSgePayment = new Payment()
                                 {
-                                  PaymentNo = irsPayment.PaymentNo,
-                                  AccountNo = irsPayment.AccountNo,
-                                  ContractNo = irsPayment.ContractNo,
-                                  Renewal = irsPayment.Renewal,
-                                  Name = irsPayment.Name,
-                                  PayDate = irsPayment.PayDate,
-                                  PaymentType = irsPayment.PaymentType,
-                                  PaymentFor1 = irsPayment.PaymentFor1,
-                                  PaymentFor2 = irsPayment.PaymentFor2,
-                                  TotalPayment = irsPayment.TotalPayment,
-                                  Rent = irsPayment.Rent,
-                                  Deposit = irsPayment.Deposit,
-                                  Maintenance = irsPayment.Maintenance,
-                                  Others = irsPayment.Others,
-                                  Posted = irsPayment.Posted,
-                                  DebitAccount = irsPayment.DebitAccount,
-                                  PayCode = irsPayment.PayCode,
-                                  
-   
+                                    PaymentNo = irsPayment.PaymentNo,
+                                    AccountNo = irsPayment.AccountNo,
+                                    ContractNo = irsPayment.ContractNo,
+                                    Renewal = irsPayment.Renewal,
+                                    Name = irsPayment.Name,
+                                    PayDate = irsPayment.PayDate,
+                                    PaymentType = irsPayment.PaymentType,
+                                    PaymentFor1 = irsPayment.PaymentFor1,
+                                    PaymentFor2 = irsPayment.PaymentFor2,
+                                    TotalPayment = irsPayment.TotalPayment,
+                                    Rent = irsPayment.Rent,
+                                    Deposit = irsPayment.Deposit,
+                                    Maintenance = irsPayment.Maintenance,
+                                    Others = irsPayment.Others,
+                                    Posted = irsPayment.Posted,
+                                    DebitAccount = irsPayment.DebitAccount,
+                                    PayCode = irsPayment.PayCode,
+                                    Tax = irsPayment.Tax,
+
                                 };
                                 paymentRepository.Add(newSgePayment);
                             }
                             else //Otherwise udpate it.
                             {
                                 var existingPayment = sgePayments.Single(p => p.PaymentNo == irsPayment.PaymentNo);
-                                                                  
-                                 existingPayment.AccountNo = irsPayment.AccountNo;
-                                 existingPayment.ContractNo = irsPayment.ContractNo;
-                                 existingPayment.Renewal = irsPayment.Renewal;
-                                 existingPayment.Name = irsPayment.Name;
-                                 existingPayment.PayDate = irsPayment.PayDate;
-                                 existingPayment.PaymentType = irsPayment.PaymentType;
-                                 existingPayment.PaymentFor1 = irsPayment.PaymentFor1;
-                                 existingPayment.PaymentFor2 = irsPayment.PaymentFor2;
-                                 existingPayment.TotalPayment = irsPayment.TotalPayment;
-                                 existingPayment.Rent = irsPayment.Rent;
-                                 existingPayment.Deposit = irsPayment.Deposit;
-                                 existingPayment.Maintenance = irsPayment.Maintenance;
-                                 existingPayment.Others = irsPayment.Others;
-                                 existingPayment.Posted = irsPayment.Posted;
-                                 existingPayment.DebitAccount = irsPayment.DebitAccount;
-                                 existingPayment.PayCode = irsPayment.PayCode;
+
+                                existingPayment.AccountNo = irsPayment.AccountNo;
+                                existingPayment.ContractNo = irsPayment.ContractNo;
+                                existingPayment.Renewal = irsPayment.Renewal;
+                                existingPayment.Name = irsPayment.Name;
+                                existingPayment.PayDate = irsPayment.PayDate;
+                                existingPayment.PaymentType = irsPayment.PaymentType;
+                                existingPayment.PaymentFor1 = irsPayment.PaymentFor1;
+                                existingPayment.PaymentFor2 = irsPayment.PaymentFor2;
+                                existingPayment.TotalPayment = irsPayment.TotalPayment;
+                                existingPayment.Rent = irsPayment.Rent;
+                                existingPayment.Deposit = irsPayment.Deposit;
+                                existingPayment.Maintenance = irsPayment.Maintenance;
+                                existingPayment.Others = irsPayment.Others;
+                                existingPayment.Posted = irsPayment.Posted;
+                                existingPayment.DebitAccount = irsPayment.DebitAccount;
+                                existingPayment.PayCode = irsPayment.PayCode;
+                                existingPayment.Tax = irsPayment.Tax;
 
                             }
                             current++;
@@ -111,10 +112,10 @@ namespace Jsa.ViewsModel.SyncStrategy
         public SyncContracts(IUnitOfWork unitOfWork, string contractYear)
         {
             if (unitOfWork == null) throw new ArgumentNullException("unitOfWork");
-            if (! Helper.ValidYear(contractYear)) throw new InvalidOperationException("Invalid year");
+            if (!Helper.ValidYear(contractYear)) throw new InvalidOperationException("Invalid year");
             _unitOfWork = unitOfWork;
             _contractYear = contractYear;
-        
+
         }
         public Task SyncAsync()
         {
@@ -123,7 +124,7 @@ namespace Jsa.ViewsModel.SyncStrategy
                     string contsYear = _contractYear.Substring(2, 2);
                     RepositoryBase<Contract> contractRepository = _unitOfWork.Contracts;
                     var sgeContracts = contractRepository.GetAll();
-                    var irsContracts = new ContractTableAdapter(Properties.Settings.Default.IrsDbPath, 
+                    var irsContracts = new ContractTableAdapter(Properties.Settings.Default.IrsDbPath,
                                                                  contsYear).GetData();
                     double count = irsContracts.Count;
                     double current = 0.0;
@@ -143,7 +144,7 @@ namespace Jsa.ViewsModel.SyncStrategy
                                 PropertyNo = irsContract.PropertyNo,
                                 Closed = irsContract.Closed,
                                 AgreedRent = irsContract.AgreedRent,
-                                RentDue  = irsContract.RentDue,
+                                RentDue = irsContract.RentDue,
                                 AgreedDeposit = irsContract.AgreedDeposit,
                                 AgreedMaintenance = irsContract.AgreedMaintenance,
                                 RentBalance = irsContract.RentBalance,
@@ -152,15 +153,16 @@ namespace Jsa.ViewsModel.SyncStrategy
                                 Total =
                                     irsContract.RentBalance + irsContract.MaintenanceBalance +
                                     irsContract.DepositBalance,
-                               //Set scheduled to false initially
-                               Scheduled = false,
+                                //Set scheduled to false initially
+                                Scheduled = false,
+                                Tax = irsContract.Tax,
                             };
                             contractRepository.Add(newSgeContract);
                         }
                         else //Otherwise udpate it.
                         {
                             var existingContract = sgeContracts.Single(x => x.ContractNo == irsContract.ContractNo);
-                            
+
                             existingContract.StartDate = irsContract.StartDate;
                             existingContract.EndDate = irsContract.EndDate;
                             existingContract.CustomerId = irsContract.CustomerId;
@@ -179,11 +181,12 @@ namespace Jsa.ViewsModel.SyncStrategy
 
                             bool contractHadScheduled = existingContract.ScheduleDetails.Count > 0;
                             existingContract.Scheduled = contractHadScheduled;
+                            existingContract.Tax = irsContract.Tax;
 
                         }
                         current++;
                         double progress = (current / count) * 100;
-                        RaiseProgress(progress); 
+                        RaiseProgress(progress);
                     }
                     //Now determine the closed contracts in IRS db and update their counterparts in SGE db.
                     //foreach (var sgeContract in sgeContracts)
@@ -194,13 +197,13 @@ namespace Jsa.ViewsModel.SyncStrategy
                     //    {
                     //        sgeContract.Closed = true;
                     //    }
-                        
-                        
+
+
                     //}
-                    
+
                 });
             return tsk;
-        
+
         }
 
         public event EventHandler<ProgressEventArgs> ReportProgress;
@@ -213,7 +216,7 @@ namespace Jsa.ViewsModel.SyncStrategy
             }
         }
     }
-    
+
     public class SyncCustomers : ISyncIrs
     {
         IUnitOfWork _unitOfWork;
@@ -232,7 +235,7 @@ namespace Jsa.ViewsModel.SyncStrategy
                     IList<Customer> irsCustomers = new CustomerTableAdapter(Properties.Settings.Default.IrsDbPath).GetData();
                     double count = irsCustomers.Count;
                     double current = 0.0;
-                    
+
                     foreach (Customer irsCustomer in irsCustomers)
                     {
                         bool exist = sgeCustomers.Any(cus => cus.CustomerId == irsCustomer.CustomerId);
@@ -259,7 +262,7 @@ namespace Jsa.ViewsModel.SyncStrategy
                 }
                 );
             return ta;
-        
+
         }
 
         public event EventHandler<ProgressEventArgs> ReportProgress;
@@ -289,7 +292,7 @@ namespace Jsa.ViewsModel.SyncStrategy
                 {
                     RepositoryBase<Property> propertyRepository = _unitOfWork.Properties;
                     var sgeProperties = propertyRepository.GetAll();
-                    var irsProperties = new PropertiesTableAdpater( Properties.Settings.Default.IrsDbPath).GetData();
+                    var irsProperties = new PropertiesTableAdpater(Properties.Settings.Default.IrsDbPath).GetData();
                     double count = irsProperties.Count;
                     double current = 0.0;
 
@@ -320,7 +323,7 @@ namespace Jsa.ViewsModel.SyncStrategy
                     }
                 });
             return tsk;
-     
+
         }
 
         public event EventHandler<ProgressEventArgs> ReportProgress;
@@ -341,10 +344,10 @@ namespace Jsa.ViewsModel.SyncStrategy
         public SyncSchedulesPayments(IUnitOfWork unitOfWork, string paymentYear)
         {
             if (unitOfWork == null) throw new ArgumentNullException("unitOfWork");
-            if (! Helper.ValidYear(paymentYear)) throw new InvalidOperationException("Invalid year");
+            if (!Helper.ValidYear(paymentYear)) throw new InvalidOperationException("Invalid year");
             _unitOfWork = unitOfWork;
             _paymentYear = paymentYear;
-        
+
         }
 
         public Task SyncAsync()
@@ -366,7 +369,7 @@ namespace Jsa.ViewsModel.SyncStrategy
                 {
                     bool exist = jsaSchedulePayments.Any(pay => pay.ContractNo == irsPayment.ContractNo);
                     double progress = 0.0;
-                    if(exist)
+                    if (exist)
                     {
                         var existingJsaSchedulePayment = jsaSchedulePayments.Single(pay => pay.ContractNo == irsPayment.ContractNo);
 
@@ -379,7 +382,7 @@ namespace Jsa.ViewsModel.SyncStrategy
                             RaiseProgress(progress);
 
                             continue;
-                            
+
                         }
                         if (totalPaymentInIrs > existingJsaSchedulePayment.UnscheduledPayment)
                         {
@@ -437,7 +440,7 @@ namespace Jsa.ViewsModel.SyncStrategy
                 {
                     scheduleDetail.AmountPaid = scheduleDetail.AmountDue;
                     scheduleDetail.Balance = 0;
-                    
+
                 }
                 return;
             }
@@ -449,13 +452,13 @@ namespace Jsa.ViewsModel.SyncStrategy
                     scheduleDetail.Balance = 0;
                     break;
                 }
-                if(scheduleDetail.AmountDue > paymentsTotal)
+                if (scheduleDetail.AmountDue > paymentsTotal)
                 {
                     scheduleDetail.AmountPaid = paymentsTotal;
                     scheduleDetail.Balance = (scheduleDetail.AmountDue - scheduleDetail.AmountPaid);
                     break;
                 }
-                if(scheduleDetail.AmountDue < paymentsTotal)
+                if (scheduleDetail.AmountDue < paymentsTotal)
                 {
                     scheduleDetail.AmountPaid = scheduleDetail.AmountDue;
                     scheduleDetail.Balance = 0;
@@ -465,7 +468,7 @@ namespace Jsa.ViewsModel.SyncStrategy
         }
 
         #endregion
-        
+
     }
 
 }

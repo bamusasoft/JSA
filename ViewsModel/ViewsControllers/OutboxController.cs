@@ -1,9 +1,10 @@
-﻿using Jsa.DomainModel;
-using Jsa.ViewsModel.ViewsControllers.Core;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Jsa.DomainModel;
+using Jsa.ViewsModel.Properties;
+using Jsa.ViewsModel.ViewsControllers.Core;
 
 namespace Jsa.ViewsModel.ViewsControllers
 {
@@ -351,7 +352,7 @@ namespace Jsa.ViewsModel.ViewsControllers
         }
         private Outbox CreateNew()
         {
-            return new Outbox()
+            return new Outbox
             {
                 OutboxNo = OutboxNo,
                 OutboxDate = OutboxDate,
@@ -468,14 +469,12 @@ namespace Jsa.ViewsModel.ViewsControllers
                     _canSave = true;
                     OutboxNoEnabled = false;
                     break;
-                default:
-                    break;
             }
         }
 
         protected override void ClearView()
         {
-            if (_hasChanges && !Helper.UserConfirmed(Properties.Resources.SavePrompetMsg))
+            if (_hasChanges && !Helper.UserConfirmed(Resources.SavePrompetMsg))
             {
                 return;
             }
@@ -569,7 +568,6 @@ namespace Jsa.ViewsModel.ViewsControllers
             if (SearchSubjectChecked)
             {
                 FindSubject(SearchValue);
-                return;
             }
 
         }
@@ -581,7 +579,7 @@ namespace Jsa.ViewsModel.ViewsControllers
 
         protected override void Delete()
         {
-            if (!Helper.UserConfirmed(Properties.Resources.DeletePrompetMsg)) return;
+            if (!Helper.UserConfirmed(Resources.DeletePrompetMsg)) return;
             using (IUnitOfWork unit = new UnitOfWork())
             {
                 var entity = unit.Outboxes.GetById(OutboxNo);

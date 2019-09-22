@@ -4,9 +4,9 @@
     {
         public int PaymentNo { get; set; }
         public string PaymentDate { get; set; }
-        public int Rent { get; set; }
-        public int Maintenance { get; set; }
-        public int Deposit { get; set; }
-        public int Total { get; set; }
+        public double Rent { get; set; }
+        public double Maintenance { get; set; }
+        public double Deposit { get; set; }
+        public double Total { get; set; }
     }
 }

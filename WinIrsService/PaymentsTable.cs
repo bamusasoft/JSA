@@ -23,7 +23,7 @@ namespace Jsa.WinIrsService
                "PaymentType" , "PaymentFor1", "PaymentFor2",
                "TotalPayment" , "Rent", "Deposit",
                "Maintenance" , "Others", "Posted",
-               "DebitAccount" , "PayCode"
+               "DebitAccount" , "PayCode", "Tax"
             };
             _settings = Settings.Default;
         }

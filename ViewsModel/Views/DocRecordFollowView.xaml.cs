@@ -35,7 +35,8 @@ namespace Jsa.ViewsModel.Views
             }
             else
             {
-                browser.NavigateToString("لا يوجد ملف للعرض");
+                //browser.NavigateToString("لا يوجد ملف للعرض");
+                browser.Navigate("about:blank");
             }
         }
 

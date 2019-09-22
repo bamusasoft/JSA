@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Linq;
 using Jsa.DomainModel;
 using Jsa.DomainModel.Repositories;
 using Jsa.ViewsModel.Helpers;
 using Jsa.ViewsModel.ViewsControllers.Core;
-
 
 namespace Jsa.ViewsModel.ViewsControllers
 {

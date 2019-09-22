@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Jsa.WinIrsService.Properties;
 namespace Jsa.WinIrsService
 {
-    public class PaymentTableAdapter:IDomainList<Payment>
+    public class PaymentTableAdapter : IDomainList<Payment>
     {
         readonly IDatabase _database;
         public PaymentTableAdapter(string dbPath, string paysYear)
@@ -39,26 +39,27 @@ namespace Jsa.WinIrsService
         {
             Payment p = new Payment();
 
-               p. PaymentNo = row.Field<int>("PaymentNo");
-               p. AccountNo = row.Field<string>("AccountNo");
-               p. ContractNo = row.Field<int>("ContractNo");
-               p.Renewal = row.Field<short>("Renewal");
-               p. Name = row.Field<string>("Name");
-               p. PayDate = row.Field<string>("PayDate");
-               p. PaymentType = row.Field<byte>("PaymentType");
-               p. PaymentFor1 = row.Field<string>("PaymentFor1");
-               p. PaymentFor2 = row.Field<string>("PaymentFor2");
-               p. TotalPayment = row.Field<double>("TotalPayment");
-               p. Rent = row.Field<int>("Rent");
-               p. Deposit = row.Field<int>("Deposit");
-               p. Maintenance = row.Field<int>("Maintenance");
-               p. Others = row.Field<int>("Others");
-               p. Posted = row.Field<bool>("Posted");
-               p. DebitAccount = row.Field<string>("DebitAccount");
-               p.PayCode = row.Field<short>("PayCode");
+            p.PaymentNo = row.Field<int>("PaymentNo");
+            p.AccountNo = row.Field<string>("AccountNo");
+            p.ContractNo = row.Field<int>("ContractNo");
+            p.Renewal = row.Field<short>("Renewal");
+            p.Name = row.Field<string>("Name");
+            p.PayDate = row.Field<string>("PayDate");
+            p.PaymentType = row.Field<byte>("PaymentType");
+            p.PaymentFor1 = row.Field<string>("PaymentFor1");
+            p.PaymentFor2 = row.Field<string>("PaymentFor2");
+            p.TotalPayment = row.Field<double>("TotalPayment");
+            p.Rent = row.Field<double>("Rent");
+            p.Deposit = row.Field<double>("Deposit");
+            p.Maintenance = row.Field<double>("Maintenance");
+            p.Others = row.Field<double>("Others");
+            p.Posted = row.Field<bool>("Posted");
+            p.DebitAccount = row.Field<string>("DebitAccount");
+            p.PayCode = row.Field<short>("PayCode");
+            p.Tax = row.Field<double?>("Tax");
 
-               return p;
-            
+            return p;
+
         }
     }
 }

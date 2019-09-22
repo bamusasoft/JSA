@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using Jsa.ViewsModel.Views;
-using Jsa.ViewsModel.ViewsControllers.Core;
-using Jsa.DomainModel;
 using System.Collections.ObjectModel;
-using GalaSoft.MvvmLight.Command;
-using Jsa.ViewsModel.Helpers;
+using System.Linq;
+using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
+using GalaSoft.MvvmLight.Command;
+using Jsa.DomainModel;
+using Jsa.ViewsModel.Helpers;
+using Jsa.ViewsModel.Properties;
+using Jsa.ViewsModel.Views;
+using Jsa.ViewsModel.ViewsControllers.Core;
+
 namespace Jsa.ViewsModel.ViewsControllers
 {
     public class MonthlyContractController : EditableControllerBase
@@ -86,7 +89,7 @@ namespace Jsa.ViewsModel.ViewsControllers
             {
                 RepView rv = new RepView(_contract.CustomerId);
                 rv.AddCompleted += OnAddRepresCompleted;
-                rv.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+                rv.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 rv.ShowDialog();
 
             }
@@ -115,8 +118,8 @@ namespace Jsa.ViewsModel.ViewsControllers
         private ObservableCollection<Representative> FillRepresentatives()
         {
             ObservableCollection<Representative> ocr = new ObservableCollection<Representative>();
-            Representative r = new Representative()
-                {
+            Representative r = new Representative
+            {
                     Id = "------------",
                     CustomerId = -1,
                     Name = "بدون",
@@ -187,7 +190,7 @@ namespace Jsa.ViewsModel.ViewsControllers
             {
                 if (string.IsNullOrEmpty(EndDate))
                 {
-                    string msg = Properties.Resources.MonthlyContractView_EndDateMissing;
+                    string msg = Resources.MonthlyContractView_EndDateMissing;
                     Helper.ShowMessage(msg);
                     return;
                 }
@@ -195,7 +198,7 @@ namespace Jsa.ViewsModel.ViewsControllers
                 if (pdg.ShowDialog() == DialogResult.OK)
                 {
                     var selectedPrinter = pdg.PrinterSettings.PrinterName;
-                    MonthlyContractPrinter printer = new MonthlyContractPrinter(Properties.Settings.Default.MonthlyContractTemplate,
+                    MonthlyContractPrinter printer = new MonthlyContractPrinter(Settings.Default.MonthlyContractTemplate,
                    _contract, SelectedRepresentative, StartDate, EndDate);
                     printer.Print(selectedPrinter);
                 }

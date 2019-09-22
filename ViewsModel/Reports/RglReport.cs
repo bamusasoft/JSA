@@ -42,10 +42,10 @@ namespace Jsa.ViewsModel.Reports
         public object AgreedMaint { get; private set; }
         public object AgreedDeposit { get; private set; }
         public object AgreedTotal { get; private set; }
-        public int RentPay { get; private set; }
-        public int MaintPay { get; private set; }
-        public int DepositPay { get; private set; }
-        public int PaymentNo { get; private set; }
+        public double RentPay { get; private set; }
+        public double MaintPay { get; private set; }
+        public double DepositPay { get; private set; }
+        public double PaymentNo { get; private set; }
         public string PaymentDate { get; private set; }
         public object PaymentTotal { get; private set; }
         public object BalancesTotal { get; private set; }
@@ -53,7 +53,7 @@ namespace Jsa.ViewsModel.Reports
 
         private RglReport(string contractStart, string contractEnd, string propNo, string custName, string propDesc,
                          object agreedRent,object agreedDeposit, object agreedMaint, object agreedTotal,
-                         int rentPay, int maintPay, int depositPay, int paymentNo, string paymentDate,
+                         double rentPay, double maintPay, double depositPay, int paymentNo, string paymentDate,
                          object paymentTotal, object balancesTotal, bool headerRow)
         {
             ContratStart = contractStart;
@@ -74,7 +74,7 @@ namespace Jsa.ViewsModel.Reports
             BalancesTotal = balancesTotal;
             HeaderRow = headerRow;
         }
-        private RglReport(int rentPay, int maintPay, int depositPay, int paymentNo, string paymentDate)
+        private RglReport(double rentPay, double maintPay, double depositPay, int paymentNo, string paymentDate)
             : this(null, null, null, null, null, null, null,null, null, rentPay, maintPay, depositPay, paymentNo, paymentDate, null, null,false)
         {
 
@@ -178,8 +178,8 @@ namespace Jsa.ViewsModel.Reports
                 bool headerInfo = true;
 
                 int agreedTotal = cp.DueTotals;// (cp.AgreedRent + cp.AgreedMaintenance + cp.AgreedDeposit);
-                int paymentTotals = (cp.PaymentsDetails.Sum(x => x.Rent) + cp.PaymentsDetails.Sum(y => y.Maintenance) + cp.PaymentsDetails.Sum(d => d.Deposit));
-                int agreedBalance = agreedTotal - paymentTotals;
+                var paymentTotals = (cp.PaymentsDetails.Sum(x => x.Rent) + cp.PaymentsDetails.Sum(y => y.Maintenance) + cp.PaymentsDetails.Sum(d => d.Deposit));
+                var agreedBalance = agreedTotal - paymentTotals;
                 if (cp.PaymentsDetails.Count == 0) //This contract has no payments yet, so just display its contract info.
                 {
 

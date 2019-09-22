@@ -2,22 +2,19 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Threading;
 using GalaSoft.MvvmLight.Command;
 using Jsa.DomainModel;
 using Jsa.DomainModel.Repositories;
-using Jsa.ViewsModel.DomainEntities;
 using Jsa.ViewsModel.Helpers;
-using Jsa.ViewsModel.ViewsControllers.Core;
-using Jsa.ViewsModel.Reports;
-using System.Windows.Threading;
-using System.Windows;
 using Jsa.ViewsModel.Mediator;
-using System.Windows.Data;
-using System.ComponentModel;
+using Jsa.ViewsModel.Properties;
+using Jsa.ViewsModel.Reports;
+using Jsa.ViewsModel.ViewsControllers.Core;
 
 namespace Jsa.ViewsModel.ViewsControllers
 {
@@ -34,7 +31,7 @@ namespace Jsa.ViewsModel.ViewsControllers
             Saved,
             Loaded,
             Failed,
-            Loading,
+            Loading
         }
         #endregion
         #region Properties
@@ -156,14 +153,14 @@ namespace Jsa.ViewsModel.ViewsControllers
         {
             if (!_saved)
             {
-                string msg = Properties.Resources.ClassesView_CannotOpenBeforSave;
+                string msg = Resources.ClassesView_CannotOpenBeforSave;
                 Helper.ShowMessage(msg);
                 return;
             }
             CustomerClassFields selected = SelectedItem as CustomerClassFields;
             if (selected != null)
             {
-                _dialogProxy.RaiseOpenDialog<int>(selected.CustomerId);
+                _dialogProxy.RaiseOpenDialog(selected.CustomerId);
             }
         }
         private void Save()
@@ -267,8 +264,6 @@ namespace Jsa.ViewsModel.ViewsControllers
                     ProgressVisibility = true;
                     PrintEnabled = false;
                     FilterEnabled = false;
-                    break;
-                default:
                     break;
             }
 
@@ -552,7 +547,7 @@ namespace Jsa.ViewsModel.ViewsControllers
 
         protected override void Print()
         {
-            string path = Properties.Settings.Default.ClassesTemplate;
+            string path = Settings.Default.ClassesTemplate;
             ExcelProperties props = new ExcelProperties(2, 1, false);
             ClassesReport report = new ClassesReport(Contracts.ToList(), path, props);
             report.Print();
@@ -603,7 +598,8 @@ namespace Jsa.ViewsModel.ViewsControllers
             foreach (var activeContract in activeContracts)
             {
                 var startRent = GetStartRent(activeContract);
-                CustomerStartRent oldest = new CustomerStartRent() {
+                CustomerStartRent oldest = new CustomerStartRent
+                {
                     CustomerNo = activeContract.CustomerId,
                     Name = activeContract.Customer.Name,
                     PropertyNo = activeContract.PropertyNo,
@@ -643,8 +639,8 @@ namespace Jsa.ViewsModel.ViewsControllers
             string currentYear = Helper.GetCurrentYear;
             int endYear = int.Parse(currentYear) - 1;
             int startYear = endYear - 3;
-            string startDate = startYear.ToString() + "0101";
-            string endDate = endYear.ToString() + "1230";
+            string startDate = startYear + "0101";
+            string endDate = endYear + "1230";
             return w.Contracts.Query(cont => (cont.CustomerId == customer.CustomerId)
                                     &&
                                      (cont.StartDate.CompareTo(startDate) >= 0)
@@ -682,13 +678,11 @@ namespace Jsa.ViewsModel.ViewsControllers
                     ToggleUi(InternalState.Loading);
                     _saved = false;
                     break;
-                default:
-                    break;
             }
         }
         private void Filter()
         {
-            var viewCopy = _customersClassesList.AsEnumerable<CustomerClassFields>();
+            var viewCopy = _customersClassesList.AsEnumerable();
             if(CustomerId != 0)
             {
                 viewCopy = FilterByCustomerId(viewCopy);

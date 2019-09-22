@@ -10,6 +10,6 @@ namespace Jsa.ViewsModel.DomainEntities
     {
         public string PropertyDescription { get; set; }
         public string PayDate { get; set; }
-        public int Amount { get; set; }
+        public double Amount { get; set; }
     }
 }

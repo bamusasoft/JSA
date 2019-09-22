@@ -15,7 +15,7 @@ namespace Jsa.WinIrsService
                            {
                                "ContractNo", "StartDate", "EndDate", "Customer", "Property",
                                "AgreedRent", "Rent", "Deposit", "Maintenance", "RentBal",
-                               "DepositBal", "MaintBal", "Closed"
+                               "DepositBal", "MaintBal", "Closed", "Tax"
                            };
             _settings = Settings.Default;
         }

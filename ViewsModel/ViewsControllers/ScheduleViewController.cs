@@ -11,11 +11,11 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using Jsa.DomainModel;
 using Jsa.DomainModel.Repositories;
-using Jsa.ViewsModel.Annotations;
 using Jsa.ViewsModel.DomainEntities;
+using Jsa.ViewsModel.Helpers;
+using Jsa.ViewsModel.Properties;
 using Jsa.ViewsModel.Views;
 using Jsa.ViewsModel.ViewsControllers.Core;
-using Jsa.ViewsModel.Helpers;
 
 namespace Jsa.ViewsModel.ViewsControllers
 {
@@ -305,7 +305,7 @@ namespace Jsa.ViewsModel.ViewsControllers
         {
             if (State == ControllerStates.Edited)
             {
-                if (!Helper.UserConfirmed(Properties.Resources.SavePrompetMsg))
+                if (!Helper.UserConfirmed(Resources.SavePrompetMsg))
                 {
                     return;
                 }
@@ -392,7 +392,7 @@ namespace Jsa.ViewsModel.ViewsControllers
 
         protected override void Delete()
         {
-            var msg = Properties.Resources.DeletePrompetMsg;
+            var msg = Resources.DeletePrompetMsg;
             if (!Helper.UserConfirmed(msg)) return;
             try
             {
@@ -663,7 +663,7 @@ namespace Jsa.ViewsModel.ViewsControllers
 
         private ScheduleDetail CreateScheduleDetail(ScheduleDetailsController controlller)
         {
-            return new ScheduleDetail()
+            return new ScheduleDetail
             {
                 ScheduleId = ScheduleId,
                 AmountDue = controlller.AmountDue,
@@ -709,7 +709,7 @@ namespace Jsa.ViewsModel.ViewsControllers
             }
             catch (InvalidOperationException ex)
             {
-                string msg = Properties.Resources.ObjectNotFoundExcMsg;
+                string msg = Resources.ObjectNotFoundExcMsg;
                 throw new ObjectNotFoundException(msg, ex);
 
             }
@@ -829,7 +829,7 @@ namespace Jsa.ViewsModel.ViewsControllers
                     else
                     {
 
-                        Helper.ShowMessage(Properties.Resources.ScheduleView_CustomerAlreadyScheduled);
+                        Helper.ShowMessage(Resources.ScheduleView_CustomerAlreadyScheduled);
                     }
 
                 }
@@ -899,7 +899,7 @@ namespace Jsa.ViewsModel.ViewsControllers
                 }
 
             }
-            throw new ObjectNotFoundException(Properties.Resources.ObjectNotFoundExcMsg);
+            throw new ObjectNotFoundException(Resources.ObjectNotFoundExcMsg);
         }
 
         private void ShowSchedule(Schedule schedule)
@@ -940,7 +940,7 @@ namespace Jsa.ViewsModel.ViewsControllers
             }
             foreach (var scheduleDetail in details)
             {
-                ScheduleDetailsController sdController = new ScheduleDetailsController()
+                ScheduleDetailsController sdController = new ScheduleDetailsController
                 {
                     Id = scheduleDetail.Id,
                     ScheduleId = scheduleDetail.ScheduleId,

@@ -64,6 +64,8 @@ namespace Jsa.DomainModel
 
         public string PhotoPath { get; set; }
 
+        public double? Tax { get; set; }
+
         public virtual ContractsActivity ContractsActivity { get; set; }
 
         public virtual Customer Customer { get; set; }

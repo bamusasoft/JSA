@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Jsa.DomainModel;
+using Jsa.ViewsModel.Properties;
 using Jsa.ViewsModel.Reports;
 using Jsa.ViewsModel.SearchCriteria;
 using Jsa.ViewsModel.ViewsControllers.Core;
@@ -138,7 +139,7 @@ namespace Jsa.ViewsModel.ViewsControllers
             {
             if (ShowMaint)
             {
-                string path = Properties.Settings.Default.MaintTemplatePath;
+                string path = Settings.Default.MaintTemplatePath;
                 ExcelProperties props =new ExcelProperties(2,1, false);
                 MaintReport report = new MaintReport(MaintReports.ToList(), path, props);
                 report.Print();
@@ -146,7 +147,7 @@ namespace Jsa.ViewsModel.ViewsControllers
             }
             else
             {
-                string path = Properties.Settings.Default.RentTempatePath;
+                string path = Settings.Default.RentTempatePath;
                 ExcelProperties props = new ExcelProperties(2,1,false);
                 RentReport report = new RentReport(RentReports.ToList(), path, props);
                 report.Print();

@@ -1,13 +1,14 @@
-﻿using Jsa.DomainModel;
-using Jsa.ViewsModel.Reports;
-using Jsa.ViewsModel.ViewsControllers.Core;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Jsa.DomainModel;
+using Jsa.ViewsModel.Helpers;
+using Jsa.ViewsModel.Properties;
+using Jsa.ViewsModel.Reports;
+using Jsa.ViewsModel.ViewsControllers.Core;
 
 namespace Jsa.ViewsModel.ViewsControllers
 {
@@ -240,7 +241,7 @@ namespace Jsa.ViewsModel.ViewsControllers
         }
         private async Task PrintReport()
         {
-            string path = Properties.Settings.Default.DocFollowTemplate;
+            string path = Settings.Default.DocFollowTemplate;
             if (string.IsNullOrEmpty(path))
             {
                 string msg = "يجب تحديد مسار تقرير المتابعة";
@@ -272,7 +273,7 @@ namespace Jsa.ViewsModel.ViewsControllers
             return task;
         }
 
-        private void Report_ReportProgress(object sender, Helpers.ProgressEventArgs e)
+        private void Report_ReportProgress(object sender, ProgressEventArgs e)
         {
             PrintProgress = e.Progress;
         }
@@ -287,8 +288,7 @@ namespace Jsa.ViewsModel.ViewsControllers
             string sql = @"Select DocRecords.Id As DocId, DocRecords.Subject, DocRecords.RefId, DocRecords.DocDate, 
 	                              DocRecords.DocPath, DocRecords.DocStatus, DocRecords.SecurityLevel,
 	                              DocRecordFollows.Id AS DocFollowId, DocRecordFollows.FollowDate, 
-	                              DocRecordFollows.FollowContent, DocRecordFollows.FollowPath,
-	                              Destinations.Description AS Destination
+	                              DocRecordFollows.FollowContent, Destinations.Description AS Destination
                            FROM DocRecords
                            INNER JOIN DocRecordFollows
                            ON DocRecords.Id = DocRecordFollows.DocRecodId

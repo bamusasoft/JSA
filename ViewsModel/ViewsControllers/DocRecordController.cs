@@ -1,14 +1,13 @@
-﻿using Jsa.DomainModel;
-using Jsa.ViewsModel.ViewsControllers.Core;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
+using Jsa.DomainModel;
 using Jsa.DomainModel.Repositories;
+using Jsa.ViewsModel.Properties;
+using Jsa.ViewsModel.ViewsControllers.Core;
 
 namespace Jsa.ViewsModel.ViewsControllers
 {
@@ -256,7 +255,7 @@ namespace Jsa.ViewsModel.ViewsControllers
         {
             if (_controllerStates == ControllerStates.Edited)
             {
-                string msg = Properties.Resources.SavePrompetMsg;
+                string msg = Resources.SavePrompetMsg;
                 
                 if (!Helper.UserConfirmed(msg))
                 {

@@ -6,6 +6,7 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using Jsa.DomainModel;
 using Jsa.DomainModel.Repositories;
+using Jsa.ViewsModel.Properties;
 using Jsa.ViewsModel.Reports;
 using Jsa.ViewsModel.ViewsControllers.Core;
 
@@ -436,7 +437,7 @@ namespace Jsa.ViewsModel.ViewsControllers
         }
         protected override void ClearView()
         {
-            if (_hasChanges && !Helper.UserConfirmed(Properties.Resources.SavePrompetMsg))
+            if (_hasChanges && !Helper.UserConfirmed(Resources.SavePrompetMsg))
             {
                 return;
             }
@@ -530,7 +531,7 @@ namespace Jsa.ViewsModel.ViewsControllers
 
         protected override void Delete()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         protected override bool CanDelete()
@@ -549,7 +550,7 @@ namespace Jsa.ViewsModel.ViewsControllers
 
         private void AddNew()
         {
-            if (_hasChanges && !Helper.UserConfirmed(Properties.Resources.SavePrompetMsg))
+            if (_hasChanges && !Helper.UserConfirmed(Resources.SavePrompetMsg))
             {
                 return;
             }

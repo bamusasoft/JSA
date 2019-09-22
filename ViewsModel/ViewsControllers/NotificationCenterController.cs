@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 using Jsa.DomainModel;
 using Jsa.DomainModel.Repositories;
+using Jsa.ViewsModel.Properties;
 using Jsa.ViewsModel.ViewsControllers.Core;
 
 namespace Jsa.ViewsModel.ViewsControllers
@@ -18,7 +16,7 @@ namespace Jsa.ViewsModel.ViewsControllers
         private readonly int _dueDays;
         public NotificationCenterController()
         {
-            _dueDays = Properties.Settings.Default.AppointDueDays;
+            _dueDays = Settings.Default.AppointDueDays;
              LoadDueAppointmentsAsync();
 
         }
@@ -47,7 +45,7 @@ namespace Jsa.ViewsModel.ViewsControllers
         {
             get
             {
-                int dueDays = Properties.Settings.Default.AppointDueDays;
+                int dueDays = Settings.Default.AppointDueDays;
                 return string.Format(FOLLOWINGSAPPOINTMENTDESCRIPTION, dueDays);
 
             }
@@ -57,7 +55,7 @@ namespace Jsa.ViewsModel.ViewsControllers
         {
             get
             {
-                int dueDays = Properties.Settings.Default.AppointDueDays;
+                int dueDays = Settings.Default.AppointDueDays;
                 return string.Format( CASEAPPOINTMENTSDESCRIPTION, dueDays);
             }
         }

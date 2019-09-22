@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Jsa.DomainModel;
 using Jsa.DomainModel.Repositories;
+using Jsa.ViewsModel.Properties;
 using Jsa.ViewsModel.ViewsControllers.Core;
 
 namespace Jsa.ViewsModel.ViewsControllers
@@ -334,7 +335,7 @@ namespace Jsa.ViewsModel.ViewsControllers
 
         protected override void ClearView()
         {
-            if (_hasChanges && !Helper.UserConfirmed(Properties.Resources.SavePrompetMsg))
+            if (_hasChanges && !Helper.UserConfirmed(Resources.SavePrompetMsg))
             {
                 return;
             }
@@ -388,12 +389,12 @@ namespace Jsa.ViewsModel.ViewsControllers
 
         protected override void Print()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         protected override bool CanPrint()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         protected override void Search()
@@ -409,7 +410,7 @@ namespace Jsa.ViewsModel.ViewsControllers
 
         protected override void Delete()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         protected override bool CanDelete()

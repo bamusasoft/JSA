@@ -1,14 +1,16 @@
-﻿using GalaSoft.MvvmLight.Command;
-using Jsa.DomainModel;
-using Jsa.ViewsModel.ViewsControllers.Core;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using GalaSoft.MvvmLight.Command;
+using Jsa.DomainModel;
+using Jsa.ViewsModel.Properties;
+using Jsa.ViewsModel.ViewsControllers.Core;
 
 namespace Jsa.ViewsModel.ViewsControllers
 {
@@ -23,7 +25,7 @@ namespace Jsa.ViewsModel.ViewsControllers
 
             _ = LoadDocRecordFiles(docRecordId);
             counter = 0;
-            _docRecordFolder = Properties.Settings.Default.DocFileFolder;
+            _docRecordFolder = Settings.Default.DocFileFolder;
         }
 
         #region Fields
@@ -160,7 +162,7 @@ namespace Jsa.ViewsModel.ViewsControllers
                 {
                     var process = processes.Dequeue();
                     process.WaitForExit();
-                    System.Threading.Thread.Sleep(3000);
+                    Thread.Sleep(3000);
                     if (process.CloseMainWindow() == false)
                     {
                         process.Kill();

@@ -1,9 +1,10 @@
-﻿using Jsa.ViewsModel.Helpers;
-using Jsa.ViewsModel.ViewsControllers.Core;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Jsa.DomainModel;
+using Jsa.ViewsModel.Helpers;
+using Jsa.ViewsModel.ViewsControllers.Core;
+
 namespace Jsa.ViewsModel.ViewsControllers
 {
     public class RepreController : EditableControllerBase
@@ -136,7 +137,7 @@ namespace Jsa.ViewsModel.ViewsControllers
         }
         private Representative CreateNewRepresentative()
         {
-            return new Representative()
+            return new Representative
             {
                 Id = Id,
                 Name = Name,

@@ -64,7 +64,9 @@ namespace Jsa.WinIrsService
                            DepositBalance = row.Field<int>("DepositBal"),
                            Total = row.Field<int>("RentBal") +
                                    row.Field<int>("MaintBal") +
-                                   row.Field<int>("DepositBal")
+                                   row.Field<int>("DepositBal"),
+                           Tax = row.Field<double?>("Tax")
+
                        };
         }
 

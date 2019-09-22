@@ -5,6 +5,6 @@
         Blank,
         Edited,
         Saved,
-        Loaded,
+        Loaded
     }
 }

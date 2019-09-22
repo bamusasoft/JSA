@@ -21,7 +21,7 @@ namespace Jsa.DomainModel
         public string DocFollowId { get; set; }
         public string FollowDate { get; set; }
         public string FollowContent { get; set; }
-        public string FollowPath { get; set; }
+        //public string FollowPath { get; set; }
 
         public string StatusArabic
         {

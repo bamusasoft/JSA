@@ -240,7 +240,7 @@ namespace Jsa.ViewsModel.ViewsControllers
 
         protected override bool CanDelete()
         {
-            throw new NotImplementedException();
+            return !(string.IsNullOrEmpty(FollowId));
         }
 
         protected override bool CanPrint()
@@ -285,7 +285,66 @@ namespace Jsa.ViewsModel.ViewsControllers
 
         protected override void Delete()
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(FollowId))
+            {
+                Helper.ShowMessage(NoFollowSelectedError);
+                return;
+            }
+            string msg = Properties.Resources.DeletePrompetMsg;
+            if (Helper.UserConfirmed(msg))
+            {
+                var backupFile = string.Empty;
+                var followFileName = string.Empty;
+                try
+                {
+                    //Release the lock being hold on the pdf file by the browser control, so we can delete it.
+                    RaiseFilePathChanged(string.Empty);
+                    using (IUnitOfWork unit = new UnitOfWork())
+                    {
+                        var follow = unit.DocRecordFollows.GetById(FollowId);
+                        if (follow != null)
+                        {
+                            var followFile = unit.DocRecordFiles.Query(x => x.DocFollowId == follow.Id).SingleOrDefault();
+                            if (followFile != null)
+                            {
+                                followFileName = Path.Combine(_docRecordFolder, followFile.Path);
+                                if (File.Exists(followFileName))
+                                {
+                                   var tempPath = Environment.GetEnvironmentVariable("Temp");
+                                   if (!string.IsNullOrEmpty(tempPath))
+                                   {
+                                       backupFile = Path.Combine(tempPath, followFile.Path);
+                                       if (!File.Exists(backupFile))
+                                       {
+                                           File.Copy(followFileName, backupFile);
+                                       }
+                                       File.Delete(followFileName);
+                                       unit.DocRecordFollows.Delete(follow);
+                                       unit.DocRecordFiles.Delete(followFile);
+                                       unit.Save();
+                                        //Now it is save to delete temp file used as backup
+                                       File.Delete(backupFile);
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if (!string.IsNullOrEmpty(backupFile) && !string.IsNullOrEmpty(followFileName) )
+                    {
+                        if (!File.Exists(followFileName))
+                        {
+                            File.Copy(backupFile, followFileName);
+                        }
+                    }
+                   Helper.LogShowError(ex);
+                }
+                
+               
+            }
         }
 
         protected override void Print()
@@ -659,6 +718,7 @@ namespace Jsa.ViewsModel.ViewsControllers
         private const string FOLLOWCONTERROR = "ادخل محتوى المتابعة";
         private const string FOLLOWDATERROR = "ادخل تاريخ المتابعة";
         private const string FOLLOWPATHERROR = "ادخل مستند المتابعة";
+        private const string NoFollowSelectedError = "يجب تحديد متابعة أولاً";
 
         #endregion
     }
